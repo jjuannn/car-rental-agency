@@ -1,0 +1,37 @@
+.car-list-col{
+    width: 60%;
+}
+.car-list-img{
+    width: 31%;
+}
+.car-list-table{
+    margin: auto;
+    display: inline-block;
+    width: 80%;
+}
+.car-col-form{
+    display: inline-block;
+    margin-top: 5px;
+}
+.car-list-container{
+    margin-top: 50px;
+    margin-left: auto;
+    text-align: center;
+}
+.car-title-div{
+    margin-top: 30px;
+    text-align: center;
+}
+.car-title-nav{
+    text-align: center;
+    margin-top: 100px;
+}
+.car-form{
+    width: 60%;
+    display: inline-block
+}
+.car-form-div-container{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
