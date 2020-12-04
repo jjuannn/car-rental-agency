@@ -3,6 +3,11 @@ Proyecto: Agencia de alquiler de autos
 
 Tecnologias: HTML, CSS, JS, Nunjucks, Bulma, NodeJS, SQLite.
 
+## Early To-Do:
+- [ ] Implement service between controller and repository (and their respectives validations).
+- [ ] Add client and rental module.
+- [ ] Unit testing
+
 ## Requisitos C18 PT4:
 
 ### ABM/CRUD DE AUTOS:
