@@ -1,0 +1,74 @@
+{% extends 'index.html' %}
+
+{% block add %}
+<div class="car-form-div-container">
+    <form class="car-form" method="POST" action="/car/new" enctype="multipart/form-data">
+        <div class="field">
+            <label class="label">Brand</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Car brand" name="brand">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Model</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Car model name" name="model">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Car Year</label>
+            <div class="control">
+                <input class="input" type="number" max="2020" min="1920" placeholder="Car year" name="year">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Mileage (KM)</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Car mileage" name="mileage">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Color</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Car color" name="color">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Max. of passengers</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Max. of passengers" name="passengers">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Car image</label>
+            <div class="control">
+                <input class="input" type="file" placeholder="Car image" name="car_image">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Air conditioner</label>
+            <div class="control">
+                <div class="select">
+                <select name="hasAC">
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Gearbox Type</label>
+            <div class="control">
+                <div class="select">
+                <select name="gearbox_type">
+                    <option value="automatic">Automatic</option>
+                    <option value="manual">Manual</option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="button is-primary">Send</button>
+    </form>
+</div>
+{% endblock %}
+
