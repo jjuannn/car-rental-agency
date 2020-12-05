@@ -1,5 +1,6 @@
 const AbstractCarController = require("../controller/abstractController/abstractController")
 const { formToEntity } = require("../mapper/mapper")
+const { prepareStackTrace } = require("./error/abstractControllerError")
 
 module.exports = class CarController extends AbstractCarController{
     /**
@@ -28,6 +29,8 @@ module.exports = class CarController extends AbstractCarController{
 
         app.get(`${ROUTE_BASE}/edit?:id`, this.renderEditPage.bind(this))
         app.post(`${ROUTE_BASE}/edit?:id`, this.uploadMiddleware.single("car_image"), this.saveEditedCar.bind(this))
+
+        app.get(`${ROUTE_BASE}/view?:id`, this.renderViewPage.bind(this))
 
         app.get(`${ROUTE_BASE}/delete?:id`, this.delete.bind(this))
     }
@@ -67,6 +70,16 @@ module.exports = class CarController extends AbstractCarController{
         await this.carRepository.saveNewCar(car)
         
         res.redirect("/car")
+    }
+    /**
+     * @param {import("express").Request} req
+     * @param {import("express").Response} res
+     */ 
+    async renderViewPage(req, res){
+        const { id } = req.query
+        const car = await this.carRepository.getById(id)
+        
+        res.render("view.html", { data: { car }})
     }
     /**
      * @param {import("express").Request} req

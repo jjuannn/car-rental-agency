@@ -9,6 +9,7 @@ app.use(express.urlencoded({
 }))
 app.use(express.json())
 app.use(express.static(`${__dirname}/styles`))
+app.use(express.static(`${__dirname}/module/car`))
 app.use(express.static('src'))
 
 const nunjucks = require('nunjucks')
