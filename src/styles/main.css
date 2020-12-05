@@ -17,6 +17,7 @@
     margin-top: 50px;
     margin-left: auto;
     text-align: center;
+    margin-bottom: 50px;
 }
 .car-title-div{
     margin-top: 30px;
@@ -34,4 +35,19 @@
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+.car-card-container{
+    margin-top: 50px;
+}
+.car-card-img{ 
+    width: 236px; 
+    height: auto;
+    margin: 0 auto;
+}
+.car-card{
+    width: 70%;
+    margin: 0 auto;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
 }
