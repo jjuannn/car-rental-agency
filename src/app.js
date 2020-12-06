@@ -28,6 +28,8 @@ initCarModule(app, container)
 const mainDb = container.get("Sequelize")
 mainDb.sync()
 
+app.use(container.get("session"))
+
 app.get('/', (req, res) => {
   res.redirect("/car")
 })
