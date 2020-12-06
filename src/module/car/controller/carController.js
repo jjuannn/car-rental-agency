@@ -40,17 +40,31 @@ module.exports = class CarController extends AbstractCarController{
         if(!req.query.id){
             throw new UndefinedIdError()
         }
-        const id = Number(req.query.id)
-        const car = await this.carService.getById(id)
-        res.render("edit.html", { data: { car }})
+        try {
+            const id = Number(req.query.id)
+            const car = await this.carService.getById(id)
+            res.render("edit.html", { data: { car }})
+        } catch (e) {
+            req.session.errors = [e.message]
+            res.redirect("/car")
+        }
+        
     }
     /**
     * @param {import("express").Request} req
     * @param {import("express").Response} res
     */
     async renderList(req, res){
-        const cars = await this.carService.getAll()
-        res.render("car/main-page.html", { data: { cars }})
+        const { errors, messages } = req.session
+        try{
+            const cars = await this.carService.getAll()
+            res.render("car/main-page.html", { data: { cars, errors, messages }})
+        } catch(e){
+            req.session.errors = [e.message]
+            res.redirect("/car")
+        }
+        req.session.errors = []
+        req.session.messages = []
     }
     /**
     * @param {import("express").Request} req
@@ -67,10 +81,15 @@ module.exports = class CarController extends AbstractCarController{
         if(!req.query.id){
             throw new UndefinedIdError()
         }
-        const id = Number(req.query.id)
-        const car = await this.carService.getById(id)
+        try {
+            const id = Number(req.query.id)
+            const car = await this.carService.getById(id)
+            res.render("view.html", { data: { car }})
+        } catch (e) {
+            req.session.errors = [e.message]
+            res.redirect("/car")
+        }
         
-        res.render("view.html", { data: { car }})
     }
 
 
@@ -84,8 +103,12 @@ module.exports = class CarController extends AbstractCarController{
         if(req.file){
             car.images = `/uploads/${req.file.filename}`
         }
-        await this.carService.saveNewCar(car)
-        
+        try {
+            await this.carService.saveNewCar(car)
+            req.session.messages = [`The car ${car.brand} ${car.model} has been created successfully`]
+        } catch (e) {
+            req.session.errors = [e.message]
+        }
         res.redirect("/car")
     }
     /**
@@ -97,8 +120,12 @@ module.exports = class CarController extends AbstractCarController{
         if(req.file){
             car.images = `/uploads/${req.file.filename}`
         }
-        await this.carService.saveEditedCar(car)
-
+        try {
+            await this.carService.saveEditedCar(car)
+            req.session.messages = [`The car ${car.brand} ${car.model} has been edited successfully`]
+        } catch (e) {
+            req.session.errors = [e.message]
+        }
         res.redirect("/car")
     }
     /**
@@ -109,9 +136,13 @@ module.exports = class CarController extends AbstractCarController{
         if(!req.query.id){
             throw new UndefinedIdError()
         }
-        const id = Number(req.query.id)
-        await this.carService.delete(id)
-
+        try {
+            const id = Number(req.query.id)
+            await this.carService.delete(id)
+            req.session.messages = [`The car with ID ${id} has been deleted successfully`]
+        } catch (e) {
+            req.session.errors = [e.message]
+        }
         res.redirect("/car")
     }
 }

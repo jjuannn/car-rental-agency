@@ -22,13 +22,14 @@ nunjucks.configure('views', {
 const configureDI = require("./config/di")
 const container = configureDI.configureContainer()
 
+const exp_session = container.get("session")
+app.use(exp_session)
+
 const { initCarModule } = require("../src/module/car/module")
 initCarModule(app, container)
 
 const mainDb = container.get("Sequelize")
 mainDb.sync()
-
-app.use(container.get("session"))
 
 app.get('/', (req, res) => {
   res.redirect("/car")

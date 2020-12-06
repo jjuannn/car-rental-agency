@@ -2,6 +2,21 @@
 
 {% block list%}
 
+{% for error in data.errors %}
+    <div class="notification is-danger is-light">
+    <button class="delete"></button>
+        {{error}}
+    </div>
+{% endfor %}
+
+{% for message in data.messages %}
+    <div class="notification is-danger is-light">
+    <button class="delete"></button>
+        {{message}}
+    </div>
+{% endfor %}
+
+
 <div style="text-align: center; margin-top: 50px">
     <div>
         <form id="agregar-equipo" style="display:inline-block" method="GET" action="/car/new">
