@@ -1,6 +1,7 @@
 const car = require("../../entity/car");
 const { dbToEntity } = require("../../mapper/mapper");
 const AbstractCarRepository = require("../abstractRepository/abstractRepository")
+const NoResultsError = require("../error/noResultsError")
 
 module.exports = class CarRepository extends AbstractCarRepository {
   constructor(carModel) {
@@ -14,13 +15,15 @@ module.exports = class CarRepository extends AbstractCarRepository {
   async saveNewCar(newCar) {
     const buildOptions = { isNewRecord: true }
     const saveCar = await this.carModel.create(newCar, buildOptions)
+
+    const { id } = saveCar
+    return this.getById(id)
   }
   /**
    * 
    * @param {Car} editedCar 
    */
   async saveEditedCar(editedCar){
-
     const newValues = {
       brand: editedCar.brand,
       model: editedCar.model,
@@ -48,10 +51,16 @@ module.exports = class CarRepository extends AbstractCarRepository {
    */
   async getById(id){
     const car = await this.carModel.findOne({ where: { id }})
+    if(!car){
+      throw new NoResultsError()
+    }
     return dbToEntity(car)
   }
   async getAll(){
     const cars = await this.carModel.findAll() 
+    if(!cars){
+      throw new NoResultsError()
+    }
     return cars.map( car => dbToEntity(car))
   }
   /**
@@ -59,8 +68,11 @@ module.exports = class CarRepository extends AbstractCarRepository {
    */
   async delete(id){
     const carToDelete = await this.carModel.findByPk(id)
+    if(!carToDelete){
+      throw new NoResultsError()
+    }
+
     carToDelete.destroy()
-  
     return true
   }
 }

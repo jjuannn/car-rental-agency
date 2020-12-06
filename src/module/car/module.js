@@ -1,6 +1,7 @@
 const CarRepository = require("../car/repository/sqlite/carRepository")
 const CarModel = require("../car/model/carModel")
 const CarController = require("../car/controller/carController")
+const CarService = require("../car/service/carService")
 /**
  * 
  * @param {import("express").Application} app 
@@ -11,4 +12,4 @@ function initCarModule(app, container){
     controller.configureRoutes(app)
 }
 
-module.exports = { initCarModule, CarRepository, CarModel, CarController }
+module.exports = { initCarModule, CarRepository, CarModel, CarController, CarService }
