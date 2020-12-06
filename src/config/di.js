@@ -1,6 +1,6 @@
 const { Sequelize } = require("sequelize")
 const { default: DIContainer, object, get, factory } = require("rsdi")
-const { CarRepository, CarModel, CarController } = require("../module/car/module")
+const { CarRepository, CarModel, CarController, CarService } = require("../module/car/module")
 const multer = require("multer")
 
 function configureDatabase(){
@@ -32,6 +32,7 @@ function configureMulter(){
 function addCarModuleDefinitions(container){
     container.addDefinitions({
         CarController: object(CarController).construct(get("multer"), get("CarRepository")),
+        CarService: object(CarService).construct(get("CarRepository")),
         CarRepository: object(CarRepository).construct(get("CarModel")),
         CarModel: factory(configureCarModel)
     })
