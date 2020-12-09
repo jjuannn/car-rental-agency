@@ -1,0 +1,70 @@
+{% extends "index.html" %}
+
+{% block edit %}
+
+<div class="cl-form-div-container">
+    <form class="cl-form" method="POST" action="/client/edit?:id" enctype="application/x-www-form-urlencoded">
+        <div class="field">
+            <label class="label">Name(s)</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="cl brand" name="name" value="{{data.client.name}}" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Surname</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="cl model name" name="surname" value="{{data.client.surname}}" required>
+            </div>
+        </div>
+        <div class="field" style="display: inline-block;">
+            <label class="label">Document Type</label>
+            <div class="control">
+                <div class="select">
+                <select name="doc_type" required>
+                    <option {{"selected" if data.client.doc_type === "dni"}} value="dni">DNI</option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Document Number</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="cl year" name="doc_num" value="{{data.client.doc_num}}" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Address</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="cl mileage" name="address" value="{{data.client.address}}" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Phone</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="cl color" name="phone" value="{{data.client.phone}}" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">ID</label>
+            <div class="control">
+                <input class="input" readonly type="number" placeholder="cl color" name="id" value="{{data.client.id}}" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">E-Mail</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Max. of passengers" name="e_mail" value="{{data.client.e_mail}}" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Birthdate</label>
+            <div class="control">
+                <input class="input" type="date" value="{{data.client.birthdate}}" placeholder="Birthdate" name="birthdate" required>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="button is-primary">Send</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

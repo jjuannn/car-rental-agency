@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+
+{% block list%}
+
+{% for error in data.errors %}
+    <div class="notification is-danger is-light">
+    <button class="delete"></button>
+        {{error}}
+    </div>
+{% endfor %}
+
+{% for message in data.messages %}
+    <div class="notification is-success is-light">
+    <button class="delete"></button>
+        {{message}}
+    </div>
+{% endfor %}
+
+
+<div style="text-align: center; margin-top: 50px">
+    <div>
+        <form style="display:inline-block" method="GET" action="/client/new">
+            <button type="submit" class="button is-primary" >
+                <strong>
+                    Add Client <i class="fas fa-plus-square"></i>
+                </strong> 
+            </button>
+        </form>
+    </div>
+</div>
+
+<div id="container" class="cl-list-container">
+    <table class="table is-bordered cl-list-table">
+    <thead>
+        <tr>
+            <th class="cl-list-col">Client</th>
+            <th class="cl-list-col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in data.clients %}
+        <tr>
+            <th class="cl-list-col">{{client.name}} {{client.surname}}</th>
+            <th class="cl-list-col">
+                <form class="cl-col-form" method="GET" action="/client/view?:id">
+                    <input type="hidden" name="id" value="{{client.id}}">
+                    <button type="submit" class="button is-primary"><i class="fas fa-eye"></i></button>
+                </form>
+                <form class="cl-col-form" method="GET" action="/client/edit?:id">
+                    <input type="hidden" name="id" value="{{client.id}}">
+                    <button type="submit" class="button is-info"><i class="fas fa-edit"></i></button>
+                </form>
+                <form class="cl-col-form" method="GET" action="/client/delete?:id">
+                    <input type="hidden" name="id" value="{{client.id}}">
+                    <button type="submit" class="button is-danger"><i class="fas fa-trash"></i></button>
+                </form>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+</div>
+
+{% endblock %}

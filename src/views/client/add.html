@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+
+{% block add %}
+<div class="cl-form-div-container">
+    <form class="cl-form" method="POST" action="/client/new" enctype="application/x-www-form-urlencoded">
+        <div class="field">
+            <label class="label">Name(s)</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Name" name="name" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Surname</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Surname" name="surname" required>
+            </div>
+        </div>
+        <div class="field" style="display: inline-block;">
+            <label class="label">Document Type</label>
+            <div class="control">
+                <div class="select">
+                <select name="doc_type" required>
+                    <option value="dni">DNI</option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Document Number</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Document Number" name="doc_num" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Address</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="Address" name="address" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Phone Number</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Phone Number" name="phone" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">E-Mail</label>
+            <div class="control">
+                <input class="input" type="text" placeholder="e-mail" name="e_mail" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Birthdate</label>
+            <div class="control">
+                <input class="input" type="date" min="1930-01-01" max="2003-01-01" placeholder="Birthdate" name="birthdate" required>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="button is-primary">Send</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

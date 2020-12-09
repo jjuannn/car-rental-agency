@@ -1,62 +1,61 @@
-{% extends "index.html" %}
+{% extends 'index.html' %}
 
-{% block edit %}
-
+{% block add %}
 <div class="car-form-div-container">
-    <form class="car-form" method="POST" action="/car/edit?:id" enctype="multipart/form-data">
+    <form class="car-form" method="POST" action="/car/new" enctype="multipart/form-data">
         <div class="field">
             <label class="label">Brand</label>
             <div class="control">
-                <input class="input" type="text" placeholder="Car brand" name="brand" value="{{data.car.brand}}">
+                <input class="input" type="text" placeholder="Car brand" name="brand" required>
             </div>
         </div>
         <div class="field">
             <label class="label">Model</label>
             <div class="control">
-                <input class="input" type="text" placeholder="Car model name" name="model" value="{{data.car.model}}">
+                <input class="input" type="text" placeholder="Car model name" name="model" required>
             </div>
         </div>
         <div class="field">
             <label class="label">Car Year</label>
             <div class="control">
-                <input class="input" type="number" max="2020" min="1920" placeholder="Car year" name="year" value="{{data.car.year}}">
+                <input class="input" type="number" max="2020" min="1920" placeholder="Car year" name="year" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Price per day ($ARS)</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Price per day" name="price_per_day" required>
             </div>
         </div>
         <div class="field">
             <label class="label">Mileage (KM)</label>
             <div class="control">
-                <input class="input" type="number" placeholder="Car mileage" name="mileage" value="{{data.car.mileage}}">
+                <input class="input" type="number" placeholder="Car mileage" name="mileage" required>
             </div>
         </div>
         <div class="field">
             <label class="label">Color</label>
             <div class="control">
-                <input class="input" type="text" placeholder="Car color" name="color" value="{{data.car.color}}">
-            </div>
-        </div>
-        <div class="field">
-            <label class="label">ID</label>
-            <div class="control">
-                <input class="input" readonly type="number" placeholder="Car color" name="id" value="{{data.car.id}}">
+                <input class="input" type="text" placeholder="Car color" name="color" required>
             </div>
         </div>
         <div class="field">
             <label class="label">Max. of passengers</label>
             <div class="control">
-                <input class="input" type="number" placeholder="Max. of passengers" name="passengers" value="{{data.car.passengers}}">
+                <input class="input" type="number" placeholder="Max. of passengers" name="passengers" required>
             </div>
         </div>
         <div class="field" style="display: inline-block; margin-right: 30px">
             <label class="label">Car image</label>
             <div class="control">
-                <input class="input" type="file" placeholder="Car image" name="car_image">
+                <input class="input" type="file" placeholder="Car image" name="car_image" required>
             </div>
         </div>
         <div class="field" style="display: inline-block;">
             <label class="label">Air conditioner</label>
             <div class="control">
                 <div class="select">
-                <select name="hasAC">
+                <select name="hasAC" required>
                     <option value="true">Yes</option>
                     <option value="false">No</option>
                 </select>
@@ -67,9 +66,9 @@
             <label class="label">Gearbox Type</label>
             <div class="control">
                 <div class="select">
-                <select name="gearbox_type">
-                    <option {{"selected" if data.car.gearbox_type === "automatic"}} value="automatic">Automatic</option>
-                    <option {{"selected" if data.car.gearbox_type === "manual"}} value="manual">Manual</option>
+                <select name="gearbox_type" required>
+                    <option value="automatic">Automatic</option>
+                    <option value="manual">Manual</option>
                 </select>
                 </div>
             </div>
@@ -80,3 +79,4 @@
     </form>
 </div>
 {% endblock %}
+

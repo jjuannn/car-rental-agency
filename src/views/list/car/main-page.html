@@ -10,7 +10,7 @@
 {% endfor %}
 
 {% for message in data.messages %}
-    <div class="notification is-danger is-light">
+    <div class="notification is-success is-light">
     <button class="delete"></button>
         {{message}}
     </div>
@@ -19,7 +19,7 @@
 
 <div style="text-align: center; margin-top: 50px">
     <div>
-        <form id="agregar-equipo" style="display:inline-block" method="GET" action="/car/new">
+        <form style="display:inline-block" method="GET" action="/car/new">
             <button type="submit" class="button is-primary" >
                 <strong>
                     Add Car <i class="fas fa-plus-square"></i>

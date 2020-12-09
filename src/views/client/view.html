@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% block view %}
+<div class="cl-card-container">
+  <div class="card cl-card">
+    <div class="card-content">
+      <div class="content title is-5">
+        <p>Full name: {{data.client.name}} {{data.client.surname}}</p>
+        <p>Document: {{data.client.doc_type}} {{data.client.doc_num}}</p>
+        <p>Adress: {{data.client.address}}</p>
+        <p>Phone: {{data.client.phone}}</p>
+        <p>E-Mail: {{data.client.e_mail}}</p>
+        <p>Birthdate: {{data.client.birthdate}}</p>
+      </div>
+    </div>
+    <a class="button is-primary" href="/client">
+      <strong>Back to client list <i class="fas fa-user"></i></strong>
+    </a>
+  </div>
+  
+</div>
+
+{% endblock %}
