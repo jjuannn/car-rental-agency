@@ -14,7 +14,7 @@ module.exports = class Service{
     */
     async saveNewCar(car){
         if(!(car instanceof Car) || car === undefined){
-            throw new CarNotMapped()
+            throw new InvalidCarError()
         }
         return this.carRepository.saveNewCar(car)
     }
@@ -23,7 +23,7 @@ module.exports = class Service{
      */
     async saveEditedCar(car){
         if(!(car instanceof Car) || car === undefined){
-            throw new CarNotMapped()
+            throw new InvalidCarError()
         }
         return this.carRepository.saveEditedCar(car)
     }

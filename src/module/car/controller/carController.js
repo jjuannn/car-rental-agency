@@ -43,7 +43,7 @@ module.exports = class CarController extends AbstractCarController{
         try {
             const id = Number(req.query.id)
             const car = await this.carService.getById(id)
-            res.render("edit.html", { data: { car }})
+            res.render("car/edit.html", { data: { car }})
         } catch (e) {
             req.session.errors = [e.message]
             res.redirect("/car")
@@ -58,7 +58,7 @@ module.exports = class CarController extends AbstractCarController{
         const { errors, messages } = req.session
         try{
             const cars = await this.carService.getAll()
-            res.render("car/main-page.html", { data: { cars, errors, messages }})
+            res.render("list/car/main-page.html", { data: { cars, errors, messages }})
         } catch(e){
             req.session.errors = [e.message]
             res.redirect("/car")
@@ -71,7 +71,7 @@ module.exports = class CarController extends AbstractCarController{
     * @param {import("express").Response} res
     */
     async renderAddPage(req, res){
-        res.render('add.html')
+        res.render('car/add.html')
     }
     /**
     * @param {import("express").Request} req
@@ -84,7 +84,7 @@ module.exports = class CarController extends AbstractCarController{
         try {
             const id = Number(req.query.id)
             const car = await this.carService.getById(id)
-            res.render("view.html", { data: { car }})
+            res.render("car/view.html", { data: { car }})
         } catch (e) {
             req.session.errors = [e.message]
             res.redirect("/car")

@@ -32,6 +32,7 @@ module.exports = class CarRepository extends AbstractCarRepository {
       color: editedCar.color,
       hasAC: editedCar.hasAC,
       passengers: editedCar.passengers,
+      price_per_day: editedCar.price_per_day,
       gearbox_type: editedCar.gearbox_type,
     } = editedCar
 

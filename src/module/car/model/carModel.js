@@ -46,6 +46,10 @@ module.exports = class CarModel extends Model {
         type: DataTypes.STRING,
         allowNull: false
       },
+      price_per_day: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       images: {
         type: DataTypes.STRING,
         field: "car_image",

@@ -11,6 +11,7 @@ function formToEntity(car){
         hasAC,
         passengers,
         gearbox_type,
+        price_per_day,
         images
     } = car
 
@@ -24,6 +25,7 @@ function formToEntity(car){
         hasAC,
         passengers,
         gearbox_type,
+        price_per_day,
         images
     })
 }

@@ -1,6 +1,6 @@
 class Car{
     constructor({
-        id, brand, model, year, mileage, color, hasAC, passengers, gearbox_type, images
+        id, brand, model, year, mileage, color, hasAC, passengers, gearbox_type, price_per_day, images
     }){
         this.id = id
         this.brand = brand
@@ -11,6 +11,7 @@ class Car{
         this.hasAC = hasAC
         this.passengers = passengers
         this.gearbox_type = gearbox_type
+        this.price_per_day = price_per_day
         this.images = images
     }
 }
