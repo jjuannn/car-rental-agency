@@ -26,7 +26,10 @@ const exp_session = container.get("session")
 app.use(exp_session)
 
 const { initCarModule } = require("../src/module/car/module")
+const { initClientModule } = require("../src/module/client/module")
+
 initCarModule(app, container)
+initClientModule(app, container)
 
 const mainDb = container.get("Sequelize")
 mainDb.sync()

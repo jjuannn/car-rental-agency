@@ -1,6 +1,8 @@
 const { Sequelize } = require("sequelize")
 const { default: DIContainer, object, get, factory } = require("rsdi")
 const { CarRepository, CarModel, CarController, CarService } = require("../module/car/module")
+const { ClientRepository, ClientModel, ClientController, ClientService } = require("../module/client/module")
+
 const multer = require("multer")
 const session = require("express-session")
 
@@ -31,6 +33,13 @@ function configureCarModel(container){
     CarModel.setup(container.get("Sequelize"))
     return CarModel
 }
+/**
+ * @param {DIContainer} container
+ */
+function configureClientModel(container){
+    return ClientModel.setup(container.get("Sequelize"))
+}
+
 function configureMulter(){
     const upload = multer({
         dest: process.env.UPLOAD_MULTER_DIR
@@ -54,6 +63,18 @@ function addCarModuleDefinitions(container){
  * 
  * @param {DIContainer} container 
  */
+function addClientModuleDefinitions(container){
+    container.addDefinitions({
+        ClientController: object(ClientController).construct(get("ClientService")),
+        ClientService: object(ClientService).construct(get("ClientRepository")),
+        ClientRepository: object(ClientRepository).construct(get("ClientModel")),
+        ClientModel: factory(configureClientModel)
+    })
+}
+/**
+ * 
+ * @param {DIContainer} container 
+ */
 function addCommonDefinitions(container){
     container.addDefinitions({
         Sequelize: factory(configureDatabase),
@@ -68,6 +89,7 @@ function configureContainer(){
     const container = new DIContainer()
     addCommonDefinitions(container)
     addCarModuleDefinitions(container)
+    addClientModuleDefinitions(container)
     return container
 }
 
