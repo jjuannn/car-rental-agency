@@ -42,6 +42,10 @@ module.exports = class ClientModel extends Model {
         type: DataTypes.STRING,
         allowNull: false
       },
+      nationality: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       birthdate: {
         type: DataTypes.STRING,
         allowNull: false

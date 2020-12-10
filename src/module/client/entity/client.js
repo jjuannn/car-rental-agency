@@ -1,6 +1,6 @@
 class Client{
     constructor({
-        id, name, surname, doc_type, doc_num, address, phone, e_mail, birthdate
+        id, name, surname, doc_type, doc_num, address, phone, e_mail, nationality, birthdate
     }){
         this.id = id
         this.name = name
@@ -10,6 +10,7 @@ class Client{
         this.address = address
         this.phone = phone
         this.e_mail = e_mail
+        this.nationality = nationality
         this.birthdate = birthdate
     }
 }

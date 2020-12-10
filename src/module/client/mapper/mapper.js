@@ -10,6 +10,7 @@ function formToEntity(client){
         address,
         phone,
         e_mail,
+        nationality,
         birthdate
     } = client
  
@@ -22,6 +23,7 @@ function formToEntity(client){
         address,
         phone,
         e_mail,
+        nationality,
         birthdate
     })
 }

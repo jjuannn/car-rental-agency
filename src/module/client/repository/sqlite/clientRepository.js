@@ -32,6 +32,7 @@ module.exports = class ClientRepository extends AbstractClientRepository {
       address: editedclient.address,
       phone: editedclient.phone,
       e_mail: editedclient.e_mail,
+      nationality: editedclient.nationality,
       birthdate: editedclient.birthdate,
     } = editedclient
     

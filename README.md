@@ -28,6 +28,7 @@ Tecnologias: HTML, CSS, JS, Nunjucks, Bulma, NodeJS, SQLite.
     - Apellidos
     - Tipo documento
     - Numero documento
+    - Nacionalidad
     - Direccion
     - Telefono
     - E-mail
@@ -39,8 +40,8 @@ Tecnologias: HTML, CSS, JS, Nunjucks, Bulma, NodeJS, SQLite.
 
     - La tabla de alquileres debe guardar:
 
-    -- auto
-    -- cliente
+    -- fk auto
+    -- fk cliente
     -- precio unitario del auto
     -- fecha desde
     -- fecha hasta
