@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+
+{% block add %}
+<div class="cl-form-div-container">
+    <form class="cl-form" method="POST" action="/rental/new" enctype="application/x-www-form-urlencoded">
+        <div class="field" style="display: inline-block;">
+            <label class="label">Car</label>
+            <div class="control">
+                <div class="select">
+                <select name="fk_car" required>
+                    {% for car in data.cars%}
+                        <option value="{{car.id}}">{{car.year}} {{car.brand}} {{car.model}} - ${{car.price_per_day}} per day </option>
+                    {% endfor %}
+                </select>
+                </div>
+            </div>
+        </div>
+        <div class="field" style="display: inline-block;">
+            <label class="label">Client</label>
+            <div class="control">
+                <div class="select">
+                <select name="fk_client" required>
+                    {% for client in data.clients%}
+                        <option value="{{client.id}}">{{client.name}} {{client.surname}} </option>
+                    {% endfor %}
+                </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Price per day</label>
+            <div class="control">
+                <input class="input" type="number" placeholder="Price per day" name="price_per_day" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">From...</label>
+            <div class="control">
+                <input class="input" type="date" placeholder="From" name="date_from" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Until</label>
+            <div class="control">
+                <input class="input" type="date" placeholder="Until" name="date_until" required>
+            </div>
+        </div>
+        <div class="field" style="display: inline-block">
+            <label class="label">Payment method</label>
+            <div class="control">
+                <div class="select">
+                <select name="payment_method" required>
+                        <option value="debit_card">Debit card</option>
+                        <option value="credit_card">Credit card</option>
+                        <option value="transaction">Transaction</option>
+                        <option value="cash">Cash</option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <div class="field" style="display: inline-block; margin-left: 20px">
+            <label class="label">Is paid</label>
+            <div class="control">
+                <div class="select">
+                <select name="is_paid" required>
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="button is-primary">Send</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
