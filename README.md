@@ -3,10 +3,11 @@ Proyecto: Agencia de alquiler de autos
 
 Tecnologias: HTML, CSS, JS, Nunjucks, Bulma, NodeJS, SQLite.
 
-## Early To-Do:
-- [ ] Implement service between controller and repository (and their respectives validations).
-- [ ] Add client and rental module.
-- [ ] Unit testing
+## To-Do:
+- [ ] Strict check for rental module implementations.
+- [ ] Fix details.
+- [ ] Add validations ¿?
+- [ ] Unit testing.
 
 ## Requisitos C18 PT4:
 
@@ -46,6 +47,7 @@ Tecnologias: HTML, CSS, JS, Nunjucks, Bulma, NodeJS, SQLite.
     -- fecha desde
     -- fecha hasta
     -- precio total
-    -- si el alquiler esta pago
+    -- medio de pago
+    -- si el alquiler esta pago (booleano)
     
     - Realizar diagrama C4 L1, L2 y L3 del sistema de gestion de autos
