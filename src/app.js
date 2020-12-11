@@ -27,9 +27,11 @@ app.use(exp_session)
 
 const { initCarModule } = require("../src/module/car/module")
 const { initClientModule } = require("../src/module/client/module")
+const { initRentalModule } = require("../src/module/rental/module")
 
 initCarModule(app, container)
 initClientModule(app, container)
+initRentalModule(app, container)
 
 const mainDb = container.get("Sequelize")
 mainDb.sync()

@@ -1,7 +1,8 @@
 const { Sequelize } = require("sequelize")
-const { default: DIContainer, object, get, factory } = require("rsdi")
+const { default: DIContainer, object, get, factory} = require("rsdi")
 const { CarRepository, CarModel, CarController, CarService } = require("../module/car/module")
 const { ClientRepository, ClientModel, ClientController, ClientService } = require("../module/client/module")
+const { RentalRepository, RentalModel, RentalController, RentalService } = require("../module/rental/module")
 
 const multer = require("multer")
 const session = require("express-session")
@@ -30,8 +31,7 @@ function configureSession(){
  * @param {DIContainer} container
  */
 function configureCarModel(container){
-    CarModel.setup(container.get("Sequelize"))
-    return CarModel
+    return CarModel.setup(container.get("Sequelize"))
 }
 /**
  * @param {DIContainer} container
@@ -39,7 +39,14 @@ function configureCarModel(container){
 function configureClientModel(container){
     return ClientModel.setup(container.get("Sequelize"))
 }
-
+/**
+ * @param {DIContainer} container
+ */
+function configureRentalModel(container){
+    RentalModel.setup(container.get("Sequelize"))
+    RentalModel.setupAssociations(container.get("CarModel"), container.get("ClientModel"))
+    return RentalModel
+}
 function configureMulter(){
     const upload = multer({
         dest: process.env.UPLOAD_MULTER_DIR
@@ -57,6 +64,22 @@ function addCarModuleDefinitions(container){
         CarService: object(CarService).construct(get("CarRepository")),
         CarRepository: object(CarRepository).construct(get("CarModel")),
         CarModel: factory(configureCarModel)
+    })
+}
+/**
+ * 
+ * @param {DIContainer} container 
+ */
+function addRentalModelDefinitions(container){
+    container.addDefinitions({
+        RentalController: object(RentalController).construct(
+            get("RentalRepository"), 
+            get("CarController"), 
+            get("ClientController")
+        ),
+        RentalService: object(RentalService).construct(get("RentalRepository")),
+        RentalRepository: object(RentalRepository).construct(get("RentalModel"), get("ClientModel"), get("CarModel")),
+        RentalModel: factory(configureRentalModel)
     })
 }
 /**
@@ -90,6 +113,7 @@ function configureContainer(){
     addCommonDefinitions(container)
     addCarModuleDefinitions(container)
     addClientModuleDefinitions(container)
+    addRentalModelDefinitions(container)
     return container
 }
 
