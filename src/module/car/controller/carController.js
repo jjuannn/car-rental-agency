@@ -145,4 +145,7 @@ module.exports = class CarController extends AbstractCarController{
         }
         res.redirect("/car")
     }
+    async getAll(){
+        return this.carService.getAll()
+    }
 }

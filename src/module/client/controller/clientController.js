@@ -140,4 +140,7 @@ module.exports = class ClientController extends AbstractClientController{
         }
         res.redirect("/client")
     }
+    async getAll(){
+        return this.clientService.getAll()
+    }
 }
