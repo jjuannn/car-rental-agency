@@ -14,5 +14,19 @@ class Rental{
         this.Car = Car
         this.Client = Client
     }
+    /**
+     * 
+     * @param {String} date1 // String => date 
+     * @param {String} date2 // String => date
+     */
+    getTotalDays(date1, date2){
+        let from = new Date(date1)
+        let until = new Date(date2)
+
+        let differenceInTime =  until.getTime()- from.getTime()
+        let differenceInDays = differenceInTime / (1000 * 3600 * 24)
+
+        this.total_price = differenceInDays * Number(this.price_per_day)
+    }
 }
 module.exports = { Rental }

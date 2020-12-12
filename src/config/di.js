@@ -73,7 +73,7 @@ function addCarModuleDefinitions(container){
 function addRentalModelDefinitions(container){
     container.addDefinitions({
         RentalController: object(RentalController).construct(
-            get("RentalRepository"), 
+            get("RentalService"), 
             get("CarController"), 
             get("ClientController")
         ),

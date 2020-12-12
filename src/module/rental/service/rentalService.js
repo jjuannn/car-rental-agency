@@ -2,7 +2,7 @@ const { Rental } = require("../entity/rental")
 const InvalidIdError  = require("./error/invalidId")
 const InvalidRentalError = require("./error/invalidRental")
 
-module.exports = class Service{
+module.exports = class RentalService{
     /**
      * @param {import ("../repository/abstractRepository/abstractRepository")} rentalRepository
     */
@@ -16,6 +16,10 @@ module.exports = class Service{
         if(!(rental instanceof Rental) || rental === undefined){
             throw new InvalidRentalError()
         }
+        await rental.getTotalDays(
+            rental.date_from,
+            rental.date_until
+        )
         return this.rentalRepository.saveNewRental(rental)
     }
     /**
@@ -25,6 +29,10 @@ module.exports = class Service{
         if(!(rental instanceof Rental) || rental === undefined){
             throw new InvalidRentalError()
         }
+        await rental.getTotalDays(
+            rental.date_from,
+            rental.date_until
+        )
         return this.rentalRepository.saveEditedRental(rental)
     }
     /**

@@ -99,31 +99,13 @@ module.exports = class RentalController extends AbstractRentalController{
         }
         
     }
-    /**
-     * 
-     * @param {String} date1 // String => date 
-     * @param {String} date2 // String => date
-     */
-    getTotalDays(date1, date2){
-        let from = new Date(date1)
-        let until = new Date(date2)
-
-        let differenceInTime =  until.getTime()- from.getTime()
-        let differenceInDays = differenceInTime / (1000 * 3600 * 24)
-
-        return differenceInDays
-    }
+    
     /**
     * @param {import("express").Request} req
     * @param {import("express").Response} res
     */ 
     async saveNewRental(req, res){
         const rental = formToEntity(req.body)
-        const totalPrice = this.getTotalDays(
-            new Date(rental.date_from),
-            new Date(rental.date_until)
-        )
-        rental.total_price = totalPrice * Number(rental.price_per_day)
         try {
             await this.rentalService.saveNewRental(rental)
             req.session.messages = [`The Rental ${rental.name} ${rental.surname} has been created successfully`]
@@ -138,11 +120,6 @@ module.exports = class RentalController extends AbstractRentalController{
     */ 
     async saveEditedRental(req, res){
         const rental = formToEntity(req.body)
-        const totalPrice = this.getTotalDays(
-            new Date(rental.date_from),
-            new Date(rental.date_until)
-        )
-        rental.total_price = totalPrice * Number(rental.price_per_day)
         try {
             await this.rentalService.saveEditedRental(rental)
             req.session.messages = [`The Rental ${rental.name} ${rental.surname} has been edited successfully`]
