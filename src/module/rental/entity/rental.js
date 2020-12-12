@@ -27,6 +27,7 @@ class Rental{
         let differenceInDays = differenceInTime / (1000 * 3600 * 24)
 
         this.total_price = differenceInDays * Number(this.price_per_day)
+        return this
     }
 }
 module.exports = { Rental }
