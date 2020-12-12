@@ -8,7 +8,7 @@
             <label class="label">Car</label>
             <div class="control">
                 <div class="select" >
-                <select name="doc_type" required>
+                <select name="fk_car" required>
                     {% for car in data.cars%}
                     <option {{"selected" if data.rental.fk_car === car.id}} value={{car.id}}>{{car.year}} {{car.brand}} {{car.model}} - ${{car.price_per_day}} per day</option>
                     {% endfor %}
