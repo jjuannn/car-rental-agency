@@ -20,6 +20,7 @@ module.exports = class RentalService{
             rental.date_from,
             rental.date_until
         )
+
         return this.rentalRepository.saveNewRental(rental)
     }
     /**
@@ -33,6 +34,7 @@ module.exports = class RentalService{
             rental.date_from,
             rental.date_until
         )
+        
         return this.rentalRepository.saveEditedRental(rental)
     }
     /**
@@ -45,13 +47,15 @@ module.exports = class RentalService{
         return this.rentalRepository.getById(id)
     }
     /**
-     * @param {Number} id
+     * @param {Rental} rental
      */
-    async delete(id){
-        if(typeof id !== "number" || id === undefined){
-            throw new InvalidIdError()
+    async finish(rental){
+        if(!(rental instanceof Rental) || rental === undefined){
+            throw new InvalidRentalError()
         }
-        return this.rentalRepository.delete(id)
+        rental.setFinished()
+        this.rentalRepository.saveEditedRental(rental)
+        return this.rentalRepository.finish(rental)
     }
     async getAll(){
         return this.rentalRepository.getAll()

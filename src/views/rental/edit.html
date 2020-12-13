@@ -64,8 +64,8 @@
             <div class="control">
                 <div class="select">
                 <select name="is_paid" required>
-                        <option {{"selected" if data.rental.is_paid == "true"}}value="true">Yes</option>
-                        <option {{"selected" if data.rental.is_paid == "false"}} value="false">No</option>
+                        <option {{"selected" if data.rental.is_paid == true}}value="true">Yes</option>
+                        <option {{"selected" if data.rental.is_paid == false}} value="false">No</option>
                 </select>
                 </div>
             </div>

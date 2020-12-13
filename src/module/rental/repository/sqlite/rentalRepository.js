@@ -16,7 +16,11 @@ module.exports = class ClientRepository extends AbstractClientRepository {
   */
   async saveNewRental(newRental) {
     const buildOptions = { isNewRecord: true }
-    const saveRental = await this.rentalModel.create(newRental, buildOptions)
+    
+    let saveRental
+    saveRental = await this.rentalModel.build(newRental, buildOptions)
+    saveRental.setDataValue("status", "active") 
+    saveRental = await saveRental.save()
 
     const { id } = saveRental
     return this.getById(id)
@@ -33,10 +37,11 @@ module.exports = class ClientRepository extends AbstractClientRepository {
       total_price: editedRental.total_price,
       payment_method: editedRental.payment_method,
       is_paid: editedRental.is_paid,
+      status: editedRental.status,
       fk_car: editedRental.fk_car,
       fk_client: editedRental.fk_client
     } = editedRental
-    
+
     const currentRentalId = editedRental.id
     const buildOptions = { isNewRecord: false, where: { id : currentRentalId}}
     await this.rentalModel.update(newValues, buildOptions)
@@ -48,14 +53,25 @@ module.exports = class ClientRepository extends AbstractClientRepository {
    * @param {Number} id 
    */
   async getById(id){
-    const rental = await this.rentalModel.findOne({ where: { id }, include: [this.carModel, this.clientModel]})
+    const rental = await this.rentalModel.findOne(
+      { where: { id }, 
+      include: [
+        {model: this.carModel, paranoid: false}, 
+        {model: this.clientModel, paranoid: false}
+      ]}
+    )
     if(!rental){
       throw new NoResultsError()
     }
     return dbToEntity(rental)
   }
   async getAll(){
-    const rentals = await this.rentalModel.findAll({ include: [this.carModel, this.clientModel]})
+    const rentals = await this.rentalModel.findAll({
+      include: [
+        {model: this.carModel, paranoid: false}, 
+        {model: this.clientModel, paranoid: false}
+      ]}
+    )
     if(!rentals){
       throw new NoResultsError()
     }
@@ -64,13 +80,14 @@ module.exports = class ClientRepository extends AbstractClientRepository {
   /**
    * @param {Number} id
    */
-  async delete(id){
-    const rentalToDelete = await this.rentalModel.findByPk(id)
-    if(!rentalToDelete){
+  async finish(rental){
+    const setInactive = await this.rentalModel.findByPk(rental.id)
+
+    if(!setInactive){
       throw new NoResultsError()
     }
-
-    rentalToDelete.destroy()
+    setInactive.destroy()
+    
     return true
   }
 }

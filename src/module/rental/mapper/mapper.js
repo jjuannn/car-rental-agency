@@ -10,7 +10,8 @@ function formToEntity(rental){
         date_until,
         payment_method,
         total_price,
-        is_paid
+        is_paid,
+        status
     } = rental
 
     return new Rental({
@@ -22,7 +23,8 @@ function formToEntity(rental){
         date_until,
         payment_method,
         total_price,
-        is_paid
+        is_paid,
+        status
     })
 }
 

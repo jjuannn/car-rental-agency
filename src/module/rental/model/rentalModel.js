@@ -38,6 +38,9 @@ module.exports = class RentalModel extends Model {
         type: DataTypes.BOOLEAN,
         allowNull: false
       },
+      status: {
+        type: DataTypes.STRING
+      },
       createdAt: {
         type: DataTypes.DATE,
         defaultValue: Sequelize.NOW,
@@ -51,7 +54,7 @@ module.exports = class RentalModel extends Model {
       {
         sequelize: sequelizeInstance,
         modelName: "Rent",
-        timestamps: false
+        paranoid: true
       });
     return RentalModel
   }

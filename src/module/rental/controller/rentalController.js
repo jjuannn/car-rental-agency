@@ -33,7 +33,7 @@ module.exports = class RentalController extends AbstractRentalController{
 
         app.get(`${ROUTE_BASE}/view?:id`, this.renderViewPage.bind(this))
 
-        app.get(`${ROUTE_BASE}/delete?:id`, this.delete.bind(this))
+        app.get(`${ROUTE_BASE}/delete?:id`, this.finish.bind(this))
     }
     /**
     * @param {import("express").Request} req
@@ -108,7 +108,7 @@ module.exports = class RentalController extends AbstractRentalController{
         const rental = formToEntity(req.body)
         try {
             await this.rentalService.saveNewRental(rental)
-            req.session.messages = [`The Rental ${rental.name} ${rental.surname} has been created successfully`]
+            req.session.messages = [`The Rental has been created successfully`]
         } catch (e) {
             req.session.errors = [e.message]
         }
@@ -122,7 +122,7 @@ module.exports = class RentalController extends AbstractRentalController{
         const rental = formToEntity(req.body)
         try {
             await this.rentalService.saveEditedRental(rental)
-            req.session.messages = [`The Rental ${rental.name} ${rental.surname} has been edited successfully`]
+            req.session.messages = [`The Rental has been edited successfully`]
         } catch (e) {
             req.session.errors = [e.message]
         }
@@ -132,13 +132,14 @@ module.exports = class RentalController extends AbstractRentalController{
     * @param {import("express").Request} req
     * @param {import("express").Response} res
     */ 
-    async delete(req, res){
+    async finish(req, res){
         if(!req.query.id){
             throw new UndefinedIdError()
         }
         try {
             const id = Number(req.query.id)
-            await this.rentalService.delete(id)
+            const rentalToDelete = await this.rentalService.getById(id)
+            await this.rentalService.finish(rentalToDelete)
             req.session.messages = [`The rental with ID ${id} has been deleted successfully`]
         } catch (e) {
             req.session.errors = [e.message]

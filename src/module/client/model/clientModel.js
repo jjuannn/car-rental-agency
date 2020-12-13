@@ -63,7 +63,7 @@ module.exports = class ClientModel extends Model {
       {
         sequelize: sequelizeInstance,
         modelName: "Client",
-        timestamps: false
+        paranoid: true
       });
     return ClientModel
   }
