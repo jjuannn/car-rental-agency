@@ -4,7 +4,6 @@ Proyecto: Agencia de alquiler de autos
 Tecnologias: HTML, CSS, JS, Nunjucks, Bulma, NodeJS, SQLite.
 
 ## To-Do:
-- [ ] Strict check for rental module implementations.
 - [ ] Fix details.
 - [ ] Add validations ¿?
 - [ ] Unit testing.

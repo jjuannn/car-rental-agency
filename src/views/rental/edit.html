@@ -1,6 +1,6 @@
 {% extends "index.html" %}
 
-{% block edit %}
+{% block body %}
 
 <div class="cl-form-div-container">
     <form class="cl-form" method="POST" action="/rental/edit?:id" enctype="application/x-www-form-urlencoded">
@@ -8,7 +8,7 @@
             <label class="label">Car</label>
             <div class="control">
                 <div class="select" >
-                <select name="fk_car" required>
+                <select name="fk_car">
                     {% for car in data.cars%}
                     <option {{"selected" if data.rental.fk_car === car.id}} value={{car.id}}>{{car.year}} {{car.brand}} {{car.model}} - ${{car.price_per_day}} per day</option>
                     {% endfor %}
@@ -20,7 +20,7 @@
             <label class="label">Client</label>
             <div class="control">
                 <div class="select">
-                <select name="doc_type" required>
+                <select name="fk_client">
                     {% for client in data.clients %}
                     <option {{"selected" if data.rental.fk_client === client.id}} value={{client.id}}>{{client.name}} {{client.surname}}</option>
                     {% endfor %}
