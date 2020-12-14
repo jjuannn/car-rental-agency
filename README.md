@@ -20,7 +20,7 @@
 ## Instalation
 
 - Run ```npm install``` to install the project dependencies.
-- Create a ```.env``` file in the proyect root, copyng the existing ```.env.dist``` file content.
+- Create a ```.env``` file in the project root, copying the existing ```.env.dist``` file content.
 - Run ```npm run dev``` to run the app in development mode at port 8080.
 - Ready! Just go to ```http://localhost:8080/``` in your browser and use the proyect!  
 
