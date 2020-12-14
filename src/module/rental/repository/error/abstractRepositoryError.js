@@ -1,1 +1,1 @@
-module.exports = class AbstractRepositoryError extends Error{}
+module.exports = class AbstractRepositoryError extends Error {};

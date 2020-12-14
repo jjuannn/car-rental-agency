@@ -1,1 +1,1 @@
-module.exports = class InvalidClientError extends Error{}
+module.exports = class InvalidClientError extends Error {};

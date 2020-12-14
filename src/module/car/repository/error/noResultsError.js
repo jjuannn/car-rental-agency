@@ -1,1 +1,1 @@
-module.exports = class NoResultsError extends Error{}
+module.exports = class NoResultsError extends Error {};

@@ -1,36 +1,36 @@
-const { dbToEntity } = require("../../mapper/mapper");
-const AbstractClientRepository = require("../abstractRepository/abstractRepository")
-const NoResultsError = require("../error/noResultsError")
-const { Rental } = require("../../entity/rental")
+const {dbToEntity} = require('../../mapper/mapper');
+const AbstractClientRepository = require('../abstractRepository/abstractRepository');
+const NoResultsError = require('../error/noResultsError');
+const {Rental} = require('../../entity/rental');
 
 module.exports = class ClientRepository extends AbstractClientRepository {
   constructor(rentalModel, clientModel, carModel) {
     super();
-    this.rentalModel = rentalModel
-    this.clientModel = clientModel
-    this.carModel = carModel
+    this.rentalModel = rentalModel;
+    this.clientModel = clientModel;
+    this.carModel = carModel;
   }
 
   /**
-    * @param { Rental } newRental
-  */
-  async saveNewRental(newRental) {
-    const buildOptions = { isNewRecord: true }
-    
-    let saveRental
-    saveRental = await this.rentalModel.build(newRental, buildOptions)
-    saveRental.setDataValue("status", "active") 
-    saveRental = await saveRental.save()
-
-    const { id } = saveRental
-    return this.getById(id)
-  }
-  /**
-   * 
-   * @param {Rental} editedRental 
+   * @param { Rental } newRental
    */
-  async saveEditedRental(editedRental){
-    const newValues = {
+  async saveNewRental(newRental) {
+    const buildOptions = {isNewRecord: true};
+
+    let saveRental;
+    saveRental = await this.rentalModel.build(newRental, buildOptions);
+    saveRental.setDataValue('status', 'active');
+    saveRental = await saveRental.save();
+
+    const {id} = saveRental;
+    return this.getById(id);
+  }
+  /**
+   *
+   * @param {Rental} editedRental
+   */
+  async saveEditedRental(editedRental) {
+    const newValues = ({
       date_from: editedRental.date_from,
       date_until: editedRental.date_until,
       price_per_day: editedRental.price_per_day,
@@ -40,54 +40,54 @@ module.exports = class ClientRepository extends AbstractClientRepository {
       status: editedRental.status,
       fk_car: editedRental.fk_car,
       fk_client: editedRental.fk_client
-    } = editedRental
+    } = editedRental);
 
-    const currentRentalId = editedRental.id
-    const buildOptions = { isNewRecord: false, where: { id : currentRentalId}}
-    await this.rentalModel.update(newValues, buildOptions)
+    const currentRentalId = editedRental.id;
+    const buildOptions = {isNewRecord: false, where: {id: currentRentalId}};
+    await this.rentalModel.update(newValues, buildOptions);
 
-    return this.getById(currentRentalId)
+    return this.getById(currentRentalId);
   }
   /**
-   * 
-   * @param {Number} id 
+   *
+   * @param {Number} id
    */
-  async getById(id){
-    const rental = await this.rentalModel.findOne(
-      { where: { id }, 
+  async getById(id) {
+    const rental = await this.rentalModel.findOne({
+      where: {id},
       include: [
-        {model: this.carModel, paranoid: false}, 
+        {model: this.carModel, paranoid: false},
         {model: this.clientModel, paranoid: false}
-      ]}
-    )
-    if(!rental){
-      throw new NoResultsError()
+      ]
+    });
+    if (!rental) {
+      throw new NoResultsError();
     }
-    return dbToEntity(rental)
+    return dbToEntity(rental);
   }
-  async getAll(){
+  async getAll() {
     const rentals = await this.rentalModel.findAll({
       include: [
-        {model: this.carModel, paranoid: false}, 
+        {model: this.carModel, paranoid: false},
         {model: this.clientModel, paranoid: false}
-      ]}
-    )
-    if(!rentals){
-      throw new NoResultsError()
+      ]
+    });
+    if (!rentals) {
+      throw new NoResultsError();
     }
-    return rentals.map( rental => dbToEntity(rental))
+    return rentals.map(rental => dbToEntity(rental));
   }
   /**
    * @param {Number} id
    */
-  async finish(rental){
-    const setInactive = await this.rentalModel.findByPk(rental.id)
+  async finish(rental) {
+    const setInactive = await this.rentalModel.findByPk(rental.id);
 
-    if(!setInactive){
-      throw new NoResultsError()
+    if (!setInactive) {
+      throw new NoResultsError();
     }
-    setInactive.destroy()
-    
-    return true
+    setInactive.destroy();
+
+    return true;
   }
-}
+};

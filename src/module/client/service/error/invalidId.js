@@ -1,1 +1,1 @@
-module.exports = class InvalidIdError extends Error{}
+module.exports = class InvalidIdError extends Error {};

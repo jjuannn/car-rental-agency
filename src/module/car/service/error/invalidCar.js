@@ -1,1 +1,1 @@
-module.exports = class InvalidCarError extends Error{}
+module.exports = class InvalidCarError extends Error {};
