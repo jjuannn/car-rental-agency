@@ -20,8 +20,8 @@ module.exports = class ClientRepository extends AbstractClientRepository {
     let saveRental;
     saveRental = await this.rentalModel.build(newRental, buildOptions);
     saveRental.setDataValue('status', 'active');
-    saveRental = await saveRental.save();
 
+    saveRental = await saveRental.save();
     const {id} = saveRental;
     return this.getById(id);
   }
@@ -89,5 +89,34 @@ module.exports = class ClientRepository extends AbstractClientRepository {
     setInactive.destroy();
 
     return true;
+  }
+  async findCarBookingsBetweenDates(rentId, car, dateToCompareFrom, dateToCompareUntil) {
+    const toCompare = await this.rentalModel.findAll({
+      where: {fk_car: car},
+      attributes: ['fk_car', 'date_from', 'date_until'],
+      exclude: {where: {rentId}}
+    });
+    const parsedList = toCompare.map(rent => dbToEntity(rent));
+    let container = [];
+    parsedList.forEach(rent => {
+      let dateToCheckFrom = new Date(dateToCompareFrom);
+      let dateToCheckUntil = new Date(dateToCompareUntil);
+      let dateFrom = new Date(rent.date_from);
+      let dateUntil = new Date(rent.date_until);
+
+      if (
+        (dateToCheckFrom >= dateFrom && dateToCheckFrom <= dateUntil) ||
+        (dateToCheckUntil >= dateFrom && dateToCheckUntil <= dateUntil) ||
+        (dateToCheckFrom <= dateFrom && dateToCheckUntil >= dateUntil)
+      ) {
+        container.push(rent);
+      }
+      return container;
+    });
+    if (container.length > 0) {
+      throw new Error('This car is already rented during the dates entered!');
+    } else {
+      return {success: true};
+    }
   }
 };

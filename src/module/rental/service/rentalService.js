@@ -4,7 +4,7 @@ const InvalidRentalError = require('./error/invalidRental');
 
 module.exports = class RentalService {
   /**
-   * @param {import ("../repository/abstractRepository/abstractRepository")} rentalRepository
+   * @param {import ("../repository/sqlite/rentalRepository")} rentalRepository
    */
   constructor(rentalRepository) {
     this.rentalRepository = rentalRepository;
@@ -16,8 +16,12 @@ module.exports = class RentalService {
     if (!(rental instanceof Rental) || rental === undefined) {
       throw new InvalidRentalError();
     }
-    await rental.getTotalDays(rental.date_from, rental.date_until);
-
+    await this.rentalRepository.findCarBookingsBetweenDates(
+      rental.id,
+      rental.fk_car,
+      rental.date_from,
+      rental.date_until
+    );
     return this.rentalRepository.saveNewRental(rental);
   }
   /**
@@ -27,8 +31,11 @@ module.exports = class RentalService {
     if (!(rental instanceof Rental) || rental === undefined) {
       throw new InvalidRentalError();
     }
-    await rental.getTotalDays(rental.date_from, rental.date_until);
-
+    await this.rentalRepository.findCarBookingsBetweenDates(
+      rental.fk_car,
+      rental.date_from,
+      rental.date_until
+    );
     return this.rentalRepository.saveEditedRental(rental);
   }
   /**
