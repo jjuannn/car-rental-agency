@@ -16,12 +16,10 @@ module.exports = class RentalService {
     if (!(rental instanceof Rental) || rental === undefined) {
       throw new InvalidRentalError();
     }
-    await this.rentalRepository.findCarBookingsBetweenDates(
-      rental.id,
-      rental.fk_car,
-      rental.date_from,
-      rental.date_until
-    );
+    const currentRentalsInDate = await this.rentalRepository.findCarRentalsBetweenDates(rental);
+    if (currentRentalsInDate.length > 0) {
+      throw new Error('This car is already rented during the dates entered!');
+    }
     return this.rentalRepository.saveNewRental(rental);
   }
   /**
@@ -31,11 +29,10 @@ module.exports = class RentalService {
     if (!(rental instanceof Rental) || rental === undefined) {
       throw new InvalidRentalError();
     }
-    await this.rentalRepository.findCarBookingsBetweenDates(
-      rental.fk_car,
-      rental.date_from,
-      rental.date_until
-    );
+    const currentRentalsInDate = await this.rentalRepository.findCarRentalsBetweenDates(rental);
+    if (currentRentalsInDate.length > 0) {
+      throw new Error('This car is already rented during the dates entered!');
+    }
     return this.rentalRepository.saveEditedRental(rental);
   }
   /**

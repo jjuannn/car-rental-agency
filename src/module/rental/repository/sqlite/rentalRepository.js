@@ -2,7 +2,7 @@ const {dbToEntity} = require('../../mapper/mapper');
 const AbstractClientRepository = require('../abstractRepository/abstractRepository');
 const NoResultsError = require('../error/noResultsError');
 const {Rental} = require('../../entity/rental');
-
+const {QueryTypes, Op} = require('sequelize');
 module.exports = class ClientRepository extends AbstractClientRepository {
   constructor(rentalModel, clientModel, carModel) {
     super();
@@ -90,33 +90,19 @@ module.exports = class ClientRepository extends AbstractClientRepository {
 
     return true;
   }
-  async findCarBookingsBetweenDates(rentId, car, dateToCompareFrom, dateToCompareUntil) {
-    const toCompare = await this.rentalModel.findAll({
-      where: {fk_car: car},
-      attributes: ['fk_car', 'date_from', 'date_until'],
-      exclude: {where: {rentId}}
-    });
-    const parsedList = toCompare.map(rent => dbToEntity(rent));
-    let container = [];
-    parsedList.forEach(rent => {
-      let dateToCheckFrom = new Date(dateToCompareFrom);
-      let dateToCheckUntil = new Date(dateToCompareUntil);
-      let dateFrom = new Date(rent.date_from);
-      let dateUntil = new Date(rent.date_until);
-
-      if (
-        (dateToCheckFrom >= dateFrom && dateToCheckFrom <= dateUntil) ||
-        (dateToCheckUntil >= dateFrom && dateToCheckUntil <= dateUntil) ||
-        (dateToCheckFrom <= dateFrom && dateToCheckUntil >= dateUntil)
-      ) {
-        container.push(rent);
-      }
-      return container;
-    });
-    if (container.length > 0) {
-      throw new Error('This car is already rented during the dates entered!');
-    } else {
-      return {success: true};
-    }
+  async findCarRentalsBetweenDates(rental) {
+    const {date_from, date_until, fk_car, id} = rental;
+    const toCompare = await this.rentalModel.sequelize.query(
+      `SELECT date_from, date_until, id, fk_car FROM Rents WHERE
+      (fk_car = "${fk_car}") AND
+      (("${date_from}" >= date_from AND "${date_from}" <= date_until) OR
+      ("${date_until}" >= date_from AND "${date_until}" <= date_until) OR
+      ("${date_from}" <= date_from AND "${date_until}" >= date_until)) AND
+      (status = "active") AND (id <> "${id}")
+      `,
+      {type: QueryTypes.SELECT, model: this.rentalModel}
+    );
+    const mappedList = await toCompare.map(result => dbToEntity(result));
+    return mappedList;
   }
 };
