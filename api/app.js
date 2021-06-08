@@ -12,7 +12,7 @@ app.use(
 app.use(express.json());
 app.use(express.static(`${__dirname}/styles`));
 app.use(express.static(`${__dirname}/module/car`));
-app.use(express.static('src'));
+app.use(express.static('api'));
 
 const nunjucks = require('nunjucks');
 
@@ -27,9 +27,9 @@ const container = configureDI.configureContainer();
 const exp_session = container.get('session');
 app.use(exp_session);
 
-const {initCarModule} = require('../src/module/car/module');
-const {initClientModule} = require('../src/module/client/module');
-const {initRentalModule} = require('../src/module/rental/module');
+const {initCarModule} = require('../api/module/car/module');
+const {initClientModule} = require('../api/module/client/module');
+const {initRentalModule} = require('../api/module/rental/module');
 
 initCarModule(app, container);
 initClientModule(app, container);
