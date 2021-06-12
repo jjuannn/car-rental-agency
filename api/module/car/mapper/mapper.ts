@@ -30,11 +30,11 @@ export function formToEntity(car): Car {
   );
 }
 
-export function dbToEntity(model): Car {
+export function dbToEntity(carModel): Car {
   const {
     id,
     brand,
-    mode,
+    model,
     year,
     mileage,
     color,
@@ -43,11 +43,11 @@ export function dbToEntity(model): Car {
     gearbox_type,
     price_per_day,
     images
-  } = model.toJSON();
+  } = carModel.toJSON();
   return new Car(
     id,
     brand,
-    mode,
+    model,
     year,
     mileage,
     color,
