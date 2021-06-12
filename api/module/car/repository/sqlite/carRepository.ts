@@ -8,10 +8,9 @@ export default class CarRepository implements ICarRepository {
   constructor(public carModel: typeof CarModel) {}
   async saveNewCar(newCar: Car): Promise<Car> {
     const buildOptions = {isNewRecord: true};
-    const saveCar = await this.carModel.create(newCar, buildOptions);
-
-    // const {id} = saveCar;
-    return this.getById(0);
+    const saveCar: any = await this.carModel.create(newCar, buildOptions);
+    const {id} = saveCar;
+    return this.getById(id);
   }
 
   async saveEditedCar(editedCar: Car): Promise<Car> {
