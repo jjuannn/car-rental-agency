@@ -1,15 +1,10 @@
 import express from 'express';
 
-export interface IParams {
-  req: express.Request;
-  res: express.Response;
-}
-
 export default interface IClientController {
   configureRoutes(app: express.Application): void;
-  getAll(args: IParams): Promise<void>;
-  getById(args: IParams): Promise<void>;
-  saveNewClient(args: IParams): Promise<void>;
-  saveEditedClient(args: IParams): Promise<void>;
-  delete(args: IParams): Promise<void>;
+  getAll(req: express.Request, res: express.Response): Promise<void>;
+  getById(req: express.Request, res: express.Response): Promise<void>;
+  saveNewClient(req: express.Request, res: express.Response): Promise<void>;
+  saveEditedClient(req: express.Request, res: express.Response): Promise<void>;
+  delete(req: express.Request, res: express.Response): Promise<void>;
 }

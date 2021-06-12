@@ -1,7 +1,6 @@
 import {formToEntity} from '../mapper/mapper';
 import UndefinedIdError from './error/undefinedId';
 import IRentalController from './interface/IRentalController';
-import {IParams} from './interface/IRentalController';
 import express from 'express';
 import ICarController from '../../car/controller/interface/ICarController';
 import IClientController from '../../client/controller/interface/IClientController';
@@ -30,13 +29,12 @@ export default class RentalController implements IRentalController {
     app.get(`${ROUTE_BASE}/delete?:id`, this.finish.bind(this));
   }
 
-  async getAll(args: IParams): Promise<void> {
+  async getAll(req: express.Request, res: express.Response): Promise<void> {
     const rentals = await this.rentalService.getAll();
     console.log(rentals);
   }
 
-  async getById(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async getById(req: express.Request, res: express.Response): Promise<void> {
     if (!req.query.id) {
       throw new UndefinedIdError();
     }
@@ -49,8 +47,7 @@ export default class RentalController implements IRentalController {
     }
   }
 
-  async saveNewRental(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async saveNewRental(req: express.Request, res: express.Response): Promise<void> {
     const rental = formToEntity(req.body);
     try {
       const newRental = await this.rentalService.saveNewRental(rental);
@@ -60,8 +57,7 @@ export default class RentalController implements IRentalController {
     }
   }
 
-  async saveEditedRental(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async saveEditedRental(req: express.Request, res: express.Response): Promise<void> {
     const rental = formToEntity(req.body);
     try {
       const editedRental = await this.rentalService.saveEditedRental(rental);
@@ -71,8 +67,7 @@ export default class RentalController implements IRentalController {
     }
   }
 
-  async finish(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async finish(req: express.Request, res: express.Response): Promise<void> {
     if (!req.query.id) {
       throw new UndefinedIdError();
     }

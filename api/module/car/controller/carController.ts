@@ -3,7 +3,6 @@ import Car from '../entity/car';
 import ICarController from './interface/ICarController';
 import ICarService from '../service/interface/ICarService';
 import express from 'express';
-import {IParams} from './interface/ICarController';
 
 export default class CarController implements ICarController {
   constructor(
@@ -33,19 +32,17 @@ export default class CarController implements ICarController {
     app.get(`${ROUTE_BASE}/delete?:id`, this.delete.bind(this));
   }
 
-  async renderList(args: IParams): Promise<void> {
-    const {req, res} = args;
-    res.send('working');
+  async renderList(req: express.Request, res: express.Response): Promise<void> {
     try {
       const cars = await this.carService.getAll();
       console.log(cars);
+      res.send(cars);
     } catch (e) {
       console.error(e);
     }
   }
 
-  async getById(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async getById(req: express.Request, res: express.Response): Promise<void> {
     if (!req.query.id) {
       //throw new UndefinedIdError();
       console.error('failed');
@@ -58,8 +55,7 @@ export default class CarController implements ICarController {
       console.error(e);
     }
   }
-  async saveNewCar(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async saveNewCar(req: express.Request, res: express.Response): Promise<void> {
     const car: Car = formToEntity(req.body);
     if (req.file) {
       car.images = `/uploads/${req.file.filename}`;
@@ -67,12 +63,12 @@ export default class CarController implements ICarController {
     try {
       const savedCar = await this.carService.saveNewCar(car);
       console.log(savedCar);
+      res.send('working! ');
     } catch (e) {
       console.error(e);
     }
   }
-  async saveEditedCar(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async saveEditedCar(req: express.Request, res: express.Response): Promise<void> {
     const car: Car = formToEntity(req.body);
     if (req.file) {
       car.images = `/uploads/${req.file.filename}`;
@@ -85,8 +81,7 @@ export default class CarController implements ICarController {
     }
   }
 
-  async delete(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async delete(req: express.Request, res: express.Response): Promise<void> {
     if (!req.query.id) {
       //throw new UndefinedIdError();
       console.error('failed');

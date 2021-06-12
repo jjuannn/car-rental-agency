@@ -3,7 +3,6 @@ import UndefinedIdError from './error/undefinedId';
 import IClientController from './interface/IClientController';
 import IClientService from '../service/interface/IClientService';
 import express from 'express';
-import {IParams} from './interface/IClientController';
 
 export default class ClientController implements IClientController {
   constructor(public clientService: IClientService, public ROUTE_BASE: string = '/client') {}
@@ -22,8 +21,7 @@ export default class ClientController implements IClientController {
     app.get(`${ROUTE_BASE}/delete?:id`, this.delete.bind(this));
   }
 
-  async getAll(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async getAll(req: express.Request, res: express.Response): Promise<void> {
     try {
       const clients = await this.clientService.getAll();
       console.log(clients);
@@ -32,15 +30,13 @@ export default class ClientController implements IClientController {
     }
   }
 
-  async getById(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async getById(req: express.Request, res: express.Response): Promise<void> {
     const id = Number(req.query.id);
     const client = await this.clientService.getById(id);
     console.log(client);
   }
 
-  async saveNewClient(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async saveNewClient(req: express.Request, res: express.Response): Promise<void> {
     const client = formToEntity(req.body);
     console.log(client);
     try {
@@ -51,8 +47,7 @@ export default class ClientController implements IClientController {
     }
   }
 
-  async saveEditedClient(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async saveEditedClient(req: express.Request, res: express.Response): Promise<void> {
     const client = formToEntity(req.body);
     try {
       await this.clientService.saveEditedClient(client);
@@ -63,8 +58,7 @@ export default class ClientController implements IClientController {
     // y commitearlo
   }
 
-  async delete(args: IParams): Promise<void> {
-    const {req, res} = args;
+  async delete(req: express.Request, res: express.Response): Promise<void> {
     if (!req.query.id) {
       throw new UndefinedIdError();
     }
