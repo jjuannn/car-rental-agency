@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cd server && cd lib && nodemon --inspect -e js,html app.js",
+    "compile:dev": "cd server && concurrently \"npm run lib\" \"tsc --watch\" ",
+    "tsc:watch": "tsc --watch",
+    "lib": "cd lib && nodemon --inspect -e app.js",
     "app": "cd src && node app.js"
   },
   "repository": {
@@ -22,6 +24,7 @@
     "@types/express": "^4.17.12",
     "@types/multer": "^1.4.5",
     "bulma": "^0.9.1",
+    "concurrently": "^6.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
