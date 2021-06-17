@@ -1,6 +1,6 @@
 import Car from '../entity/car';
-
-export function formToEntity(car): Car {
+import {CarModel} from '../module';
+export function formToEntity(car: Car): Car {
   const {
     id,
     brand,
@@ -30,7 +30,7 @@ export function formToEntity(car): Car {
   );
 }
 
-export function dbToEntity(carModel): Car {
+export function dbToEntity(carModel: typeof CarModel): Car {
   const {
     id,
     brand,

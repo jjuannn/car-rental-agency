@@ -1,6 +1,7 @@
 import Rental from '../entity/rental';
+import {RentalModel} from '../module';
 
-export function formToEntity(rental) {
+export function formToEntity(rental: Rental): Rental {
   const {
     id,
     fk_car,
@@ -22,7 +23,7 @@ export function formToEntity(rental) {
     date_from,
     date_until,
     payment_method,
-    total_price,
+    String(total_price),
     is_paid,
     status,
     {},
@@ -30,7 +31,7 @@ export function formToEntity(rental) {
   );
 }
 
-export function dbToEntity(rentalModel) {
+export function dbToEntity(rentalModel: typeof RentalModel): Rental {
   const {
     id,
     fk_car,

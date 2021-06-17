@@ -6,12 +6,13 @@ import {formToEntity} from '../mapper/mapper';
 import UndefinedIdError from './error/undefinedId';
 import Rental from '../entity/rental';
 import express from 'express';
+import IRentalService from '../service/interface/IRentalService';
 
 export default class RentalController
   extends AbstractRentalController
   implements IRentalController {
   constructor(
-    public rentalService,
+    public rentalService: IRentalService,
     public carService: ICarService,
     public clientService: IClientService,
     public ROUTE_BASE = '/rental'

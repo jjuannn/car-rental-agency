@@ -74,7 +74,7 @@ export default class ClientRepository
     if (!rentals) {
       throw new NoResultsError();
     }
-    return rentals.map(rental => dbToEntity(rental));
+    return rentals.map((rental: typeof RentalModel) => dbToEntity(rental));
   }
 
   async finish(rental: Rental): Promise<boolean> {
@@ -99,7 +99,7 @@ export default class ClientRepository
       `,
       {type: QueryTypes.SELECT, model: this.rentalModel}
     );
-    const mappedList = await toCompare.map(result => dbToEntity(result));
+    const mappedList = await toCompare.map((result: typeof RentalModel) => dbToEntity(result));
     return mappedList;
   }
 }

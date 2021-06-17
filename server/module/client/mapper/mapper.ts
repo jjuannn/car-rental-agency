@@ -1,6 +1,7 @@
 import Client from '../entity/client';
+import {ClientModel} from '../module';
 
-export function formToEntity(client): Client {
+export function formToEntity(client: Client): Client {
   const {
     id,
     name,
@@ -28,7 +29,7 @@ export function formToEntity(client): Client {
   );
 }
 
-export function dbToEntity(clientModel): Client {
+export function dbToEntity(clientModel: typeof ClientModel): Client {
   const {
     id,
     name,

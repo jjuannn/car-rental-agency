@@ -1,3 +1,6 @@
+import {CarModel} from '../../car/module';
+import {ClientModel} from '../../client/module';
+
 const {Sequelize, Model, DataTypes} = require('sequelize');
 
 export default class RentalModel extends Model {
@@ -58,16 +61,12 @@ export default class RentalModel extends Model {
     return RentalModel;
   }
 
-  /**
-   *
-   * @param {import("../../car/model/carModel")} CarModel
-   * @param {import("../../client/model/clientModel")} ClientModel
-   */
-  static setupAssociations(CarModel, ClientModel) {
-    RentalModel.belongsTo(CarModel, {
+  static setupAssociations(carModel: typeof CarModel, clientModel: typeof ClientModel) {
+    RentalModel.belongsTo(carModel, {
       foreignKey: 'fk_car'
     });
-    RentalModel.belongsTo(ClientModel, {
+
+    RentalModel.belongsTo(clientModel, {
       foreignKey: 'fk_client'
     });
   }

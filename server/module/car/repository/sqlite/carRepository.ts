@@ -54,7 +54,7 @@ export default class CarRepository extends AbstractCarRepository implements ICar
     if (!cars) {
       throw new NoResultsError();
     }
-    return cars.map(car => dbToEntity(car));
+    return cars.map((car: typeof CarModel) => dbToEntity(car));
   }
 
   async delete(id: number): Promise<boolean> {

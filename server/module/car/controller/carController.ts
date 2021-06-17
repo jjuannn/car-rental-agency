@@ -4,10 +4,14 @@ import UndefinedIdError from './error/undefinedId';
 import ICarController from './interface/ICarController';
 import Car from '../entity/car';
 import express from 'express';
+import multer from 'multer';
 import ICarService from '../service/interface/ICarService';
-
 export default class CarController extends AbstractCarController implements ICarController {
-  constructor(public uploadMiddleware, public carService: ICarService, public ROUTE_BASE = '/car') {
+  constructor(
+    public uploadMiddleware: multer.Multer,
+    public carService: ICarService,
+    public ROUTE_BASE = '/car'
+  ) {
     super();
   }
 

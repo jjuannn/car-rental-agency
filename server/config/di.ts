@@ -1,5 +1,5 @@
 import {Sequelize} from 'sequelize';
-import DIContainer, {object, get, factory} from 'rsdi';
+import DIContainer, {object, get, factory, IDIContainer} from 'rsdi';
 import {CarRepository, CarModel, CarController, CarService} from '../module/car/module';
 import {
   ClientRepository,
@@ -15,38 +15,25 @@ import {
 } from '../module/rental/module';
 
 import multer, {Multer} from 'multer';
-import session from 'express-session';
 
 function configureDatabase() {
   const sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: process.env.MAIN_DB_PATH
+    storage: '../data/database.db'
   });
 
   return sequelize;
 }
-function configureSession() {
-  const ONE_WEEK_IN_SECONDS = 604800000;
 
-  const sessionOptions = {
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {maxAge: ONE_WEEK_IN_SECONDS}
-  };
-
-  return session(sessionOptions);
-}
-
-function configureCarModel(container: DIContainer) {
+function configureCarModel(container: IDIContainer) {
   return CarModel.setup(container.get('Sequelize'));
 }
 
-function configureClientModel(container: DIContainer) {
+function configureClientModel(container: IDIContainer) {
   return ClientModel.setup(container.get('Sequelize'));
 }
 
-function configureRentalModel(container: DIContainer) {
+function configureRentalModel(container: IDIContainer) {
   RentalModel.setup(container.get('Sequelize'));
   RentalModel.setupAssociations(container.get('CarModel'), container.get('ClientModel'));
   return RentalModel;
@@ -68,7 +55,6 @@ function addCarModuleDefinitions(container: DIContainer) {
     CarModel: factory(configureCarModel)
   });
 }
-
 function addRentalModelDefinitions(container: DIContainer) {
   container.addDefinitions({
     RentalController: object(RentalController).construct(
@@ -98,12 +84,11 @@ function addClientModuleDefinitions(container: DIContainer) {
 function addCommonDefinitions(container: DIContainer) {
   container.addDefinitions({
     Sequelize: factory(configureDatabase),
-    multer: factory(configureMulter),
-    session: factory(configureSession)
+    multer: factory(configureMulter)
   });
 }
 
-export function configureContainer() {
+export default function configureContainer(): DIContainer {
   const container = new DIContainer();
   addCommonDefinitions(container);
   addCarModuleDefinitions(container);

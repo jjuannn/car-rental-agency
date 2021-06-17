@@ -1,47 +1,35 @@
-require('dotenv').config({path: '/.env'});
-const express = require('express');
-
-const app = express();
 const path = require('path');
+require('dotenv').config('/.env');
 
-app.use(
-  express.urlencoded({
-    extended: false
-  })
-);
+import express from 'express';
+import {Sequelize} from 'sequelize/types';
+const app = express();
+
+app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.static(`${__dirname}/styles`));
 app.use(express.static(`${__dirname}/module/car`));
 app.use(express.static('server'));
 
-const nunjucks = require('nunjucks');
+import configureContainer from './config/di';
+const container = configureContainer();
 
-nunjucks.configure('views', {
-  autoescape: true,
-  express: app
-});
-
-const configureDI = require('./config/di');
-const container = configureDI.configureContainer();
-
-const exp_session = container.get('session');
-app.use(exp_session);
-
-const {initCarModule} = require('./module/car/module');
-const {initClientModule} = require('./module/client/module');
-const {initRentalModule} = require('./module/rental/module');
+import {initCarModule} from './module/car/module';
+import {initClientModule} from './module/client/module';
+import {initRentalModule} from './module/rental/module';
 
 initCarModule(app, container);
 initClientModule(app, container);
 initRentalModule(app, container);
 
-const mainDb = container.get('Sequelize');
+const mainDb: Sequelize = container.get('Sequelize');
 mainDb.sync();
 
-app.get('/', (req, res) => {
+app.get('/', (req: express.Request, res: express.Response) => {
   res.redirect('/car');
 });
+console.log('HOLA!');
 console.log(process.env.UPLOAD_MULTER_DIR);
 console.log(process.env.MAIN_DB_PATH);
 const PORT = 8080;
-app.listen(process.env.PORT || PORT, console.log(`CAR-RENTAL-AGENCY listening at port ${PORT}`));
+app.listen(process.env.PORT || PORT);

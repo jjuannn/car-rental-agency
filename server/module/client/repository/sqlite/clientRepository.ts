@@ -52,7 +52,7 @@ export default class ClientRepository
     if (!clients) {
       throw new NoResultsError();
     }
-    return clients.map(client => dbToEntity(client));
+    return clients.map((client: typeof ClientModel) => dbToEntity(client));
   }
 
   async delete(id: number): Promise<boolean> {
