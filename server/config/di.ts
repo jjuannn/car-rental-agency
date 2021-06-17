@@ -19,7 +19,7 @@ import multer, {Multer} from 'multer';
 function configureDatabase() {
   const sequelize = new Sequelize({
     dialect: 'sqlite',
-    storage: '../data/database.db'
+    storage: process.env.MAIN_DB_PATH
   });
 
   return sequelize;
