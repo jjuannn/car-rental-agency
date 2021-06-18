@@ -1,8 +1,12 @@
 const path = require('path');
-require('dotenv').config('/.env');
+const dotenv = require('dotenv');
+const config = dotenv.config();
+
+if (config.error) {
+  throw config.error;
+}
 
 import express from 'express';
-import {Sequelize} from 'sequelize/types';
 const app = express();
 
 app.use(express.urlencoded({extended: false}));
@@ -10,7 +14,6 @@ app.use(express.json());
 app.use(express.static(`${__dirname}/styles`));
 app.use(express.static(`${__dirname}/module/car`));
 app.use(express.static('server'));
-
 import configureContainer from './config/di';
 const container = configureContainer();
 
@@ -22,12 +25,14 @@ initCarModule(app, container);
 initClientModule(app, container);
 initRentalModule(app, container);
 
+import {Sequelize} from 'sequelize/types';
 const mainDb: Sequelize = container.get('Sequelize');
 mainDb.sync();
 
 app.get('/', (req: express.Request, res: express.Response) => {
   res.redirect('/car');
 });
+
 console.log('HOLA!');
 console.log(process.env.UPLOAD_MULTER_DIR);
 console.log(process.env.MAIN_DB_PATH);
