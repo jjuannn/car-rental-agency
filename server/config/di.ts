@@ -13,7 +13,6 @@ import {
   RentalController,
   RentalService
 } from '../module/rental/module';
-
 import multer, {Multer} from 'multer';
 
 function configureDatabase() {
@@ -25,15 +24,15 @@ function configureDatabase() {
   return sequelize;
 }
 
-function configureCarModel(container: IDIContainer) {
+function configureCarModel(container: IDIContainer): typeof CarModel {
   return CarModel.setup(container.get('Sequelize'));
 }
 
-function configureClientModel(container: IDIContainer) {
+function configureClientModel(container: IDIContainer): typeof ClientModel {
   return ClientModel.setup(container.get('Sequelize'));
 }
 
-function configureRentalModel(container: IDIContainer) {
+function configureRentalModel(container: IDIContainer): typeof RentalModel {
   RentalModel.setup(container.get('Sequelize'));
   RentalModel.setupAssociations(container.get('CarModel'), container.get('ClientModel'));
   return RentalModel;
@@ -47,15 +46,15 @@ function configureMulter(): Multer {
   return upload;
 }
 
-function addCarModuleDefinitions(container: DIContainer) {
+function addCarModuleDefinitions(container: DIContainer): void {
   container.addDefinitions({
-    CarController: object(CarController).construct(get('multer'), get('CarRepository')),
+    CarController: object(CarController).construct(get('multer'), get('CarService')),
     CarService: object(CarService).construct(get('CarRepository')),
     CarRepository: object(CarRepository).construct(get('CarModel')),
     CarModel: factory(configureCarModel)
   });
 }
-function addRentalModelDefinitions(container: DIContainer) {
+function addRentalModelDefinitions(container: DIContainer): void {
   container.addDefinitions({
     RentalController: object(RentalController).construct(
       get('RentalService'),
@@ -72,7 +71,7 @@ function addRentalModelDefinitions(container: DIContainer) {
   });
 }
 
-function addClientModuleDefinitions(container: DIContainer) {
+function addClientModuleDefinitions(container: DIContainer): void {
   container.addDefinitions({
     ClientController: object(ClientController).construct(get('ClientService')),
     ClientService: object(ClientService).construct(get('ClientRepository')),
@@ -81,7 +80,7 @@ function addClientModuleDefinitions(container: DIContainer) {
   });
 }
 
-function addCommonDefinitions(container: DIContainer) {
+function addCommonDefinitions(container: DIContainer): void {
   container.addDefinitions({
     Sequelize: factory(configureDatabase),
     multer: factory(configureMulter)
