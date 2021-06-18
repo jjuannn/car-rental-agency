@@ -23,13 +23,13 @@ export default class CarController extends AbstractCarController implements ICar
 
     app.post(
       `${ROUTE_BASE}/new`,
-      this.uploadMiddleware.single('car_image'),
+      this.uploadMiddleware.single('images'),
       this.saveNewCar.bind(this)
     );
 
     app.post(
       `${ROUTE_BASE}/edit?:id`,
-      this.uploadMiddleware.single('car_image'),
+      this.uploadMiddleware.single('images'),
       this.saveEditedCar.bind(this)
     );
 
@@ -41,10 +41,9 @@ export default class CarController extends AbstractCarController implements ICar
   async getAll(req: express.Request, res: express.Response): Promise<void> {
     try {
       const cars = await this.carService.getAll();
-      console.log(cars);
-      res.send(cars);
+      res.status(200).send(cars);
     } catch (e) {
-      console.error(e);
+      res.status(400).send({status: 'failed', err: 'Something failed while getting the teams'});
     }
   }
 
@@ -55,35 +54,37 @@ export default class CarController extends AbstractCarController implements ICar
     try {
       const id = Number(req.query.id);
       const car = await this.carService.getById(id);
-      res.render('car/view.html', {data: {car}});
+      res.status(200).send(car);
     } catch (e) {
-      res.redirect('/car');
+      res.status(400).send({status: 'failed', err: 'Something failed while getting a car'});
     }
   }
 
   async saveNewCar(req: express.Request, res: express.Response): Promise<void> {
     const car: Car = formToEntity(req.body);
-    // if (req.body) {
-    //   car.images = `/uploads/${req.file.filename}`;
-    // }
+    if (req.file) {
+      car.images = `/uploads/${req.file.filename}`;
+    }
     try {
-      const savedCar = await this.carService.saveNewCar(car);
-      console.log(savedCar);
-      res.send('working! ');
+      const newCar = await this.carService.saveNewCar(car);
+      res.status(200).send(newCar);
     } catch (e) {
-      console.error(e);
+      res.status(400).send({status: 'failed', err: 'Something went wrong while creating a car'});
     }
   }
 
   async saveEditedCar(req: express.Request, res: express.Response): Promise<void> {
+    req.body.id = req.query.id;
     const car: Car = formToEntity(req.body);
-    // if (req.file) {
-    //   car.images = `/uploads/${req.file.filename}`;
-    // }
+    if (req.file) {
+      car.images = `/uploads/${req.file.filename}`;
+    }
     try {
-      await this.carService.saveEditedCar(car);
-    } catch (e) {}
-    res.redirect('/car');
+      const editedCar = await this.carService.saveEditedCar(car);
+      res.status(200).send(editedCar);
+    } catch (e) {
+      res.status(400).send({status: 'failed', err: 'Something went wrong while edited a car!'});
+    }
   }
 
   async delete(req: express.Request, res: express.Response): Promise<void> {
@@ -93,7 +94,9 @@ export default class CarController extends AbstractCarController implements ICar
     try {
       const id = Number(req.query.id);
       await this.carService.delete(id);
-    } catch (e) {}
-    res.redirect('/car');
+      res.status(200).send({success: true});
+    } catch (e) {
+      res.status(400).send({status: 'failed', err: 'Something went wrong while deleting a car'});
+    }
   }
 }

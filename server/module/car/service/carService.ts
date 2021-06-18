@@ -4,10 +4,11 @@ import InvalidIdError from './error/invalidId';
 import InvalidCarError from './error/invalidCar';
 import ICarRepository from '../repository/interface/sqlite/ICarRepository';
 
-export default class Service implements ICarService {
+export default class CarService implements ICarService {
   constructor(public carRepository: ICarRepository) {}
 
   async saveNewCar(car: Car): Promise<Car> {
+    console.log(car);
     if (car === undefined) {
       throw new InvalidCarError();
     }
@@ -15,6 +16,7 @@ export default class Service implements ICarService {
   }
 
   async saveEditedCar(car: Car): Promise<Car> {
+    console.log(car);
     if (car === undefined) {
       throw new InvalidCarError();
     }
