@@ -37,12 +37,12 @@ export default class RentalController
   }
 
   async newRental(req: express.Request, res: express.Response): Promise<void> {
-    const cars = await this.carService.getAll();
-    const clients = await this.clientService.getAll();
-    if (cars.length === 0 || clients.length === 0) {
-      res.redirect('/rental');
-    } else {
-      res.render('rental/add.html', {data: {cars, clients}});
+    try {
+      const cars = await this.carService.getAll();
+      const clients = await this.clientService.getAll();
+      res.status(200).send({cars, clients});
+    } catch (e) {
+      res.status(400).send({status: 'failed', err: 'something failed while creating the rental!'});
     }
   }
   async editRental(req: express.Request, res: express.Response): Promise<void> {
@@ -54,19 +54,17 @@ export default class RentalController
       const rental = await this.rentalService.getById(id);
       const cars = await this.carService.getAll();
       const clients = await this.clientService.getAll();
-      res.render('rental/edit.html', {data: {rental, cars, clients}});
+      res.status(200).send({rental, cars, clients});
     } catch (e) {
-      res.redirect('/rental');
+      res.status(400).send({status: 'failed', err: 'something failed while editing the rental!'});
     }
   }
   async getAll(req: express.Request, res: express.Response): Promise<void> {
     try {
       const rentals = await this.rentalService.getAll();
-      res.render('list/rental/main-page.html', {
-        data: {rentals}
-      });
+      res.status(200).send(rentals);
     } catch (e) {
-      res.redirect('/rental');
+      res.status(400).send({status: 'failed', err: 'something failed while getting the rentals!'});
     }
   }
 
@@ -77,26 +75,30 @@ export default class RentalController
     try {
       const id = Number(req.query.id);
       const rental = await this.rentalService.getById(id);
-      res.render('rental/view.html', {data: {rental}});
+      res.status(200).send(rental);
     } catch (e) {
-      res.redirect('/rental');
+      res.status(400).send('failed');
     }
   }
 
   async saveNewRental(req: express.Request, res: express.Response): Promise<void> {
     const rental: Rental = formToEntity(req.body);
     try {
-      await this.rentalService.saveNewRental(rental);
-    } catch (e) {}
-    res.redirect('/rental');
+      const newRental = await this.rentalService.saveNewRental(rental);
+      res.status(200).send(newRental);
+    } catch (e) {
+      res.status(400).send({status: 'failed', err: 'something failed while saving the rental!'});
+    }
   }
 
   async saveEditedRental(req: express.Request, res: express.Response): Promise<void> {
     const rental: Rental = formToEntity(req.body);
     try {
-      await this.rentalService.saveEditedRental(rental);
-    } catch (e) {}
-    res.redirect('/rental');
+      const editedRental = await this.rentalService.saveEditedRental(rental);
+      res.status(200).send(editedRental);
+    } catch (e) {
+      res.status(400).send({status: 'failed', err: 'something failed while editing the rental!'});
+    }
   }
 
   async finish(req: express.Request, res: express.Response): Promise<void> {
@@ -106,8 +108,10 @@ export default class RentalController
     try {
       const id = Number(req.query.id);
       const rentalToDelete = await this.rentalService.getById(id);
-      await this.rentalService.finish(rentalToDelete);
-    } catch (e) {}
-    res.redirect('/rental');
+      const finished = await this.rentalService.finish(rentalToDelete);
+      res.status(200).send(finished);
+    } catch (e) {
+      res.status(400).send("the rental isn't paid yet!");
+    }
   }
 }

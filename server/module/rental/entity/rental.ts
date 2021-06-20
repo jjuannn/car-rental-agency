@@ -19,11 +19,6 @@ export default class Rental {
     this.total_price = this.calculateTotalPrice();
   }
 
-  /**
-   *
-   * @param {String} date1 // String => date
-   * @param {String} date2 // String => date
-   */
   calculateTotalPrice() {
     let from = new Date(this.date_from);
     let until = new Date(this.date_until);
@@ -31,7 +26,7 @@ export default class Rental {
     let differenceInTime = until.getTime() - from.getTime();
     let differenceInDays = differenceInTime / (1000 * 3600 * 24);
 
-    return (this.total_price = differenceInDays * Number(this.price_per_day));
+    return (this.total_price = String(differenceInDays * Number(this.price_per_day)));
   }
   setFinished() {
     if (this.is_paid !== true) {
