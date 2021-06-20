@@ -27,6 +27,6 @@ This application was made with:
 
 - Run ```npm install``` to install the project dependencies.
 - Create a ```.env``` file in ```server/lib``` root, copying the existing ```.env.dist``` file content.
-- Run ```npm run compile:dev``` to start Typescript compiler and run the app in development mode at port 8080.
-- Ready! Just go to ```http://localhost:8080/``` in your browser and use the proyect!  
+- Run ```npm run compile:dev``` to start Typescript compiler and run the app in development mode.
+- Ready! The app will be listening at ```http://localhost:8080/```!  
 
