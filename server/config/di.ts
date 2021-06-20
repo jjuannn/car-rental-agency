@@ -58,8 +58,8 @@ function addRentalModelDefinitions(container: DIContainer): void {
   container.addDefinitions({
     RentalController: object(RentalController).construct(
       get('RentalService'),
-      get('CarController'),
-      get('ClientController')
+      get('CarService'),
+      get('ClientService')
     ),
     RentalService: object(RentalService).construct(get('RentalRepository')),
     RentalRepository: object(RentalRepository).construct(
