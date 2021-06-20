@@ -11,7 +11,6 @@ export default class CarRepository extends AbstractCarRepository implements ICar
   }
 
   async saveNewCar(newCar: Car): Promise<Car> {
-    console.log(newCar);
     const buildOptions = {isNewRecord: true};
     const saveCar = await this.carModel.create(newCar, buildOptions);
     const {id} = saveCar;
@@ -19,7 +18,6 @@ export default class CarRepository extends AbstractCarRepository implements ICar
   }
 
   async saveEditedCar(editedCar: Car): Promise<Car> {
-    console.log(editedCar);
     const newValues = ({
       brand: editedCar.brand,
       model: editedCar.model,

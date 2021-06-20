@@ -8,7 +8,6 @@ export default class CarService implements ICarService {
   constructor(public carRepository: ICarRepository) {}
 
   async saveNewCar(car: Car): Promise<Car> {
-    console.log(car);
     if (car === undefined) {
       throw new InvalidCarError();
     }
@@ -16,7 +15,6 @@ export default class CarService implements ICarService {
   }
 
   async saveEditedCar(car: Car): Promise<Car> {
-    console.log(car);
     if (car === undefined) {
       throw new InvalidCarError();
     }
