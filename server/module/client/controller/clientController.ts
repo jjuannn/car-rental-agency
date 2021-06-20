@@ -29,42 +29,48 @@ export default class ClientController
   async getAll(req: express.Request, res: express.Response): Promise<void> {
     try {
       const clients = await this.clientService.getAll();
-      res.render('list/client/main-page.html', {
-        data: {clients}
-      });
+      res.status(200).send(clients);
     } catch (e) {
-      res.redirect('/client');
+      res
+        .status(400)
+        .send({status: 'failed', err: 'something failed while getting the clients list'});
     }
   }
 
   async getById(req: express.Request, res: express.Response): Promise<void> {
     if (!req.query.id) {
-      throw new UndefinedIdError();
+      res.status(400).send({status: 'failed', err: 'client id required'});
     }
     try {
       const id = Number(req.query.id);
       const client = await this.clientService.getById(id);
-      res.render('client/view.html', {data: {client}});
+      res.status(200).send(client);
     } catch (e) {
-      res.redirect('/client');
+      res.status(400).send({status: 'failed', err: ' something failed while getting a client! '});
     }
   }
 
   async saveNewClient(req: express.Request, res: express.Response): Promise<void> {
     const client = formToEntity(req.body);
-    console.log(client);
     try {
-      await this.clientService.saveNewClient(client);
-    } catch (e) {}
-    res.redirect('/client');
+      const newClient = await this.clientService.saveNewClient(client);
+      res.status(200).send(newClient);
+    } catch (e) {
+      res.status(400).send({status: 'failed', err: 'Something went wrong while creating a user!'});
+    }
   }
 
   async saveEditedClient(req: express.Request, res: express.Response): Promise<void> {
+    req.body.id = req.query.id;
     const client = formToEntity(req.body);
+    console.log(client);
     try {
-      await this.clientService.saveEditedClient(client);
-    } catch (e) {}
-    res.redirect('/client');
+      const editedClient = await this.clientService.saveEditedClient(client);
+      console.log(editedClient);
+      res.status(200).send(editedClient);
+    } catch (e) {
+      res.status(400).send({status: 'failed', err: 'something when wrong while editing a user!'});
+    }
   }
 
   async delete(req: express.Request, res: express.Response): Promise<void> {
@@ -73,8 +79,12 @@ export default class ClientController
     }
     try {
       const id = Number(req.query.id);
-      await this.clientService.delete(id);
-    } catch (e) {}
-    res.redirect('/client');
+      const deleted = await this.clientService.delete(id);
+      res.status(200).send({status: deleted});
+    } catch (e) {
+      res
+        .status(400)
+        .send({status: 'failed', err: 'something went wrong while deleting a client!'});
+    }
   }
 }
