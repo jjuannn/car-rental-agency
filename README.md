@@ -22,6 +22,8 @@ This application was made with:
 
 - [ ] Testing when the app is finished.
 
+- [ ] Modify API error messages.
+
 
 ## Instalation
 
