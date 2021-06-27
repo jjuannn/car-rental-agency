@@ -1,0 +1,20 @@
+[
+  {
+    "type": "Rentals",
+    "lastMonthNumber": "413",
+    "total": "2817",
+    "lastMonthPercent": "16,7"
+  },
+  {
+    "type": "Cars",
+    "lastMonthNumber": "12",
+    "total": "351",
+    "lastMonthPercent": "8,2"
+  },
+  {
+    "type": "Clients",
+    "lastMonthNumber": "402",
+    "total": "2158",
+    "lastMonthPercent": "24,6"
+  }
+]
