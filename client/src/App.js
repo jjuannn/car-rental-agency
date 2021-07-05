@@ -1,21 +1,16 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {Heading} from '@chakra-ui/react';
+import {BrowserRouter as Router, Switch} from 'react-router-dom';
 import NavigationBar from './components/nav/index';
 import Footer from './components/footer/index';
-import HomePage from './pages/home';
+import Routes from './components/routes/index.js';
+
 export default function App() {
   return (
     <>
       <Router>
         <NavigationBar />
         <Switch>
-          <Route path='/' exact>
-            <HomePage />
-          </Route>
-          <Route path='/test' exact>
-            <Heading size='md'>Test path</Heading>
-          </Route>
+          <Routes />
         </Switch>
         <Footer />
       </Router>
