@@ -1,19 +1,12 @@
 import React from 'react';
-import {Box, Heading, Divider, Flex} from '@chakra-ui/react';
+import {Box, Divider, Flex} from '@chakra-ui/react';
 import stats from '../../assets/stats.json';
 import StatCard from '../../components/stat';
-
+import Title from '../../components/title/index';
 export default function HomePage() {
   return (
     <Box flex='1' as='section' padding='5'>
-      <Box padding='10px'>
-        <Heading color='teal.main' size='xl'>
-          Welcome back
-        </Heading>
-        <Heading color='gray' size='sm'>
-          Check out our lastest movements...
-        </Heading>
-      </Box>
+      <Title title='Welcome back' subtitle='Check out our lastest movements...' />
       <Flex
         marginBottom='10'
         justifyContent={{sm: 'center', md: 'center', md: 'center', xl: 'space-between'}}
