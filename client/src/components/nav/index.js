@@ -39,13 +39,13 @@ export default function NavigationBar() {
             Manage
           </MenuButton>
           <MenuList>
-            <MenuItem as={Link} to='/cars'>
+            <MenuItem as={Link} to='/car/list'>
               Cars <Icon marginLeft='2' as={AiOutlineCar} />
             </MenuItem>
-            <MenuItem as={Link} to='/clients'>
+            <MenuItem as={Link} to='/client/list'>
               Clients <Icon marginLeft='2' as={AiOutlineUser} />
             </MenuItem>
-            <MenuItem as={Link} to='/rentals'>
+            <MenuItem as={Link} to='/rental/list'>
               Rentals <Icon marginLeft='2' as={AiOutlineBook} />
             </MenuItem>
           </MenuList>
