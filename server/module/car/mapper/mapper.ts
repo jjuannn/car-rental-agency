@@ -44,6 +44,7 @@ export function dbToEntity(carModel: typeof CarModel): Car {
     price_per_day,
     images
   } = carModel.toJSON();
+  const image_url = `http://localhost:8080${images}`;
   return new Car(
     id,
     brand,
@@ -55,6 +56,6 @@ export function dbToEntity(carModel: typeof CarModel): Car {
     passengers,
     gearbox_type,
     price_per_day,
-    images
+    image_url
   );
 }
