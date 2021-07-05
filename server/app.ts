@@ -9,6 +9,13 @@ if (config.error) {
 import express from 'express';
 const app = express();
 
+const cors = require('cors');
+
+app.use(
+  cors({
+    origin: 'http://localhost:3000'
+  })
+);
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(express.static(`${__dirname}/styles`));
