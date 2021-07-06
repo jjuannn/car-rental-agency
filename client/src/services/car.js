@@ -35,3 +35,9 @@ export function addCar(data) {
       throw new Error(e.response.data);
     });
 }
+
+export function deleteCar(id) {
+  return AXIOS_REQ.get(`/car/delete?id=${id}`).then(res => {
+    return res.data;
+  });
+}
