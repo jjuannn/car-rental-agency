@@ -33,7 +33,6 @@ export default function AppRoutes() {
       <Route path='/test' exact>
         <p>Test path</p>
       </Route>
-      <Redirect to='/' />
     </>
   );
 }
