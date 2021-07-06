@@ -105,7 +105,12 @@ export default function CarForm({
         <FormLabel>Car image</FormLabel>
         <Input padding='1' type='file' name='images' />
       </FormControl>
-      <Button type='submit' boxShadow='base' leftIcon={<AiOutlineSave />}>
+      <Button
+        type='submit'
+        boxShadow='base'
+        isDisabled={addCarLoading}
+        leftIcon={<AiOutlineSave />}
+      >
         Submit{' '}
       </Button>
       {addCarError && (
