@@ -50,7 +50,9 @@ export default class CarRepository extends AbstractCarRepository implements ICar
   }
 
   async getAll(): Promise<Car[]> {
-    const cars = await this.carModel.findAll();
+    const cars = await this.carModel.findAll({
+      order: [['id', 'DESC']]
+    });
     if (!cars) {
       throw new NoResultsError();
     }
