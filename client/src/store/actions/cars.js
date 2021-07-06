@@ -42,3 +42,22 @@ export const ADDING_CAR_RESET = () => {
     type: 'ADDING_CAR_RESET'
   };
 };
+
+export const DELETING_CAR_FAILURE = payload => {
+  return {
+    type: 'DELETING_CAR_FAILURE',
+    payload
+  };
+};
+
+export const DELETING_CAR_LOADING = () => {
+  return {
+    type: 'DELETING_CAR_LOADING'
+  };
+};
+
+export const DELETING_CAR_SUCCESS = () => {
+  return {
+    type: 'DELETING_CAR_SUCCESS'
+  };
+};

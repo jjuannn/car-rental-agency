@@ -8,6 +8,11 @@ const INITIAL_VALUES = {
     loading: false,
     error: null,
     success: false
+  },
+  carDeleted: {
+    loading: false,
+    error: null,
+    success: false
   }
 };
 
@@ -41,7 +46,6 @@ const carsReducer = (state = INITIAL_VALUES, {type, payload}) => {
         }
       };
     case 'ADDING_CAR_LOADING':
-      console.log('ADDING CAR LOADING');
       return {
         ...state,
         carAdded: {
@@ -51,8 +55,6 @@ const carsReducer = (state = INITIAL_VALUES, {type, payload}) => {
         }
       };
     case 'ADDING_CAR_FAILURE':
-      console.log(payload);
-      console.log('ADD CAR FALIUURE');
       return {
         ...state,
         carAdded: {
@@ -62,7 +64,6 @@ const carsReducer = (state = INITIAL_VALUES, {type, payload}) => {
         }
       };
     case 'ADDING_CAR_SUCCESS':
-      console.log('ADDING CAR SUCCESS');
       return {
         ...state,
         carAdded: {
@@ -72,13 +73,39 @@ const carsReducer = (state = INITIAL_VALUES, {type, payload}) => {
         }
       };
     case 'ADDING_CAR_RESET':
-      console.log('ADDING CAR RESET');
       return {
         ...state,
         carAdded: {
           loading: false,
           error: null,
           success: false
+        }
+      };
+    case 'DELETING_CAR_LOADING':
+      return {
+        ...state,
+        carDeleted: {
+          loading: true,
+          error: null,
+          success: false
+        }
+      };
+    case 'DELETING_CAR_FAILURE':
+      return {
+        ...state,
+        carDeleted: {
+          loading: false,
+          error: payload,
+          success: false
+        }
+      };
+    case 'DELETING_CAR_SUCCESS':
+      return {
+        ...state,
+        carDeleted: {
+          loading: false,
+          error: null,
+          success: true
         }
       };
     default:
