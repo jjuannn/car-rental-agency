@@ -61,3 +61,23 @@ export const DELETING_CAR_SUCCESS = () => {
     type: 'DELETING_CAR_SUCCESS'
   };
 };
+
+export const DETAIL_CAR_LOADING = () => {
+  return {
+    type: 'DETAIL_CAR_LOADING'
+  };
+};
+
+export const DETAIL_CAR_SUCCESS = payload => {
+  return {
+    type: 'DETAIL_CAR_SUCCESS',
+    payload
+  };
+};
+
+export const DETAIL_CAR_ERROR = payload => {
+  return {
+    type: 'DETAIL_CAR_ERROR',
+    payload
+  };
+};

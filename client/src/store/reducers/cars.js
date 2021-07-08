@@ -13,6 +13,11 @@ const INITIAL_VALUES = {
     loading: false,
     error: null,
     success: false
+  },
+  carDetail: {
+    loading: false,
+    error: null,
+    data: null
   }
 };
 
@@ -106,6 +111,33 @@ const carsReducer = (state = INITIAL_VALUES, {type, payload}) => {
           loading: false,
           error: null,
           success: true
+        }
+      };
+    case 'DETAIL_CAR_SUCCESS':
+      return {
+        ...state,
+        carDetail: {
+          loading: false,
+          error: null,
+          data: payload
+        }
+      };
+    case 'DETAIL_CAR_ERROR':
+      return {
+        ...state,
+        carDetail: {
+          loading: false,
+          error: payload,
+          data: null
+        }
+      };
+    case 'DETAIL_CAR_LOADING':
+      return {
+        ...state,
+        carDetail: {
+          loading: true,
+          error: null,
+          data: null
         }
       };
     default:
