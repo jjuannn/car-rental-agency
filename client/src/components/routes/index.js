@@ -1,8 +1,9 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 import HomePage from '../../pages/home';
-import CarList from '../../pages/_car/list/list';
-import ManageCar from '../../pages/_car/add/add';
+import CarList from '../../pages/_car/list';
+import ManageCar from '../../pages/_car/add';
+import CarDetail from '../../pages/_car/view';
 export default function AppRoutes() {
   return (
     <>
@@ -15,7 +16,9 @@ export default function AppRoutes() {
       <Route path='/car/add' exact>
         <ManageCar />
       </Route>
-      <Route path='/car/view/id=:id' exact></Route>
+      <Route path='/car/view/id=:id' exact>
+        <CarDetail />
+      </Route>
       <Route path='/car/edit/id=:id' exact>
         <ManageCar />
       </Route>
