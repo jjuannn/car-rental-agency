@@ -18,6 +18,9 @@ export function getCars() {
     })
     .then(rjson => {
       return rjson;
+    })
+    .catch(err => {
+      throw new Error('Failed to fetch cars');
     });
 }
 
@@ -32,12 +35,29 @@ export function addCar(data) {
       return res.data;
     })
     .catch(e => {
-      throw new Error(e.response.data);
+      throw new Error('Failed to add a car');
     });
 }
 
 export function deleteCar(id) {
-  return AXIOS_REQ.get(`/car/delete?id=${id}`).then(res => {
-    return res.data;
-  });
+  return AXIOS_REQ.get(`/car/delete?id=${id}`)
+    .then(res => {
+      return res.data;
+    })
+    .catch(e => {
+      throw new Error('Failed to delete a car');
+    });
+}
+
+export function getCar(id) {
+  return AXIOS_REQ.get(`/car/view?id=${id}`)
+    .then(res => {
+      return apiToEntity(res.data);
+    })
+    .then(rjson => {
+      return rjson;
+    })
+    .catch(e => {
+      throw new Error('Failed to fetch car');
+    });
 }
