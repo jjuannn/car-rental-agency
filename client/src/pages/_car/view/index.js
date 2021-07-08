@@ -11,10 +11,6 @@ export default function CarDetail() {
     getCar(id);
   }, []);
 
-  if (carDetailData) {
-    console.log(carDetailData);
-  }
-
   return (
     <Flex as='section' flex='1' padding='5' justifyContent='center'>
       {carDetailData && <CarDetailCard {...carDetailData} />}
