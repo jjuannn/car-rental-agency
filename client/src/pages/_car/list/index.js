@@ -6,6 +6,8 @@ import CarTable from '../../../components/table/car';
 import useCars from '../../../hooks/useCars';
 import Loading from '../../../components/loading';
 import {Link} from 'react-router-dom';
+import ErrorMessage from '../../../components/error/index';
+
 export default function CarList() {
   const {data, error, loading, getCars} = useCars();
 
@@ -31,11 +33,7 @@ export default function CarList() {
         </Box>
       </Box>
       {loading && <Loading />}
-      {error && (
-        <Text fontSize='16px' color='red'>
-          {error.message}
-        </Text>
-      )}
+      {error && <ErrorMessage message={error.message} />}
       {data && <CarTable list={data} />}
     </Flex>
   );
