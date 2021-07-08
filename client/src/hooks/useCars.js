@@ -1,7 +1,8 @@
 import {
   getCars as getCarsService,
   addCar as addCarService,
-  deleteCar as deleteCarService
+  deleteCar as deleteCarService,
+  getCar as getCarService
 } from '../services/car';
 import {useSelector, useDispatch} from 'react-redux';
 import {
@@ -14,13 +15,16 @@ import {
   ADDING_CAR_SUCCESS,
   DELETING_CAR_FAILURE,
   DELETING_CAR_LOADING,
-  DELETING_CAR_SUCCESS
+  DELETING_CAR_SUCCESS,
+  DETAIL_CAR_ERROR,
+  DETAIL_CAR_LOADING,
+  DETAIL_CAR_SUCCESS
 } from '../store/actions/cars';
 
 export default function useCars() {
   const dispatch = useDispatch();
   const state = useSelector(state => state.cars);
-  const {carList, carAdded, carDeleted} = state;
+  const {carList, carAdded, carDeleted, carDetail} = state;
 
   const getCars = async () => {
     dispatch(ADDING_CAR_RESET());
@@ -54,10 +58,23 @@ export default function useCars() {
     }
   };
 
+  const getCar = async id => {
+    dispatch(DETAIL_CAR_LOADING());
+    try {
+      const apiData = await getCarService(id);
+      dispatch(DETAIL_CAR_SUCCESS(apiData));
+    } catch (err) {
+      dispatch(DETAIL_CAR_ERROR(err));
+    }
+  };
+
   return {
     data: carList.data,
     loading: carList.loading,
     error: carList.error,
+    carDetailData: carDetail.data,
+    carDetailLoading: carDetail.loading,
+    carDetailError: carDetail.error,
     deleteCarLoading: carDeleted.loading,
     deleteCarSuccess: carDeleted.success,
     deleteCarError: carDeleted.error,
@@ -66,6 +83,7 @@ export default function useCars() {
     addCarSuccess: carAdded.success,
     getCars,
     addCar,
-    deleteCar
+    deleteCar,
+    getCar
   };
 }
