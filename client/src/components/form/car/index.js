@@ -11,6 +11,7 @@ import {
   HStack,
   Button
 } from '@chakra-ui/react';
+import ErrorMessage from '../../error';
 import {AiOutlineSave} from 'react-icons/ai';
 import useCars from '../../../hooks/useCars';
 export default function CarForm({
@@ -81,7 +82,7 @@ export default function CarForm({
         <FormLabel>Passengers</FormLabel>
         <Input type='number' name='passengers' maxLength='1' minLength='1' min='1' max='7' />
       </FormControl>
-      <Box display='flex' marginBottom='10' flexDirection='row'>
+      <Box display='flex' marginBottom='10' flexDirection={{sm: 'column', md: 'row'}}>
         <FormControl as='fieldset' isRequired>
           <FormLabel>Has AC</FormLabel>
           <RadioGroup defaultValue='true' name='hasAC'>
@@ -113,11 +114,7 @@ export default function CarForm({
       >
         Submit{' '}
       </Button>
-      {addCarError && (
-        <Text fontSize='16px' margin='10' as='em' color='red'>
-          {addCarError.message}
-        </Text>
-      )}
+      {addCarError && <ErrorMessage message={addCarError.message} />}
       {redirect && <Redirect from='/car/add' to='/car/list' />}
     </Box>
   );
