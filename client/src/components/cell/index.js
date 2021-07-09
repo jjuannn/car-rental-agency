@@ -41,8 +41,10 @@ export default function TableCell({images, year, model, brand, id}) {
               <AiOutlineEye />
             </Link>
           </Button>
-          <Button colorScheme='blue' variant='outline'>
-            <AiOutlineEdit />
+          <Button colorScheme='blue' variant='outline' padding='0'>
+            <Link to={`/car/edit/id=${id}`} style={{display: 'block', padding: '1em'}}>
+              <AiOutlineEdit />
+            </Link>
           </Button>
         </HStack>
       </Td>
