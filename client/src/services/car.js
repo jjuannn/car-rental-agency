@@ -61,3 +61,18 @@ export function getCar(id) {
       throw new Error('Failed to fetch car');
     });
 }
+
+export function editCar(id, data) {
+  return axios({
+    method: 'POST',
+    url: `${BASE_URL}/car/edit?id=${id}`,
+    data,
+    headers: {'Content-Type': 'multipart/form-data'}
+  })
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      throw new Error('Failed to edit car');
+    });
+}
