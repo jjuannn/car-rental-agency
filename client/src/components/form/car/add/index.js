@@ -11,21 +11,10 @@ import {
   HStack,
   Button
 } from '@chakra-ui/react';
-import ErrorMessage from '../../error';
+import ErrorMessage from '../../../error';
 import {AiOutlineSave} from 'react-icons/ai';
-import useCars from '../../../hooks/useCars';
-export default function CarForm({
-  brand,
-  model,
-  year,
-  price_per_day,
-  mileage,
-  color,
-  passengers,
-  hasAC,
-  gearbox_type,
-  images
-}) {
+import useCars from '../../../../hooks/useCars';
+export default function AddCarForm() {
   const {addCar, addCarError, addCarSuccess, addCarLoading} = useCars();
   const [redirect, setRedirect] = useState(false);
 
