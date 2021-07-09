@@ -18,6 +18,11 @@ const INITIAL_VALUES = {
     loading: false,
     error: null,
     data: null
+  },
+  carEdit: {
+    loading: false,
+    error: null,
+    success: false
   }
 };
 
@@ -138,6 +143,42 @@ const carsReducer = (state = INITIAL_VALUES, {type, payload}) => {
           loading: true,
           error: null,
           data: null
+        }
+      };
+    case 'EDIT_CAR_FAILURE':
+      return {
+        ...state,
+        carEdit: {
+          loading: false,
+          error: payload,
+          success: false
+        }
+      };
+    case 'EDIT_CAR_LOADING':
+      return {
+        ...state,
+        carEdit: {
+          loading: true,
+          error: null,
+          success: false
+        }
+      };
+    case 'EDIT_CAR_SUCCESS':
+      return {
+        ...state,
+        carEdit: {
+          loading: false,
+          error: null,
+          success: true
+        }
+      };
+    case 'EDIT_CAR_RESET':
+      return {
+        ...state,
+        carEdit: {
+          loading: false,
+          error: null,
+          success: false
         }
       };
     default:

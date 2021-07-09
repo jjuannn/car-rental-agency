@@ -81,3 +81,28 @@ export const DETAIL_CAR_ERROR = payload => {
     payload
   };
 };
+
+export const EDIT_CAR_LOADING = () => {
+  return {
+    type: 'EDIT_CAR_LOADING'
+  };
+};
+
+export const EDIT_CAR_FAILURE = payload => {
+  return {
+    type: 'EDIT_CAR_FAILURE',
+    payload
+  };
+};
+
+export const EDIT_CAR_SUCCESS = () => {
+  return {
+    type: 'EDIT_CAR_SUCCESS'
+  };
+};
+
+export const EDIT_CAR_RESET = () => {
+  return {
+    type: 'EDIT_CAR_RESET'
+  };
+};
