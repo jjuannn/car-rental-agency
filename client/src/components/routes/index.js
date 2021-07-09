@@ -2,8 +2,9 @@ import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 import HomePage from '../../pages/home';
 import CarList from '../../pages/_car/list';
-import ManageCar from '../../pages/_car/add';
+import AddCar from '../../pages/_car/add';
 import CarDetail from '../../pages/_car/view';
+import EditCar from '../../pages/_car/edit/index';
 export default function AppRoutes() {
   return (
     <>
@@ -14,13 +15,13 @@ export default function AppRoutes() {
         <CarList />
       </Route>
       <Route path='/car/add' exact>
-        <ManageCar />
+        <AddCar />
       </Route>
       <Route path='/car/view/id=:id' exact>
         <CarDetail />
       </Route>
       <Route path='/car/edit/id=:id' exact>
-        <ManageCar />
+        <EditCar />
       </Route>
 
       <Route path='/client/list' exact></Route>

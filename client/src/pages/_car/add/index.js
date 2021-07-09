@@ -1,4 +1,4 @@
-import CarForm from '../../../components/form/car/index';
+import CarForm from '../../../components/form/car/add/index';
 import {Box, Flex} from '@chakra-ui/react';
 import Title from '../../../components/title/index';
 
