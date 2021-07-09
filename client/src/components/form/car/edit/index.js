@@ -1,0 +1,139 @@
+import React, {useEffect, useState} from 'react';
+import {Redirect, useParams} from 'react-router-dom';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  Box,
+  RadioGroup,
+  Radio,
+  HStack,
+  Button
+} from '@chakra-ui/react';
+import ErrorMessage from '../../../error';
+import {AiOutlineSave} from 'react-icons/ai';
+import useCars from '../../../../hooks/useCars';
+
+export default function EditCarForm({
+  brand,
+  color,
+  gearbox_type,
+  hasAC,
+  images,
+  mileage,
+  model,
+  passengers,
+  price_per_day,
+  year
+}) {
+  const {editCar, carEditError, carEditLoading, carEditSuccess} = useCars();
+  const [redirect, setRedirect] = useState(false);
+  const {id} = useParams();
+
+  useEffect(() => {
+    if (carEditSuccess) {
+      setRedirect(true);
+    }
+  }, [carEditSuccess]);
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const values = Object.fromEntries(formData.entries());
+    if (formData.get('images').name) {
+      formData.append('images', URL.createObjectURL(values.images));
+    }
+    editCar(id, formData);
+  };
+  return (
+    <Box
+      encType='multipart/form-data'
+      onSubmit={handleSubmit}
+      as='form'
+      borderRadius='12px'
+      border='1px'
+      borderColor='gray.200'
+      padding='5'
+      width='100%'
+    >
+      <FormControl as='fieldset' marginBottom='10' isRequired>
+        <FormLabel>Brand</FormLabel>
+        <Input type='text' name='brand' defaultValue={brand} />
+      </FormControl>
+      <FormControl as='fieldset' marginBottom='10' name='model' isRequired>
+        <FormLabel>Model</FormLabel>
+        <Input type='text' name='model' defaultValue={model} />
+      </FormControl>
+      <FormControl as='fieldset' marginBottom='10' isRequired>
+        <FormLabel>Year</FormLabel>
+        <Input
+          type='number'
+          name='year'
+          defaultValue={year}
+          maxLength='4'
+          minLength='4'
+          max='2020'
+          isRequired
+        />
+      </FormControl>
+      <FormControl as='fieldset' marginBottom='10' isRequired>
+        <FormLabel>Price per day</FormLabel>
+        <Input type='number' name='price_per_day' defaultValue={price_per_day} />
+      </FormControl>
+      <FormControl as='fieldset' marginBottom='10' isRequired>
+        <FormLabel>Mileage</FormLabel>
+        <Input type='number' name='mileage' defaultValue={mileage} />
+      </FormControl>
+      <FormControl as='fieldset' marginBottom='10' isRequired>
+        <FormLabel>Color</FormLabel>
+        <Input type='text' name='color' defaultValue={color} />
+      </FormControl>
+      <FormControl as='fieldset' marginBottom='10' isRequired>
+        <FormLabel>Passengers</FormLabel>
+        <Input
+          type='number'
+          name='passengers'
+          defaultValue={passengers}
+          maxLength='1'
+          minLength='1'
+          min='1'
+          max='7'
+        />
+      </FormControl>
+      <Box display='flex' marginBottom='10' flexDirection={{sm: 'column', md: 'row'}}>
+        <FormControl as='fieldset' isRequired>
+          <FormLabel>Has AC</FormLabel>
+          <RadioGroup defaultValue='true' name='hasAC'>
+            <HStack spacing='24px'>
+              <Radio value='true'>Yes</Radio>
+              <Radio value='false'>No</Radio>
+            </HStack>
+          </RadioGroup>
+        </FormControl>
+        <FormControl as='fieldset' isRequired>
+          <FormLabel>Gearbox type</FormLabel>
+          <RadioGroup defaultValue={gearbox_type} name='gearbox_type'>
+            <HStack spacing='24px'>
+              <Radio value='automatic'>Automatic</Radio>
+              <Radio value='manual'>Manual</Radio>
+            </HStack>
+          </RadioGroup>
+        </FormControl>
+      </Box>
+      <FormControl as='fieldset' marginBottom='10'>
+        <FormLabel>Car image</FormLabel>
+        <Input padding='1' type='file' name='images' />
+      </FormControl>
+      <Button
+        type='submit'
+        boxShadow='base'
+        isDisabled={carEditLoading}
+        leftIcon={<AiOutlineSave />}
+      >
+        Submit{' '}
+      </Button>
+      {carEditError && <ErrorMessage message={carEditError.message} />}
+      {redirect && <Redirect from='/car/add' to='/car/list' />}
+    </Box>
+  );
+}
