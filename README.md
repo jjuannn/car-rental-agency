@@ -18,12 +18,15 @@ This application was made with:
 
 ## To Do: 
 
-- [ ] React frontend to consume the rest-api data.
+- [x] React frontend to consume the rest-api data. (Work in progress 🚧)
 
 - [ ] Testing when the app is finished.
 
 - [ ] Modify API error messages.
 
+## Features: 
+
+- [x] 08/07/2021 - The frontend car 🚗 part is ready to use
 
 ## Instalation
 
