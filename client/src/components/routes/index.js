@@ -1,10 +1,17 @@
 import React from 'react';
 import {Route, Redirect} from 'react-router-dom';
 import HomePage from '../../pages/home';
+//
 import CarList from '../../pages/_car/list';
 import AddCar from '../../pages/_car/add';
-import CarDetail from '../../pages/_car/view';
-import EditCar from '../../pages/_car/edit/index';
+import CarDetail from '../../pages/_car/detail';
+import EditCar from '../../pages/_car/edit';
+//
+import ClientList from '../../pages/_client/list';
+import ClientDetail from '../../pages/_client/detail';
+import AddClient from '../../pages/_client/add';
+import EditClient from '../../pages/_client/edit';
+
 export default function AppRoutes() {
   return (
     <>
@@ -24,10 +31,18 @@ export default function AppRoutes() {
         <EditCar />
       </Route>
 
-      <Route path='/client/list' exact></Route>
-      <Route path='/client/add' exact></Route>
-      <Route path='/client/view/id=:id' exact></Route>
-      <Route path='/client/edit/id=:id' exact></Route>
+      <Route path='/client/list' exact>
+        <ClientList />
+      </Route>
+      <Route path='/client/add' exact>
+        <AddClient />
+      </Route>
+      <Route path='/client/view/id=:id' exact>
+        <ClientDetail />
+      </Route>
+      <Route path='/client/edit/id=:id' exact>
+        <EditClient />
+      </Route>
 
       <Route path='/rental/list' exact></Route>
       <Route path='/rental/add' exact></Route>
