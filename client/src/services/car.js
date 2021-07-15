@@ -49,19 +49,6 @@ export function deleteCar(id) {
     });
 }
 
-export function getCar(id) {
-  return AXIOS_REQ.get(`/car/view?id=${id}`)
-    .then(res => {
-      return apiToEntity(res.data);
-    })
-    .then(rjson => {
-      return rjson;
-    })
-    .catch(e => {
-      throw new Error('Failed to fetch car');
-    });
-}
-
 export function editCar(id, data) {
   return axios({
     method: 'POST',

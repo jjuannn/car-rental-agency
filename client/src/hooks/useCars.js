@@ -2,7 +2,6 @@ import {
   getCars as getCarsService,
   addCar as addCarService,
   deleteCar as deleteCarService,
-  getCar as getCarService,
   editCar as editCarService
 } from '../services/car';
 import {useSelector, useDispatch} from 'react-redux';
@@ -64,11 +63,11 @@ export default function useCars() {
     }
   };
 
-  const getCar = async id => {
+  const getCar = id => {
     dispatch(DETAIL_CAR_LOADING());
     try {
-      const apiData = await getCarService(id);
-      dispatch(DETAIL_CAR_SUCCESS(apiData));
+      const data = carList.data.find(car => car.id == id);
+      dispatch(DETAIL_CAR_SUCCESS(data));
     } catch (err) {
       dispatch(DETAIL_CAR_ERROR(err));
     }
