@@ -15,6 +15,9 @@ This application was made with:
 * 💾 SQLite3 for the database where the data are stored.
 * ➰ Sequelize as an ORM.
 * 🟦 Typescript for the static type definitions.
+* ⚛️ React JS for the UI.
+* ⚡️ Chakra UI for the styles.
+* 🟣 Redux for the state handling.
 
 ## To Do: 
 
