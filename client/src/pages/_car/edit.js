@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
-import {Flex, Box, Title as ChakraTitle} from '@chakra-ui/react';
-import CarForm from '../../../components/form/car/edit';
+import {Flex, Box} from '@chakra-ui/react';
+import CarForm from '../../components/_car/editForm';
 import {useParams} from 'react-router-dom';
-import useCars from '../../../hooks/useCars';
-import Loading from '../../../components/loading';
-import ErrorMessage from '../../../components/error';
-import Title from '../../../components/title';
+import useCars from '../../hooks/useCars';
+import Loading from '../../components/loading';
+import ErrorMessage from '../../components/error';
+import Title from '../../components/title';
 
 export default function EditCar() {
   const {id} = useParams();

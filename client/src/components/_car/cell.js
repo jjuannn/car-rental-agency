@@ -4,6 +4,7 @@ import {HStack, Button, Text, Tr, Td, Image} from '@chakra-ui/react';
 import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
 import useCars from '../../hooks/useCars';
+
 export default function TableCell({images, year, model, brand, id}) {
   const {deleteCarError, deleteCarLoading, deleteCarSuccess, deleteCar} = useCars();
   const history = useHistory();
@@ -36,12 +37,12 @@ export default function TableCell({images, year, model, brand, id}) {
           >
             <AiOutlineDelete />
           </Button>
-          <Button colorScheme='green' variant='outline' padding='0'>
+          <Button colorScheme='green' variant='outline' padding='0' isDisabled={deleteCarLoading}>
             <Link to={`/car/view/id=${id}`} style={{display: 'block', padding: '1em'}}>
               <AiOutlineEye />
             </Link>
           </Button>
-          <Button colorScheme='blue' variant='outline' padding='0'>
+          <Button colorScheme='blue' variant='outline' padding='0' isDisabled={deleteCarLoading}>
             <Link to={`/car/edit/id=${id}`} style={{display: 'block', padding: '1em'}}>
               <AiOutlineEdit />
             </Link>

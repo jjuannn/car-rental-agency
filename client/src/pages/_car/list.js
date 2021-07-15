@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import {Box, Flex, Button, Text} from '@chakra-ui/react';
 import {AiOutlineFileAdd} from 'react-icons/ai';
-import Title from '../../../components/title';
-import CarTable from '../../../components/table/car';
-import useCars from '../../../hooks/useCars';
-import Loading from '../../../components/loading';
+import Title from '../../components/title';
+import CarTable from '../../components/_car/table';
+import useCars from '../../hooks/useCars';
+import Loading from '../../components/loading';
 import {Link} from 'react-router-dom';
-import ErrorMessage from '../../../components/error/index';
+import ErrorMessage from '../../components/error/index';
 
 export default function CarList() {
   const {data, error, loading, getCars} = useCars();

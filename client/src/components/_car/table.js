@@ -1,5 +1,5 @@
 import React from 'react';
-import TableCell from '../../cell';
+import TableCell from './cell';
 import {Flex, Title, Box, Table, Thead, Tr, Th, Tbody} from '@chakra-ui/react';
 
 export default function CarTable(props) {

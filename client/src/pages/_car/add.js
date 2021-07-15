@@ -1,10 +1,8 @@
-import CarForm from '../../../components/form/car/add/index';
+import CarForm from '../../components/_car/addForm';
 import {Box, Flex} from '@chakra-ui/react';
-import Title from '../../../components/title/index';
+import Title from '../../components/error/index';
 
 export default function AddCar() {
-  // nothing here bc
-  // i don't need do anything
   return (
     <Flex as='section' padding='5' flex='1' direction='column' alignItems='center'>
       <Box alignSelf='flex-start'>

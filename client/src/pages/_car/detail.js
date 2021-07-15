@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
 import {Flex, Box} from '@chakra-ui/react';
 import {useParams} from 'react-router-dom';
-import useCars from '../../../hooks/useCars';
-import CarDetailCard from '../../../components/detail/car';
-import ErrorMessage from '../../../components/error';
-import Loading from '../../../components/loading/index';
+import useCars from '../../hooks/useCars';
+import CarDetailCard from '../../components/_car/detail';
+import ErrorMessage from '../../components/error';
+import Loading from '../../components/loading/index';
 export default function CarDetail() {
   const {id} = useParams();
   const {getCar, carDetailData, carDetailError, carDetailLoading} = useCars();

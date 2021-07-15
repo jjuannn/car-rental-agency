@@ -11,7 +11,8 @@ export default function CarDetailCard({
   passengers,
   price_per_day,
   hasAC,
-  gearbox_type
+  gearbox_type,
+  id
 }) {
   return (
     <Box
@@ -50,9 +51,13 @@ export default function CarDetailCard({
             <ListIcon as={AiFillCaretRight} color='teal.main' />
             Gearbox type: {gearbox_type}
           </ListItem>
+          <ListItem>
+            <ListIcon as={AiFillCaretRight} color='teal.main' />
+            ID: {id}
+          </ListItem>
         </List>
       </Box>
-      <Box marginTop='10px'>
+      <Box marginTop='40px'>
         <Link to='/car/list'>
           <Button boxShadow='base' colorScheme='gray' leftIcon={<AiOutlineArrowLeft />}>
             <Text as='span'>Back to list</Text>
