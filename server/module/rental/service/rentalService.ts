@@ -15,6 +15,7 @@ export default class RentalService implements IRentalService {
     if (currentRentalsInDate.length > 0) {
       throw new Error('This car is already rented during the dates entered!');
     }
+    rental.evaluateDates();
     return this.rentalRepository.saveNewRental(rental);
   }
 
@@ -26,6 +27,7 @@ export default class RentalService implements IRentalService {
     if (currentRentalsInDate.length > 0) {
       throw new Error('This car is already rented during the dates entered!');
     }
+    rental.evaluateDates();
     return this.rentalRepository.saveEditedRental(rental);
   }
 

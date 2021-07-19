@@ -35,4 +35,13 @@ export default class Rental {
     this.status = 'finished';
     return this;
   }
+  evaluateDates() {
+    const from = new Date(this.date_from).getTime();
+    const until = new Date(this.date_until).getTime();
+
+    if (from > until) {
+      throw new Error('The start date cannot be greater than the finish date');
+    }
+    return this;
+  }
 }
