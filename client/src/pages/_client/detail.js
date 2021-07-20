@@ -14,10 +14,6 @@ export default function ClientDetail() {
     getClient(id);
   }, []);
 
-  if (clientDetailData) {
-    console.log(clientDetailData);
-  }
-
   return (
     <Flex as='section' flex='1' padding='5' justifyContent='center' alignItems='center'>
       {clientDetailData && <ClientDetailCard {...clientDetailData} />}

@@ -11,6 +11,7 @@ import {
   CLIENTS_FETCHING_SUCCESS,
   CLIENTS_DELETE_FAILURE,
   CLIENTS_DELETE_LOADING,
+  CLIENTS_DELETE_RESET,
   CLIENTS_DELETE_SUCCESS,
   CLIENT_DETAIL_FAILURE,
   CLIENT_DETAIL_LOADING,
@@ -31,6 +32,7 @@ export default function useClients() {
   const {clientList, clientDelete, clientDetail, clientAdd, clientEdit} = state;
 
   const getClients = async () => {
+    dispatch(CLIENTS_DELETE_RESET());
     dispatch(ADDING_CLIENT_RESET());
     dispatch(EDIT_CLIENT_RESET());
     dispatch(CLIENTS_FETCHING_LOADING());

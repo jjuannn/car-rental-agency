@@ -37,6 +37,11 @@ export const CLIENTS_DELETE_FAILURE = payload => {
   };
 };
 
+export const CLIENTS_DELETE_RESET = () => {
+  return {
+    type: 'CLIENTS_DELETE_RESET'
+  };
+};
 export const CLIENT_DETAIL_LOADING = () => {
   return {
     type: 'CLIENT_DETAIL_LOADING'

@@ -9,15 +9,11 @@ import Title from '../../components/title';
 import useClients from '../../hooks/useClients';
 
 export default function ClientList() {
-  const {data, error, loading, getClients} = useClients();
+  const {data, error, loading, getClients, deleteClientError} = useClients();
 
   useEffect(() => {
     getClients();
   }, []);
-
-  if (data) {
-    console.log(data);
-  }
 
   return (
     <Flex as='section' flex='1' direction='column' padding='5'>
@@ -27,6 +23,7 @@ export default function ClientList() {
           subtitle={`Looking for ${data ? data.length : '...'} client(s)`}
         />
         <Box alignSelf='flex-end' marginBottom='10px'>
+          {deleteClientError && <ErrorMessage message={deleteClientError.message} />}
           <Link to='/client/add'>
             <Button
               leftIcon={<AiOutlineFileAdd />}

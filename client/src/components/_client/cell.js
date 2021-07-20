@@ -4,8 +4,9 @@ import {Link} from 'react-router-dom';
 import {AiOutlineDelete, AiOutlineEdit, AiOutlineEye} from 'react-icons/ai';
 import useClients from '../../hooks/useClients';
 import {useHistory} from 'react-router';
+
 export default function TableCell({name, surname, id}) {
-  const {deleteClient, deleteClientError, deleteClientLoading, deleteClientSuccess} = useClients();
+  const {deleteClient, deleteClientLoading, deleteClientSuccess} = useClients();
   const history = useHistory();
 
   useEffect(() => {

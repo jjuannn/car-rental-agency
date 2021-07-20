@@ -73,6 +73,15 @@ const clientsReducer = (state = INITIAL_VALUES, {type, payload}) => {
           error: payload
         }
       };
+    case 'CLIENTS_DELETE_RESET':
+      return {
+        ...state,
+        clientDelete: {
+          loading: false,
+          success: false,
+          error: null
+        }
+      };
     case 'CLIENTS_DELETE_SUCCESS':
       return {
         ...state,
