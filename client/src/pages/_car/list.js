@@ -9,7 +9,7 @@ import {Link} from 'react-router-dom';
 import ErrorMessage from '../../components/error/index';
 
 export default function CarList() {
-  const {data, error, loading, getCars} = useCars();
+  const {data, error, loading, getCars, deleteCarError} = useCars();
 
   useEffect(() => {
     getCars();
@@ -20,6 +20,7 @@ export default function CarList() {
       <Box display='flex' flexDirection='row' justifyContent='space-between' marginBottom='20px'>
         <Title title='Car list' subtitle={`Looking for ${data ? data.length : '...'} car(s)`} />
         <Box alignSelf='flex-end' marginBottom='10px'>
+          {deleteCarError && <ErrorMessage message={deleteCarError.message} />}
           <Link to='/car/add'>
             <Button
               leftIcon={<AiOutlineFileAdd />}

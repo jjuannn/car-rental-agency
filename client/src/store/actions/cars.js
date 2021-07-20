@@ -56,6 +56,12 @@ export const DELETING_CAR_LOADING = () => {
   };
 };
 
+export const DELETING_CAR_RESET = () => {
+  return {
+    type: 'DELETING_CAR_RESET'
+  };
+};
+
 export const DELETING_CAR_SUCCESS = () => {
   return {
     type: 'DELETING_CAR_SUCCESS'

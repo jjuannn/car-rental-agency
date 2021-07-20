@@ -14,6 +14,7 @@ import {
   ADDING_CAR_LOADING,
   ADDING_CAR_SUCCESS,
   DELETING_CAR_FAILURE,
+  DELETING_CAR_RESET,
   DELETING_CAR_LOADING,
   DELETING_CAR_SUCCESS,
   DETAIL_CAR_ERROR,
@@ -31,6 +32,7 @@ export default function useCars() {
   const {carList, carAdded, carDeleted, carDetail, carEdit} = state;
 
   const getCars = async () => {
+    dispatch(DELETING_CAR_RESET());
     dispatch(ADDING_CAR_RESET());
     dispatch(EDIT_CAR_RESET());
     dispatch(FETCHING_LOADING());

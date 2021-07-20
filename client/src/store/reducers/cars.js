@@ -109,6 +109,15 @@ const carsReducer = (state = INITIAL_VALUES, {type, payload}) => {
           success: false
         }
       };
+    case 'DELETING_CAR_RESET':
+      return {
+        ...state,
+        carDeleted: {
+          loading: false,
+          error: null,
+          success: false
+        }
+      };
     case 'DELETING_CAR_SUCCESS':
       return {
         ...state,
