@@ -87,7 +87,7 @@ export default function EditCarForm({
       <Box display='flex' marginBottom='10' flexDirection={{sm: 'column', md: 'row'}}>
         <FormControl as='fieldset' isRequired>
           <FormLabel>Has AC</FormLabel>
-          <RadioGroup defaultValue='true' name='hasAC'>
+          <RadioGroup defaultValue={`${hasAC}`} name='hasAC'>
             <HStack spacing='24px'>
               <Radio value='true'>Yes</Radio>
               <Radio value='false'>No</Radio>

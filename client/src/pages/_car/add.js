@@ -1,6 +1,6 @@
 import CarForm from '../../components/_car/addForm';
 import {Box, Flex} from '@chakra-ui/react';
-import Title from '../../components/error/index';
+import Title from '../../components/title/index';
 
 export default function AddCar() {
   return (

@@ -11,7 +11,7 @@ export default function ClientDetailCard({
   address,
   nationality,
   birthdate,
-  email,
+  e_mail,
   id
 }) {
   return (
@@ -42,9 +42,9 @@ export default function ClientDetailCard({
             <ListIcon as={AiFillCaretRight} color='teal.main' />
             Phone: {phone}
           </ListItem>
-          <ListItem textTransform='capitalize'>
+          <ListItem>
             <ListIcon as={AiFillCaretRight} color='teal.main' />
-            Email: {email}
+            Email: {e_mail}
           </ListItem>
           <ListItem textTransform='capitalize'>
             <ListIcon as={AiFillCaretRight} color='teal.main' />

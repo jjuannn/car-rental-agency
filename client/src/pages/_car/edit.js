@@ -18,7 +18,7 @@ export default function EditCar() {
   return (
     <Flex as='section' padding='5' flex='1' direction='column' alignItems='center'>
       <Box alignSelf='flex-start'>
-        <Title title='Add car' subtitle='Please enter the car data' />
+        <Title title='Edit car' subtitle='Please enter the car data' />
       </Box>
       {carDetailError && <ErrorMessage message={carDetailError.message} />}
       {carDetailLoading && <Loading />}
