@@ -11,7 +11,11 @@ import ClientList from '../../pages/_client/list';
 import ClientDetail from '../../pages/_client/detail';
 import AddClient from '../../pages/_client/add';
 import EditClient from '../../pages/_client/edit';
-
+//
+import RentalList from '../../pages/_rental/list';
+import AddRental from '../../pages/_rental/add';
+import RentalDetail from '../../pages/_rental/detail';
+import EditRental from '../../pages/_rental/edit';
 export default function AppRoutes() {
   return (
     <>
@@ -44,10 +48,18 @@ export default function AppRoutes() {
         <EditClient />
       </Route>
 
-      <Route path='/rental/list' exact></Route>
-      <Route path='/rental/add' exact></Route>
-      <Route path='/rental/view/id=:id' exact></Route>
-      <Route path='/rental/edit/id=:id' exact></Route>
+      <Route path='/rental/list' exact>
+        <RentalList />
+      </Route>
+      <Route path='/rental/add' exact>
+        <AddRental />
+      </Route>
+      <Route path='/rental/view/id=:id' exact>
+        <RentalDetail />
+      </Route>
+      <Route path='/rental/edit/id=:id' exact>
+        <EditRental />
+      </Route>
 
       <Route path='/test' exact>
         <p>Test path</p>
