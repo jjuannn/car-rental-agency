@@ -18,7 +18,7 @@ export default function EditClient() {
   return (
     <Flex as='section' padding='5' flex='1' direction='column' alignItems='center'>
       <Box alignSelf='flex-start'>
-        <Title title='Add car' subtitle='Please enter the car data' />
+        <Title title='Edit client' subtitle='Please enter the client data' />
       </Box>
       {clientDetailError && <ErrorMessage message={clientDetailError.message} />}
       {clientDetailLoading && <Loading />}
