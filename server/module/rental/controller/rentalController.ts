@@ -93,6 +93,7 @@ export default class RentalController
 
   async saveEditedRental(req: express.Request, res: express.Response): Promise<void> {
     const rental: Rental = formToEntity(req.body);
+    rental.id = Number(req.query.id);
     try {
       const editedRental = await this.rentalService.saveEditedRental(rental);
       res.status(200).send(editedRental);
