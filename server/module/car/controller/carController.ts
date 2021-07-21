@@ -6,6 +6,7 @@ import Car from '../entity/car';
 import express from 'express';
 import multer from 'multer';
 import ICarService from '../service/interface/ICarService';
+import NoResultsError from '../repository/error/noResultsError';
 export default class CarController extends AbstractCarController implements ICarController {
   constructor(
     public uploadMiddleware: multer.Multer,
@@ -43,7 +44,10 @@ export default class CarController extends AbstractCarController implements ICar
       const cars = await this.carService.getAll();
       res.status(200).send(cars);
     } catch (e) {
-      res.status(400).send({status: 'failed', err: 'Something failed while getting the teams'});
+      if (e instanceof NoResultsError) {
+        res.status(400).send({status: 'failed', err: 'Cannot find car list'});
+      }
+      res.status(400).send({status: 'failed', err: 'Something failed while getting the car list'});
     }
   }
 
@@ -56,6 +60,9 @@ export default class CarController extends AbstractCarController implements ICar
       const car = await this.carService.getById(id);
       res.status(200).send(car);
     } catch (e) {
+      if (e instanceof NoResultsError) {
+        res.status(400).send({status: 'failed', err: `Cannot find car with ID ${req.query.id}`});
+      }
       res.status(400).send({status: 'failed', err: 'Something failed while getting a car'});
     }
   }
@@ -69,7 +76,7 @@ export default class CarController extends AbstractCarController implements ICar
       const newCar = await this.carService.saveNewCar(car);
       res.status(200).send(newCar);
     } catch (e) {
-      res.status(400).send({status: 'failed', err: 'Something went wrong while creating a car'});
+      res.status(400).send({status: 'failed', err: 'Something failed while creating a car'});
     }
   }
 
@@ -83,7 +90,7 @@ export default class CarController extends AbstractCarController implements ICar
       const editedCar = await this.carService.saveEditedCar(car);
       res.status(200).send(editedCar);
     } catch (e) {
-      res.status(400).send({status: 'failed', err: 'Something went wrong while edited a car!'});
+      res.status(400).send({status: 'failed', err: 'Something failed while editing a car!'});
     }
   }
 
@@ -96,7 +103,10 @@ export default class CarController extends AbstractCarController implements ICar
       await this.carService.delete(id);
       res.status(200).send({success: true});
     } catch (e) {
-      res.status(400).send({status: 'failed', err: 'Something went wrong while deleting a car'});
+      if (e instanceof NoResultsError) {
+        res.status(400).send({status: 'failed', err: `Cannot find car with ID ${req.query.id}`});
+      }
+      res.status(400).send({status: 'failed', err: 'Something failed while deleting a car'});
     }
   }
 }

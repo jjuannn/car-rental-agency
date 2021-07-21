@@ -20,7 +20,7 @@ export function getCars() {
       return rjson;
     })
     .catch(err => {
-      throw new Error('Failed to fetch cars');
+      throw new Error(err.response.data.err);
     });
 }
 
@@ -34,8 +34,8 @@ export function addCar(data) {
     .then(res => {
       return res.data;
     })
-    .catch(e => {
-      throw new Error('Failed to add a car');
+    .catch(err => {
+      throw new Error(err.response.data.err);
     });
 }
 
@@ -44,8 +44,8 @@ export function deleteCar(id) {
     .then(res => {
       return res.data;
     })
-    .catch(e => {
-      throw new Error('Failed to delete a car');
+    .catch(err => {
+      throw new Error(err.response.data.err);
     });
 }
 
@@ -60,6 +60,6 @@ export function editCar(id, data) {
       return res.data;
     })
     .catch(err => {
-      throw new Error('Failed to edit car');
+      throw new Error(err.response.data.err);
     });
 }

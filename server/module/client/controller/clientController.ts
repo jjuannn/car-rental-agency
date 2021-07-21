@@ -53,11 +53,11 @@ export default class ClientController
       res.status(200).send(client);
     } catch (e) {
       if (e instanceof NoResultsError) {
-        res.status(400).send({status: 'failed', err: `Cannot find car with ID ${req.query.id}`});
+        res.status(400).send({status: 'failed', err: `Cannot find client with ID ${req.query.id}`});
       }
       res.status(400).send({
         status: 'failed',
-        err: 'Something failed while getting the car, but looks like is our fault. Try again :/'
+        err: 'Something failed while getting the client, but looks like is our fault. Try again :/'
       });
     }
   }
@@ -70,7 +70,10 @@ export default class ClientController
     } catch (e) {
       res
         .status(400)
-        .send({status: 'failed', err: 'Something went wrong while creating a user! Try again :/'});
+        .send({
+          status: 'failed',
+          err: 'Something went wrong while creating a client! Try again :/'
+        });
     }
   }
 
@@ -85,7 +88,7 @@ export default class ClientController
     } catch (e) {
       res
         .status(400)
-        .send({status: 'failed', err: 'Something went wrong while editing a user! Try again :/'});
+        .send({status: 'failed', err: 'Something went wrong while editing a client! Try again :/'});
     }
   }
 
