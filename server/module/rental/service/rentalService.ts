@@ -9,7 +9,7 @@ export default class RentalService implements IRentalService {
   constructor(public rentalRepository: IRentalRepository) {}
 
   async saveNewRental(rental: Rental): Promise<Rental> {
-    if (!(rental instanceof Rental) || rental === undefined) {
+    if (rental === undefined) {
       throw new InvalidRentalError();
     }
     const currentRentalsInDate = await this.rentalRepository.findCarRentalsBetweenDates(rental);
@@ -21,7 +21,7 @@ export default class RentalService implements IRentalService {
   }
 
   async saveEditedRental(rental: Rental): Promise<Rental> {
-    if (!(rental instanceof Rental) || rental === undefined) {
+    if (rental === undefined) {
       throw new InvalidRentalError();
     }
     const currentRentalsInDate = await this.rentalRepository.findCarRentalsBetweenDates(rental);
@@ -33,14 +33,14 @@ export default class RentalService implements IRentalService {
   }
 
   async getById(id: number): Promise<Rental> {
-    if (typeof id !== 'number' || id === undefined) {
+    if (id === undefined) {
       throw new InvalidIdError();
     }
     return this.rentalRepository.getById(id);
   }
 
   async finish(rental: Rental): Promise<boolean> {
-    if (!(rental instanceof Rental) || rental === undefined) {
+    if (rental === undefined) {
       throw new InvalidRentalError();
     }
     rental.setFinished();
