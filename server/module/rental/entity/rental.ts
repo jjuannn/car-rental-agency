@@ -1,5 +1,7 @@
 import Car from '../../car/entity/car';
 import Client from '../../client/entity/client';
+import RentalNotPaidError from '../service/error/rentalNotPaid';
+import InvalidDatesError from '../service/error/invalidDates';
 
 export default class Rental {
   constructor(
@@ -30,7 +32,7 @@ export default class Rental {
   }
   setFinished() {
     if (this.is_paid !== true) {
-      throw new Error("The rental isn't paid yet!");
+      throw new RentalNotPaidError("The rental isn't paid yet!");
     }
     this.status = 'finished';
     return this;
@@ -40,7 +42,7 @@ export default class Rental {
     const until = new Date(this.date_until).getTime();
 
     if (from > until) {
-      throw new Error('The start date cannot be greater than the finish date');
+      throw new InvalidDatesError('The start date cannot be greater than the finish date');
     }
     return this;
   }

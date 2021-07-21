@@ -3,6 +3,7 @@ import IRentalService from './interface/IRentalService';
 import Rental from '../entity/rental';
 import InvalidIdError from './error/invalidId';
 import InvalidRentalError from './error/invalidRental';
+import CarAlreadyRentedError from './error/carAlreadyRented';
 
 export default class RentalService implements IRentalService {
   constructor(public rentalRepository: IRentalRepository) {}
@@ -13,7 +14,7 @@ export default class RentalService implements IRentalService {
     }
     const currentRentalsInDate = await this.rentalRepository.findCarRentalsBetweenDates(rental);
     if (currentRentalsInDate.length > 0) {
-      throw new Error('This car is already rented during the dates entered!');
+      throw new CarAlreadyRentedError('This car is already rented during the dates entered!');
     }
     rental.evaluateDates();
     return this.rentalRepository.saveNewRental(rental);
@@ -25,7 +26,7 @@ export default class RentalService implements IRentalService {
     }
     const currentRentalsInDate = await this.rentalRepository.findCarRentalsBetweenDates(rental);
     if (currentRentalsInDate.length > 0) {
-      throw new Error('This car is already rented during the dates entered!');
+      throw new CarAlreadyRentedError('This car is already rented during the dates entered!');
     }
     rental.evaluateDates();
     return this.rentalRepository.saveEditedRental(rental);

@@ -2,8 +2,6 @@ import express from 'express';
 
 export default interface IRentalController {
   configureRoutes(app: express.Application): void;
-  newRental(req: express.Request, res: express.Response): Promise<void>;
-  editRental(req: express.Request, res: express.Response): Promise<void>;
   getAll(req: express.Request, res: express.Response): Promise<void>;
   getById(req: express.Request, res: express.Response): Promise<void>;
   saveNewRental(req: express.Request, res: express.Response): Promise<void>;

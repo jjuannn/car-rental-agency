@@ -15,8 +15,8 @@ export function getRentals() {
         return apiToEntity(rental);
       });
     })
-    .catch(e => {
-      throw new Error('failed to get rentals list');
+    .catch(err => {
+      throw new Error(err.response.data.err);
     });
 }
 
@@ -31,7 +31,7 @@ export function addRental(data) {
       return res.data;
     })
     .catch(err => {
-      throw new Error('failed to add new rental');
+      throw new Error(err.response.data.err);
     });
 }
 
@@ -42,7 +42,7 @@ export function deleteRental(id) {
     })
     .catch(err => {
       console.log(err);
-      throw new Error(err.response);
+      throw new Error(err.response.data.err);
     });
 }
 
@@ -57,6 +57,6 @@ export function editRental(id, data) {
       return res.data;
     })
     .catch(err => {
-      throw new Error(err.response);
+      throw new Error(err.response.data.err);
     });
 }
