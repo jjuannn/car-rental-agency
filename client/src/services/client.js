@@ -19,7 +19,7 @@ export function getClients() {
       return rjson;
     })
     .catch(err => {
-      throw new Error('Failed to fetch clients list');
+      throw new Error(err.response.data.err);
     });
 }
 
@@ -29,7 +29,7 @@ export function deleteClient(id) {
       return res.data;
     })
     .catch(err => {
-      throw new Error('Failed to delete client');
+      throw new Error(err.response.data.err);
     });
 }
 
@@ -44,7 +44,7 @@ export function addClient(data) {
       return res.data;
     })
     .catch(err => {
-      throw new Error('Failed to add client');
+      throw new Error(err.response.data.err);
     });
 }
 
@@ -59,6 +59,6 @@ export function editClient(id, data) {
       return res.data;
     })
     .catch(err => {
-      throw new Error('Failed to edit client');
+      throw new Error(err.response.data.err);
     });
 }

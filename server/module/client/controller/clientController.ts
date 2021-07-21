@@ -4,6 +4,7 @@ import UndefinedIdError from './error/undefinedId';
 import IClientController from './interface/IClientController';
 import express from 'express';
 import IClientService from '../service/interface/IClientService';
+import NoResultsError from '../repository/error/noResultsError';
 
 export default class ClientController
   extends AbstractClientController
@@ -31,22 +32,33 @@ export default class ClientController
       const clients = await this.clientService.getAll();
       res.status(200).send(clients);
     } catch (e) {
+      if (e instanceof NoResultsError) {
+        res.status(400).send({status: 'failed', err: 'Cannot find client list'});
+      }
       res
         .status(400)
-        .send({status: 'failed', err: 'something failed while getting the clients list'});
+        .send({status: 'failed', err: 'Something failed while getting the clients list'});
     }
   }
 
   async getById(req: express.Request, res: express.Response): Promise<void> {
-    if (!req.query.id) {
-      res.status(400).send({status: 'failed', err: 'client id required'});
-    }
     try {
+      if (!req.query.id) {
+        res
+          .status(400)
+          .send({status: 'failed', err: 'You must introduce an ID to get a client details'});
+      }
       const id = Number(req.query.id);
       const client = await this.clientService.getById(id);
       res.status(200).send(client);
     } catch (e) {
-      res.status(400).send({status: 'failed', err: ' something failed while getting a client! '});
+      if (e instanceof NoResultsError) {
+        res.status(400).send({status: 'failed', err: `Cannot find car with ID ${req.query.id}`});
+      }
+      res.status(400).send({
+        status: 'failed',
+        err: 'Something failed while getting the car, but looks like is our fault. Try again :/'
+      });
     }
   }
 
@@ -56,7 +68,9 @@ export default class ClientController
       const newClient = await this.clientService.saveNewClient(client);
       res.status(200).send(newClient);
     } catch (e) {
-      res.status(400).send({status: 'failed', err: 'Something went wrong while creating a user!'});
+      res
+        .status(400)
+        .send({status: 'failed', err: 'Something went wrong while creating a user! Try again :/'});
     }
   }
 
@@ -69,22 +83,29 @@ export default class ClientController
       console.log(editedClient);
       res.status(200).send(editedClient);
     } catch (e) {
-      res.status(400).send({status: 'failed', err: 'something when wrong while editing a user!'});
+      res
+        .status(400)
+        .send({status: 'failed', err: 'Something went wrong while editing a user! Try again :/'});
     }
   }
 
   async delete(req: express.Request, res: express.Response): Promise<void> {
     if (!req.query.id) {
-      throw new UndefinedIdError();
+      res
+        .status(400)
+        .send({status: 'failed', err: 'You must introduce an ID to get a client details'});
     }
     try {
       const id = Number(req.query.id);
-      const deleted = await this.clientService.delete(id);
-      res.status(200).send({status: deleted});
+      await this.clientService.delete(id);
+      res.status(200).send({status: 'success'});
     } catch (e) {
+      if (e instanceof NoResultsError) {
+        res.status(400).send({status: 'failed', err: `Cannot find client with ID ${req.query.id}`});
+      }
       res
         .status(400)
-        .send({status: 'failed', err: 'something went wrong while deleting a client!'});
+        .send({status: 'failed', err: 'Something went wrong while deleting a client!'});
     }
   }
 }
