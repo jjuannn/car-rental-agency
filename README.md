@@ -21,16 +21,17 @@ This application was made with:
 
 ## To Do: 
 
-- [x] React frontend to consume the rest-api data. (Work in progress 🚧)
+- [x] Frontend to consume the API.
+
+- [x] Modify API error messages.
 
 - [ ] Testing when the app is finished.
 
-- [ ] Modify API error messages.
 
 ## Features: 
 
-- [x] 08/07/2021 - The frontend car 🚗 part is ready to use
-
+- [x] 20/07/2021 - The app is ready to use completely. 
+- [x] 20/07/2021 - The app now displays custom error messages. 
 ## Instalation
 
 - Run ```npm install``` to install the project dependencies.
