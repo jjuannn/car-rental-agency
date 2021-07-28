@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Tr, Td, Text, HStack, Button, Stack, useToast} from '@chakra-ui/react';
+import React, {useEffect} from 'react';
+import {Tr, Td, Text, HStack, Button} from '@chakra-ui/react';
 import {Link} from 'react-router-dom';
 import {AiOutlineDelete, AiOutlineEdit, AiOutlineEye} from 'react-icons/ai';
 import useRentals from '../../hooks/useRentals';

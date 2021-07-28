@@ -18,8 +18,8 @@ import useCars from '../../hooks/useCars';
 import useRentals from '../../hooks/useRentals';
 
 export default function AddRentalForm() {
-  const {loading: clientsLoading, data: clients, error: clientsError, getClients} = useClients();
-  const {loading: carsLoading, data: cars, error: carsError, getCars} = useCars();
+  const {data: clients, getClients} = useClients();
+  const {data: cars, getCars} = useCars();
   const {rentalAddError, rentalAddSending, rentalAddSuccess, addRental} = useRentals();
   const [redirect, setRedirect] = useState(false);
 
@@ -27,7 +27,7 @@ export default function AddRentalForm() {
     if (rentalAddSuccess) {
       setRedirect(true);
     }
-  });
+  }, [rentalAddSuccess]);
 
   useEffect(() => {
     getClients();
@@ -120,7 +120,12 @@ export default function AddRentalForm() {
           </RadioGroup>
         </FormControl>
       </Box>
-      <Button type='submit' boxShadow='base' leftIcon={<AiOutlineSave />}>
+      <Button
+        isDisabled={rentalAddSending}
+        type='submit'
+        boxShadow='base'
+        leftIcon={<AiOutlineSave />}
+      >
         Submit{' '}
       </Button>
       {rentalAddError && <ErrorMessage message={rentalAddError.message} />}

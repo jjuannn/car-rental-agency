@@ -9,7 +9,7 @@ export default function HomePage() {
       <Title title='Welcome back' subtitle='Check out our lastest movements...' />
       <Flex
         marginBottom='10'
-        justifyContent={{sm: 'center', md: 'center', md: 'center', xl: 'space-between'}}
+        justifyContent={{sm: 'center', xl: 'space-between'}}
         flexWrap='wrap'
         marginTop='5'
       >

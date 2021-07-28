@@ -13,7 +13,7 @@ export default function TableCell({images, year, model, brand, id}) {
     if (deleteCarSuccess) {
       history.go(0);
     }
-  }, [deleteCarSuccess]);
+  }, [deleteCarSuccess, history]);
 
   return (
     <Tr>

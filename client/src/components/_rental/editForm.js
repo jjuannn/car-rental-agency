@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Redirect} from 'react-router';
 import {
   FormControl,
@@ -26,8 +26,8 @@ export default function EditRentalForm({
   payment_method,
   is_paid
 }) {
-  const {loading: clientsLoading, data: clients, error: clientsError, getClients} = useClients();
-  const {loading: carsLoading, data: cars, error: carsError, getCars} = useCars();
+  const {data: clients, getClients} = useClients();
+  const {data: cars, getCars} = useCars();
   const {rentalEditError, rentalEditLoading, rentalEditSuccess, editRental} = useRentals();
   const [redirect, setRedirect] = useState(false);
 
@@ -35,18 +35,18 @@ export default function EditRentalForm({
     if (rentalEditSuccess) {
       setRedirect(true);
     }
-  });
+  }, [rentalEditSuccess]);
 
   useEffect(() => {
     getClients();
     getCars();
   }, []);
 
-  const getCarPricePerDay = id => {
+  const getCarPricePerDay = useCallback(id => {
     const car = cars.find(car => car.id === Number(id));
     const price = car && car.price_per_day;
     return price;
-  };
+  });
 
   const handleSubmit = async event => {
     event.preventDefault();

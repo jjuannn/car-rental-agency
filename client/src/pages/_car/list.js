@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Box, Flex, Button, Text} from '@chakra-ui/react';
+import {Box, Flex, Button} from '@chakra-ui/react';
 import {AiOutlineFileAdd} from 'react-icons/ai';
 import Title from '../../components/title';
 import CarTable from '../../components/_car/table';

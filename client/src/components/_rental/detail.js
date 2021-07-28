@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Image, Heading, Text, List, ListItem, ListIcon, Button} from '@chakra-ui/react';
+import {Box, Text, List, ListItem, ListIcon, Button} from '@chakra-ui/react';
 import {Link} from 'react-router-dom';
 import {AiOutlineArrowLeft, AiFillCaretRight} from 'react-icons/ai';
 

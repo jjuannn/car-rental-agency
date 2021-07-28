@@ -1,5 +1,5 @@
 import React from 'react';
-import {Route, Redirect} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import HomePage from '../../pages/home';
 //
 import CarList from '../../pages/_car/list';
@@ -59,10 +59,6 @@ export default function AppRoutes() {
       </Route>
       <Route path='/rental/edit/id=:id' exact>
         <EditRental />
-      </Route>
-
-      <Route path='/test' exact>
-        <p>Test path</p>
       </Route>
     </>
   );

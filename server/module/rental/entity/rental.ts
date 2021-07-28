@@ -21,7 +21,7 @@ export default class Rental {
     this.total_price = this.calculateTotalPrice();
   }
 
-  calculateTotalPrice() {
+  private calculateTotalPrice() {
     let from = new Date(this.date_from);
     let until = new Date(this.date_until);
 
@@ -30,14 +30,16 @@ export default class Rental {
 
     return (this.total_price = String(differenceInDays * Number(this.price_per_day)));
   }
-  setFinished() {
+
+  public setFinished() {
     if (this.is_paid !== true) {
       throw new RentalNotPaidError("The rental isn't paid yet!");
     }
     this.status = 'finished';
     return this;
   }
-  evaluateDates() {
+
+  public evaluateDates() {
     const from = new Date(this.date_from).getTime();
     const until = new Date(this.date_until).getTime();
 

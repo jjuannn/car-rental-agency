@@ -13,7 +13,7 @@ export default function TableCell({name, surname, id}) {
     if (deleteClientSuccess) {
       history.go(0);
     }
-  }, [deleteClientSuccess]);
+  }, [deleteClientSuccess, history]);
 
   return (
     <Tr>
