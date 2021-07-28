@@ -14,23 +14,24 @@ This application was made with:
 * 🍀 Node JS and Express for the rest-api.
 * 💾 SQLite3 for the database where the data are stored.
 * ➰ Sequelize as an ORM.
-* 🟦 Typescript for the static type definitions.
+* 🟦 TypeScript for the static type definitions.
 * ⚛️ React JS for the UI.
 * ⚡️ Chakra UI for the styles.
 * 🟣 Redux for the state handling.
 
 ## To Do: 
 
-- [x] React frontend to consume the rest-api data. (Work in progress 🚧)
+- [x] Frontend to consume the API.
+
+- [x] Modify API error messages.
 
 - [ ] Testing when the app is finished.
 
-- [ ] Modify API error messages.
 
 ## Features: 
 
-- [x] 08/07/2021 - The frontend car 🚗 part is ready to use
-
+- [x] 20/07/2021 - The app is ready to use completely. 
+- [x] 20/07/2021 - The app now displays custom error messages. 
 ## Instalation
 
 - Run ```npm install``` to install the project dependencies.
