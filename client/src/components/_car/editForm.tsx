@@ -46,9 +46,17 @@ export default function EditCarForm({car}: IProps) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
     const values = Object.fromEntries(formData.entries());
-    if (formData.get('images')) {
-      formData.append('images', URL.createObjectURL(values.images));
-    }
+    // idk why this is not working
+    // formData.get("images") => returns FormDataEntryValue
+    // FormDataEntryValue => File | string
+    // formData.get("images") instanceof File => true
+    // property name exists in type File
+    // but typescript is not recognizing him
+    // so this is not working and i cannot find a solution
+    // if (formData.get('images').name) {  <= Property 'name' does not exist on type 'FormDataEntryValue'.
+    //   formData.append('images', URL.createObjectURL(values.images));
+    // }
+
     editCar(id, formData);
   };
 
