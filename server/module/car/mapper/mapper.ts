@@ -1,7 +1,6 @@
 import Car from '../entity/car';
 import {CarModel} from '../module';
 export function formToEntity(car: Car): Car {
-  console.log(car);
   const {
     id,
     brand,

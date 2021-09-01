@@ -68,12 +68,10 @@ export default class ClientController
       const newClient = await this.clientService.saveNewClient(client);
       res.status(200).send(newClient);
     } catch (e) {
-      res
-        .status(400)
-        .send({
-          status: 'failed',
-          err: 'Something went wrong while creating a client! Try again :/'
-        });
+      res.status(400).send({
+        status: 'failed',
+        err: 'Something went wrong while creating a client! Try again :/'
+      });
     }
   }
 
@@ -101,7 +99,7 @@ export default class ClientController
     try {
       const id = Number(req.query.id);
       await this.clientService.delete(id);
-      res.status(200).send({status: 'success'});
+      res.status(200).send({success: true});
     } catch (e) {
       if (e instanceof NoResultsError) {
         res.status(400).send({status: 'failed', err: `Cannot find client with ID ${req.query.id}`});

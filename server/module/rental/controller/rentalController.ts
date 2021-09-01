@@ -133,7 +133,7 @@ export default class RentalController
       const id = Number(req.query.id);
       const rentalToDelete = await this.rentalService.getById(id);
       const finished = await this.rentalService.finish(rentalToDelete);
-      res.status(200).send(finished);
+      res.status(200).send({success: true});
     } catch (e) {
       if (e instanceof NoResultsError) {
         res
