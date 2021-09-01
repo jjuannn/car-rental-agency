@@ -1,7 +1,7 @@
 import {Box, Text, Link} from '@chakra-ui/react';
 import React from 'react';
 
-export default function Footer() {
+export default function Footer(): JSX.Element {
   return (
     <Box as='footer' textAlign='center' padding='10px'>
       <Text as='i'>

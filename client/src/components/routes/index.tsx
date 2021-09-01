@@ -16,7 +16,8 @@ import RentalList from '../../pages/_rental/list';
 import AddRental from '../../pages/_rental/add';
 import RentalDetail from '../../pages/_rental/detail';
 import EditRental from '../../pages/_rental/edit';
-export default function AppRoutes() {
+
+export default function AppRoutes(): JSX.Element {
   return (
     <>
       <Route path='/' exact>

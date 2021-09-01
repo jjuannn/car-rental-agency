@@ -13,7 +13,7 @@ import {
 import {Link} from 'react-router-dom';
 import {AiOutlineUser, AiOutlineCar, AiOutlineMenu, AiOutlineBook} from 'react-icons/ai';
 
-export default function NavigationBar() {
+export default function NavigationBar(): JSX.Element {
   return (
     <>
       <Flex as='nav' direction='row' alignItems='center' justifyContent='space-between' padding='5'>

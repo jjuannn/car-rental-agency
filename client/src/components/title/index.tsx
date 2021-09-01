@@ -1,8 +1,12 @@
 import React from 'react';
 import {Box, Heading} from '@chakra-ui/react';
 
-export default function Title(props) {
-  const {title, subtitle} = props;
+interface IProps {
+  title: string;
+  subtitle: string;
+}
+
+export default function Title({title, subtitle}: IProps): JSX.Element {
   return (
     <Box padding='10px'>
       <Heading color='teal.main' size='xl'>

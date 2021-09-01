@@ -1,7 +1,19 @@
 import React from 'react';
 import {Stat, StatLabel, StatNumber, StatHelpText, StatArrow} from '@chakra-ui/react';
 
-export default function StatCard({type, lastMonthNumber, total, lastMonthPercent}) {
+interface IProps {
+  type: string;
+  lastMonthNumber: string;
+  total: string;
+  lastMonthPercent: string;
+}
+
+export default function StatCard({
+  type,
+  lastMonthNumber,
+  total,
+  lastMonthPercent
+}: IProps): JSX.Element {
   return (
     <Stat
       border='1px'
