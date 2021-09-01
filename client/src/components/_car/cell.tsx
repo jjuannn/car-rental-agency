@@ -4,8 +4,15 @@ import {HStack, Button, Text, Tr, Td, Image} from '@chakra-ui/react';
 import {Link} from 'react-router-dom';
 import {useHistory} from 'react-router-dom';
 import useCars from '../../hooks/useCars';
+import Car from '../../entities/car';
 
-export default function TableCell({images, year, model, brand, id}) {
+interface IProps {
+  car: Car;
+}
+
+function TableCell({car}: IProps): JSX.Element {
+  const {images, year, model, brand, id} = car;
+
   const {deleteCarLoading, deleteCarSuccess, deleteCar} = useCars();
   const history = useHistory();
 
@@ -14,7 +21,6 @@ export default function TableCell({images, year, model, brand, id}) {
       history.go(0);
     }
   }, [deleteCarSuccess, history]);
-
   return (
     <Tr>
       <Td>
@@ -52,3 +58,5 @@ export default function TableCell({images, year, model, brand, id}) {
     </Tr>
   );
 }
+
+export default TableCell;

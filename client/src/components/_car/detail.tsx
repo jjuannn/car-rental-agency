@@ -2,18 +2,24 @@ import React from 'react';
 import {Box, Text, Image, Heading, ListIcon, ListItem, List, Button} from '@chakra-ui/react';
 import {AiFillCaretRight, AiOutlineArrowLeft} from 'react-icons/ai';
 import {Link} from 'react-router-dom';
-export default function CarDetailCard({
-  images,
-  year,
-  brand,
-  model,
-  mileage,
-  passengers,
-  price_per_day,
-  hasAC,
-  gearbox_type,
-  id
-}) {
+import Car from '../../entities/car';
+
+interface IProps {
+  car: Car;
+}
+function CarDetailCard({car}: IProps): JSX.Element {
+  const {
+    images,
+    year,
+    brand,
+    model,
+    mileage,
+    passengers,
+    price_per_day,
+    hasAC,
+    gearbox_type,
+    id
+  } = car;
   return (
     <Box
       boxShadow='base'
@@ -67,3 +73,5 @@ export default function CarDetailCard({
     </Box>
   );
 }
+
+export default CarDetailCard;

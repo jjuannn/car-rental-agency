@@ -7,8 +7,8 @@ import Loading from '../../components/loading';
 import ErrorMessage from '../../components/error';
 import Title from '../../components/title';
 
-export default function EditCar() {
-  const {id} = useParams();
+export default function EditCar(): JSX.Element {
+  const {id} = useParams<{id: string}>();
   const {carDetailError, carDetailLoading, carDetailData, getCar} = useCars();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function EditCar() {
       </Box>
       {carDetailError && <ErrorMessage message={carDetailError.message} />}
       {carDetailLoading && <Loading />}
-      {carDetailData && <CarForm {...carDetailData} />}
+      {carDetailData && <CarForm car={carDetailData} />}
     </Flex>
   );
 }

@@ -8,7 +8,7 @@ import Loading from '../../components/loading';
 import {Link} from 'react-router-dom';
 import ErrorMessage from '../../components/error/index';
 
-export default function CarList() {
+export default function CarList(): JSX.Element {
   const {data, error, loading, getCars, deleteCarError} = useCars();
 
   useEffect(() => {
