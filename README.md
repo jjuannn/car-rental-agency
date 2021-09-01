@@ -30,8 +30,8 @@ This application was made with:
 
 ## Features: 
 
-- [x] 20/07/2021 - The app is ready to use completely. 
-- [x] 20/07/2021 - The app now displays custom error messages. 
+- [x] The app is completely typed (client and server)
+
 ## Instalation
 
 - Run ```npm install``` to install the project dependencies.
