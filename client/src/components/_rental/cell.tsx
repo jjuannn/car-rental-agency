@@ -4,8 +4,14 @@ import {Link} from 'react-router-dom';
 import {AiOutlineDelete, AiOutlineEdit, AiOutlineEye} from 'react-icons/ai';
 import useRentals from '../../hooks/useRentals';
 import {useHistory} from 'react-router';
+import Rental from '../../entities/rental';
 
-export default function TableCell({Client, date_from, date_until, id, Car}) {
+interface IProps {
+  rental: Rental;
+}
+
+export default function TableCell({rental}: IProps): JSX.Element {
+  const {Client, date_from, date_until, id, Car} = rental;
   const {rentalDeleteLoading, rentalDeleteSuccess, deleteRental} = useRentals();
   const history = useHistory();
 

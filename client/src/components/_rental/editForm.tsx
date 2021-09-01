@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState, FormEvent} from 'react';
 import {Redirect} from 'react-router';
 import {
   FormControl,
@@ -16,16 +16,16 @@ import {AiOutlineSave} from 'react-icons/ai';
 import useClients from '../../hooks/useClients';
 import useCars from '../../hooks/useCars';
 import useRentals from '../../hooks/useRentals';
+import Rental from '../../entities/rental';
+import Car from '../../entities/car';
+import Client from '../../entities/client';
 
-export default function EditRentalForm({
-  fk_car,
-  fk_client,
-  id,
-  date_from,
-  date_until,
-  payment_method,
-  is_paid
-}) {
+interface IProps {
+  rental: Rental;
+}
+
+export default function EditRentalForm({rental}: IProps): JSX.Element {
+  const {fk_car, fk_client, id, date_from, date_until, payment_method, is_paid} = rental;
   const {data: clients, getClients} = useClients();
   const {data: cars, getCars} = useCars();
   const {rentalEditError, rentalEditLoading, rentalEditSuccess, editRental} = useRentals();
@@ -42,17 +42,20 @@ export default function EditRentalForm({
     getCars();
   }, []);
 
-  const getCarPricePerDay = useCallback(id => {
-    const car = cars.find(car => car.id === Number(id));
-    const price = car && car.price_per_day;
-    return price;
-  });
+  const getCarPricePerDay = useCallback(
+    (id: number) => {
+      const car: Car = cars.find((car: Car) => Number(car.id) === id);
+      const price = car && car.price_per_day;
+      return price;
+    },
+    [cars]
+  );
 
-  const handleSubmit = async event => {
+  const handleSubmit = (event: FormEvent<HTMLElement>): void => {
     event.preventDefault();
-    const form = new FormData(event.target);
+    const form = new FormData(event.target as HTMLFormElement);
     const values = Object.fromEntries(form.entries());
-    const price = getCarPricePerDay(values.fk_car);
+    const price = getCarPricePerDay(Number(values.fk_car));
     values.price_per_day = price;
     values.status = 'active';
     editRental(id, values);
@@ -60,9 +63,7 @@ export default function EditRentalForm({
 
   return (
     <Box
-      onSubmit={e => {
-        handleSubmit(e);
-      }}
+      onSubmit={handleSubmit}
       encType='multipart/form-data'
       as='form'
       borderRadius='12px'
@@ -76,7 +77,7 @@ export default function EditRentalForm({
           <FormLabel>Car</FormLabel>
           <Select placeholder='Select car' defaultValue={fk_car} name='fk_car'>
             {cars &&
-              cars.map((car, i) => {
+              cars.map((car: Car, i: number) => {
                 return (
                   <option key={i} value={car.id}>
                     {car.year} {car.brand} {car.model}
@@ -89,7 +90,7 @@ export default function EditRentalForm({
           <FormLabel>Client</FormLabel>
           <Select placeholder='Select client' defaultValue={fk_client} name='fk_client'>
             {clients &&
-              clients.map((client, i) => {
+              clients.map((client: Client, i: number) => {
                 return (
                   <option key={i} value={client.id}>
                     {client.name} {client.surname}

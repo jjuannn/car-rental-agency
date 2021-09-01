@@ -7,9 +7,9 @@ import Loading from '../../components/loading';
 import useRentals from '../../hooks/useRentals';
 import EditRentalForm from '../../components/_rental/editForm';
 
-export default function EditRental() {
+export default function EditRental(): JSX.Element {
   const {getRental, rentalDetailError, rentalDetailLoading, rentalDetailData} = useRentals();
-  const {id} = useParams();
+  const {id} = useParams<{id: string}>();
   useEffect(() => {
     getRental(id);
   }, []);
@@ -21,7 +21,7 @@ export default function EditRental() {
       </Box>
       {rentalDetailError && <ErrorMessage message={rentalDetailError.message} />}
       {rentalDetailLoading && <Loading />}
-      {rentalDetailData && <EditRentalForm {...rentalDetailData} />}
+      {rentalDetailData && <EditRentalForm rental={rentalDetailData} />}
     </Flex>
   );
 }

@@ -3,7 +3,8 @@ import {Box, Divider, Flex} from '@chakra-ui/react';
 import stats from '../../assets/stats.json';
 import StatCard from '../../components/stat';
 import Title from '../../components/title/index';
-export default function HomePage() {
+
+export default function HomePage(): JSX.Element {
   return (
     <Box flex='1' as='section' padding='5'>
       <Title title='Welcome back' subtitle='Check out our lastest movements...' />

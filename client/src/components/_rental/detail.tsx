@@ -2,19 +2,26 @@ import React from 'react';
 import {Box, Text, List, ListItem, ListIcon, Button} from '@chakra-ui/react';
 import {Link} from 'react-router-dom';
 import {AiOutlineArrowLeft, AiFillCaretRight} from 'react-icons/ai';
+import Rental from '../../entities/rental';
 
-export default function RentalDetailCard({
-  Car,
-  Client,
-  id,
-  date_from,
-  date_until,
-  is_paid,
-  payment_method,
-  price_per_day,
-  status,
-  total_price
-}) {
+interface IProps {
+  rental: Rental;
+}
+
+export default function RentalDetailCard({rental}: IProps): JSX.Element {
+  const {
+    Car,
+    Client,
+    id,
+    date_from,
+    date_until,
+    is_paid,
+    payment_method,
+    price_per_day,
+    status,
+    total_price
+  } = rental;
+
   return (
     <Box boxShadow='base' borderWidth='1px' padding='5' borderRadius='12px' overflow='hidden'>
       <Box>

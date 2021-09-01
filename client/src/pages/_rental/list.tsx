@@ -8,7 +8,7 @@ import {AiOutlineFileAdd} from 'react-icons/ai';
 import Title from '../../components/title';
 import useRentals from '../../hooks/useRentals';
 
-export default function RentalList() {
+export default function RentalList(): JSX.Element {
   const {data, error, loading, rentalDeleteError, getRentals} = useRentals();
   useEffect(() => {
     getRentals();

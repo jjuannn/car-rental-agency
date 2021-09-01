@@ -6,8 +6,8 @@ import Loading from '../../components/loading';
 import {useParams} from 'react-router';
 import RentalDetailCard from '../../components/_rental/detail';
 
-export default function RentalDetail() {
-  const {id} = useParams();
+export default function RentalDetail(): JSX.Element {
+  const {id} = useParams<{id: string}>();
   const {rentalDetailData, rentalDetailLoading, rentalDetailError, getRental} = useRentals();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function RentalDetail() {
 
   return (
     <Flex as='section' flex='1' padding='5' justifyContent='center' alignItems='center'>
-      {rentalDetailData && <RentalDetailCard {...rentalDetailData} />}
+      {rentalDetailData && <RentalDetailCard rental={rentalDetailData} />}
       {rentalDetailError && <ErrorMessage message={rentalDetailError.message} />}
       {rentalDetailLoading && <Loading />}
     </Flex>

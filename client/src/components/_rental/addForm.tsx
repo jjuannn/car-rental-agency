@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, FormEvent} from 'react';
 import {Redirect} from 'react-router';
 import {
   FormControl,
@@ -16,8 +16,10 @@ import {AiOutlineSave} from 'react-icons/ai';
 import useClients from '../../hooks/useClients';
 import useCars from '../../hooks/useCars';
 import useRentals from '../../hooks/useRentals';
+import Car from '../../entities/car';
+import Client from '../../entities/client';
 
-export default function AddRentalForm() {
+export default function AddRentalForm(): JSX.Element {
   const {data: clients, getClients} = useClients();
   const {data: cars, getCars} = useCars();
   const {rentalAddError, rentalAddSending, rentalAddSuccess, addRental} = useRentals();
@@ -34,26 +36,24 @@ export default function AddRentalForm() {
     getCars();
   }, []);
 
-  const getCarPricePerDay = id => {
-    const car = cars.find(car => car.id === Number(id));
+  const getCarPricePerDay = (id: number): number => {
+    const car = cars.find((car: Car) => Number(car.id) === id);
     const price = car && car.price_per_day;
     return price;
   };
 
-  const handleSubmit = async event => {
+  const handleSubmit = (event: FormEvent<HTMLElement>) => {
     event.preventDefault();
-    const form = new FormData(event.target);
+    const form = new FormData(event.target as HTMLFormElement);
     const values = Object.fromEntries(form.entries());
-    const price = getCarPricePerDay(values.fk_car);
-    values.price_per_day = price;
+    const price = getCarPricePerDay(Number(values.fk_car));
+    values.price_per_day = price.toString();
     addRental(values);
   };
 
   return (
     <Box
-      onSubmit={e => {
-        handleSubmit(e);
-      }}
+      onSubmit={handleSubmit}
       encType='multipart/form-data'
       as='form'
       borderRadius='12px'
@@ -67,7 +67,7 @@ export default function AddRentalForm() {
           <FormLabel>Car</FormLabel>
           <Select placeholder='Select car' name='fk_car'>
             {cars &&
-              cars.map((car, i) => {
+              cars.map((car: Car, i: number) => {
                 return (
                   <option key={i} value={car.id}>
                     {car.year} {car.brand} {car.model}
@@ -80,7 +80,7 @@ export default function AddRentalForm() {
           <FormLabel>Client</FormLabel>
           <Select placeholder='Select client' name='fk_client'>
             {clients &&
-              clients.map((client, i) => {
+              clients.map((client: Client, i: number) => {
                 return (
                   <option key={i} value={client.id}>
                     {client.name} {client.surname}
