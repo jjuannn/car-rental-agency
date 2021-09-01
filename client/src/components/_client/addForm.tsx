@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Redirect, useParams} from 'react-router-dom';
+import React, {FormEvent, useEffect, useState} from 'react';
+import {Redirect} from 'react-router-dom';
 import {
   FormControl,
   FormLabel,
@@ -14,38 +14,27 @@ import ErrorMessage from '../error';
 import {AiOutlineSave} from 'react-icons/ai';
 import useClients from '../../hooks/useClients';
 
-export default function EditClientForm({
-  name,
-  surname,
-  address,
-  phone,
-  e_mail,
-  nationality,
-  birthdate,
-  doc_type,
-  doc_num
-}) {
+export default function AddClientForm() {
+  const {addingClientError, addingClientLoading, addingClientSuccess, addClient} = useClients();
   const [redirect, setRedirect] = useState(false);
-  const {id} = useParams();
-  const {clientEditError, clientEditLoading, clientEditSuccess, editClient} = useClients();
 
   useEffect(() => {
-    if (clientEditSuccess) {
+    if (addingClientSuccess) {
       setRedirect(true);
     }
-  }, [clientEditSuccess]);
+  }, [addingClientSuccess]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: FormEvent<HTMLElement>): void => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const values = Object.fromEntries(formData.entries());
-    editClient(id, values);
+    const form = new FormData(event.target as HTMLFormElement);
+    const values = Object.fromEntries(form.entries());
+    addClient(values);
   };
 
   return (
     <Box
-      encType='multipart/form-data'
       onSubmit={handleSubmit}
+      encType='multipart/form-data'
       as='form'
       borderRadius='12px'
       border='1px'
@@ -55,31 +44,31 @@ export default function EditClientForm({
     >
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Name</FormLabel>
-        <Input type='text' name='name' defaultValue={name} />
+        <Input type='text' name='name' />
       </FormControl>
-      <FormControl as='fieldset' marginBottom='10' name='model' isRequired>
+      <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Surname</FormLabel>
-        <Input type='text' name='surname' defaultValue={surname} />
+        <Input type='text' name='surname' />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Address</FormLabel>
-        <Input type='text' name='address' defaultValue={address} isRequired />
+        <Input type='text' name='address' isRequired />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Phone</FormLabel>
-        <Input type='number' name='phone' defaultValue={phone} min='999999' max='9999999999999' />
+        <Input type='number' name='phone' min='999999' max='9999999999999' />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Email</FormLabel>
-        <Input type='text' name='e_mail' defaultValue={e_mail} />
+        <Input type='text' name='e_mail' />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Nationality</FormLabel>
-        <Input type='text' name='Nationality' defaultValue={nationality} />
+        <Input type='text' name='nationality' />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Birthdate</FormLabel>
-        <Input type='date' name='birthdate' defaultValue={birthdate} />
+        <Input type='date' name='birthdate' />
       </FormControl>
       <Box display='flex' marginBottom='10' flexDirection={{sm: 'column', md: 'row'}}>
         <FormControl as='fieldset' isRequired>
@@ -92,18 +81,18 @@ export default function EditClientForm({
         </FormControl>
         <FormControl as='fieldset' isRequired>
           <FormLabel>Document number</FormLabel>
-          <Input type='number' name='doc_num' defaultValue={doc_num} min='999999' max='99999999' />
+          <Input type='number' name='doc_num' min='999999' max='99999999' />
         </FormControl>
       </Box>
       <Button
         type='submit'
         boxShadow='base'
-        isDisabled={clientEditLoading}
         leftIcon={<AiOutlineSave />}
+        isDisabled={addingClientLoading}
       >
         Submit{' '}
       </Button>
-      {clientEditError && <ErrorMessage message={clientEditError.message} />}
+      {addingClientError && <ErrorMessage message={addingClientError.message} />}
       {redirect && <Redirect from='/client/add' to='/client/list' />}
     </Box>
   );

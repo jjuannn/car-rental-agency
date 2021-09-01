@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Redirect} from 'react-router';
+import React, {useEffect, useState, FormEvent} from 'react';
+import {Redirect, useParams} from 'react-router-dom';
 import {
   FormControl,
   FormLabel,
@@ -13,29 +13,35 @@ import {
 import ErrorMessage from '../error';
 import {AiOutlineSave} from 'react-icons/ai';
 import useClients from '../../hooks/useClients';
+import Client from '../../entities/client';
 
-export default function AddClientForm() {
-  const {addingClientError, addingClientLoading, addingClientSuccess, addClient} = useClients();
+interface IProps {
+  client: Client;
+}
+
+export default function EditClientForm({client}: IProps): JSX.Element {
+  const {name, surname, address, phone, e_mail, nationality, birthdate, doc_num} = client;
   const [redirect, setRedirect] = useState(false);
+  const {id} = useParams<{id: string}>();
+  const {clientEditError, clientEditLoading, clientEditSuccess, editClient} = useClients();
 
   useEffect(() => {
-    if (addingClientSuccess) {
+    if (clientEditSuccess) {
       setRedirect(true);
     }
-  }, [addingClientSuccess]);
+  }, [clientEditSuccess]);
 
-  const handleSubmit = event => {
+  const handleSubmit = (event: FormEvent<HTMLElement>): void => {
     event.preventDefault();
-    const form = new FormData(event.target);
-    const values = Object.fromEntries(form.entries());
-    console.log(values);
-    addClient(values);
+    const formData = new FormData(event.target as HTMLFormElement);
+    const values = Object.fromEntries(formData.entries());
+    editClient(id, values);
   };
 
   return (
     <Box
-      onSubmit={handleSubmit}
       encType='multipart/form-data'
+      onSubmit={handleSubmit}
       as='form'
       borderRadius='12px'
       border='1px'
@@ -45,31 +51,31 @@ export default function AddClientForm() {
     >
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Name</FormLabel>
-        <Input type='text' name='name' />
+        <Input type='text' name='name' defaultValue={name} />
       </FormControl>
-      <FormControl as='fieldset' marginBottom='10' isRequired>
+      <FormControl as='fieldset' marginBottom='10' name='model' isRequired>
         <FormLabel>Surname</FormLabel>
-        <Input type='text' name='surname' />
+        <Input type='text' name='surname' defaultValue={surname} />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Address</FormLabel>
-        <Input type='text' name='address' isRequired />
+        <Input type='text' name='address' defaultValue={address} isRequired />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Phone</FormLabel>
-        <Input type='number' name='phone' min='999999' max='9999999999999' />
+        <Input type='number' name='phone' defaultValue={phone} min='999999' max='9999999999999' />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Email</FormLabel>
-        <Input type='text' name='e_mail' />
+        <Input type='text' name='e_mail' defaultValue={e_mail} />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Nationality</FormLabel>
-        <Input type='text' name='nationality' />
+        <Input type='text' name='Nationality' defaultValue={nationality} />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Birthdate</FormLabel>
-        <Input type='date' name='birthdate' />
+        <Input type='date' name='birthdate' defaultValue={birthdate} />
       </FormControl>
       <Box display='flex' marginBottom='10' flexDirection={{sm: 'column', md: 'row'}}>
         <FormControl as='fieldset' isRequired>
@@ -82,18 +88,18 @@ export default function AddClientForm() {
         </FormControl>
         <FormControl as='fieldset' isRequired>
           <FormLabel>Document number</FormLabel>
-          <Input type='number' name='doc_num' min='999999' max='99999999' />
+          <Input type='number' name='doc_num' defaultValue={doc_num} min='999999' max='99999999' />
         </FormControl>
       </Box>
       <Button
         type='submit'
         boxShadow='base'
+        isDisabled={clientEditLoading}
         leftIcon={<AiOutlineSave />}
-        isDisabled={addingClientLoading}
       >
         Submit{' '}
       </Button>
-      {addingClientError && <ErrorMessage message={addingClientError.message} />}
+      {clientEditError && <ErrorMessage message={clientEditError.message} />}
       {redirect && <Redirect from='/client/add' to='/client/list' />}
     </Box>
   );

@@ -7,8 +7,8 @@ import Loading from '../../components/loading';
 import ErrorMessage from '../../components/error';
 import Title from '../../components/title';
 
-export default function EditClient() {
-  const {id} = useParams();
+export default function EditClient(): JSX.Element {
+  const {id} = useParams<{id: string}>();
   const {clientDetailData, clientDetailError, clientDetailLoading, getClient} = useClients();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function EditClient() {
       </Box>
       {clientDetailError && <ErrorMessage message={clientDetailError.message} />}
       {clientDetailLoading && <Loading />}
-      {clientDetailData && <ClientForm {...clientDetailData} />}
+      {clientDetailData && <ClientForm client={clientDetailData} />}
     </Flex>
   );
 }

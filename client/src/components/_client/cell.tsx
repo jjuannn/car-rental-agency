@@ -4,8 +4,14 @@ import {Link} from 'react-router-dom';
 import {AiOutlineDelete, AiOutlineEdit, AiOutlineEye} from 'react-icons/ai';
 import useClients from '../../hooks/useClients';
 import {useHistory} from 'react-router';
+import Client from '../../entities/client';
 
-export default function TableCell({name, surname, id}) {
+interface IProps {
+  client: Client;
+}
+
+export default function TableCell({client}: IProps): JSX.Element {
+  const {name, surname, id} = client;
   const {deleteClient, deleteClientLoading, deleteClientSuccess} = useClients();
   const history = useHistory();
 

@@ -6,8 +6,8 @@ import ErrorMessage from '../../components/error';
 import Loading from '../../components/loading';
 import {useParams} from 'react-router';
 
-export default function ClientDetail() {
-  const {id} = useParams();
+export default function ClientDetail(): JSX.Element {
+  const {id} = useParams<{id: string}>();
   const {clientDetailData, clientDetailError, clientDetailLoading, getClient} = useClients();
 
   useEffect(() => {
@@ -16,7 +16,7 @@ export default function ClientDetail() {
 
   return (
     <Flex as='section' flex='1' padding='5' justifyContent='center' alignItems='center'>
-      {clientDetailData && <ClientDetailCard {...clientDetailData} />}
+      {clientDetailData && <ClientDetailCard client={clientDetailData} />}
       {clientDetailError && <ErrorMessage message={clientDetailError.message} />}
       {clientDetailLoading && <Loading />}
     </Flex>

@@ -8,7 +8,7 @@ import {AiOutlineFileAdd} from 'react-icons/ai';
 import Title from '../../components/title';
 import useClients from '../../hooks/useClients';
 
-export default function ClientList() {
+export default function ClientList(): JSX.Element {
   const {data, error, loading, getClients, deleteClientError} = useClients();
 
   useEffect(() => {

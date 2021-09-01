@@ -2,18 +2,25 @@ import React from 'react';
 import {Box, Heading, List, ListItem, ListIcon, Text, Button} from '@chakra-ui/react';
 import {AiFillCaretRight, AiOutlineArrowLeft} from 'react-icons/ai';
 import {Link} from 'react-router-dom';
-export default function ClientDetailCard({
-  name,
-  surname,
-  doc_num,
-  doc_type,
-  phone,
-  address,
-  nationality,
-  birthdate,
-  e_mail,
-  id
-}) {
+import Client from '../../entities/client';
+
+interface IProps {
+  client: Client;
+}
+
+export default function ClientDetailCard({client}: IProps): JSX.Element {
+  const {
+    doc_num,
+    surname,
+    name,
+    address,
+    birthdate,
+    doc_type,
+    e_mail,
+    id,
+    nationality,
+    phone
+  } = client;
   return (
     <Box
       boxShadow='base'
