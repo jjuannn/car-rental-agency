@@ -56,7 +56,6 @@ export default function EditCarForm({car}: IProps) {
     // if (formData.get('images').name) {  <= Property 'name' does not exist on type 'FormDataEntryValue'.
     //   formData.append('images', URL.createObjectURL(values.images));
     // }
-
     editCar(id, formData);
   };
 

@@ -31,6 +31,18 @@ export default function EditClientForm({client}: IProps): JSX.Element {
     }
   }, [clientEditSuccess]);
 
+  function formatDate(date: string): string {
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
   const handleSubmit = (event: FormEvent<HTMLElement>): void => {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
@@ -75,7 +87,7 @@ export default function EditClientForm({client}: IProps): JSX.Element {
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Birthdate</FormLabel>
-        <Input type='date' name='birthdate' defaultValue={birthdate} />
+        <Input type='date' name='birthdate' defaultValue={formatDate(birthdate)} />
       </FormControl>
       <Box display='flex' marginBottom='10' flexDirection={{sm: 'column', md: 'row'}}>
         <FormControl as='fieldset' isRequired>

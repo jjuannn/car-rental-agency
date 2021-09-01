@@ -66,6 +66,7 @@ export default class ClientRepository
 
   async getAll(): Promise<Rental[]> {
     const rentals = await this.rentalModel.findAll({
+      order: [['id', 'DESC']],
       include: [
         {model: this.carModel, paranoid: false},
         {model: this.clientModel, paranoid: false}

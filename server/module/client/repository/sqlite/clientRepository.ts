@@ -48,7 +48,9 @@ export default class ClientRepository
   }
 
   async getAll(): Promise<Client[]> {
-    const clients = await this.clientModel.findAll();
+    const clients = await this.clientModel.findAll({
+      order: [['id', 'DESC']]
+    });
     if (!clients) {
       throw new NoResultsError();
     }
