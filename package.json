@@ -8,7 +8,8 @@
     "compile:dev": "cd server && concurrently \"tsc --watch\" \"npm run lib\" ",
     "tsc:watch": "tsc --watch",
     "lib": "cd server && cd lib && nodemon --inspect app.js",
-    "app": "cd src && node app.js"
+    "app": "cd src && node app.js",
+    "build:prod": "cd server && cd lib && ENVIRONMENT=production node app.js"
   },
   "repository": {
     "type": "git",
