@@ -19,6 +19,17 @@ This application was made with:
 * ⚡️ Chakra UI for the styles.
 * 🟣 Redux for the state handling.
 
+## Project images: 
+
+### Home view
+![home-view](/img/home.png)
+
+### Car detail view
+![car-view](/img/car.png)
+
+### List view
+![car-list](/img/list.png)
+
 ## To Do: 
 
 - [x] Frontend to consume the API.
