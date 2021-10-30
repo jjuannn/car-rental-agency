@@ -40,8 +40,5 @@ app.get('/', (req: express.Request, res: express.Response) => {
   res.redirect('/car');
 });
 
-console.log('HOLA!');
-console.log(process.env.UPLOAD_MULTER_DIR);
-console.log(process.env.MAIN_DB_PATH);
 const PORT = 8080;
 app.listen(process.env.PORT || PORT);
