@@ -68,7 +68,7 @@ export default function useCars() {
   const getCar = id => {
     dispatch(DETAIL_CAR_LOADING());
     try {
-      const data = carList.data.find(car => car.id == id);
+      const data = carList.data.find(car => Number(car.id) === Number(id));
       dispatch(DETAIL_CAR_SUCCESS(data));
     } catch (err) {
       dispatch(DETAIL_CAR_ERROR(err));

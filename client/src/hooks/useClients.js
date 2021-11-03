@@ -57,7 +57,7 @@ export default function useClients() {
   const getClient = id => {
     dispatch(CLIENT_DETAIL_LOADING());
     try {
-      const data = clientList.data.find(client => client.id == id);
+      const data = clientList.data.find(client => Number(client.id) === Number(id));
       if (!data) {
         throw new Error('Failed to get client');
       }
