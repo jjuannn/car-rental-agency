@@ -57,7 +57,7 @@ export default function useRentals() {
   const getRental = async id => {
     dispatch(DETAIL_RENTAL_LOADING());
     try {
-      const rental = rentalList.data.find(rental => rental.id == id);
+      const rental = rentalList.data.find(rental => Number(rental.id) === Number(id));
       dispatch(DETAIL_RENTAL_SUCCESS(rental));
     } catch (err) {
       dispatch(DETAIL_RENTAL_FAILURE(err));
@@ -67,7 +67,7 @@ export default function useRentals() {
   const deleteRental = async id => {
     dispatch(DELETE_RENTAL_LOADING());
     try {
-      const rental = rentalList.data.find(rental => rental.id == id);
+      const rental = rentalList.data.find(rental => Number(rental.id) === Number(id));
       if (rental.is_paid !== true) {
         throw new Error("The rental isn't paid yet!");
       }

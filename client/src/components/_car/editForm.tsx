@@ -20,18 +20,7 @@ interface IProps {
 }
 
 export default function EditCarForm({car}: IProps) {
-  const {
-    brand,
-    color,
-    gearbox_type,
-    hasAC,
-    images,
-    mileage,
-    model,
-    passengers,
-    price_per_day,
-    year
-  } = car;
+  const {brand, color, gearbox_type, hasAC, mileage, model, passengers, price_per_day, year} = car;
   const {editCar, carEditError, carEditLoading, carEditSuccess} = useCars();
   const [redirect, setRedirect] = useState(false);
   const {id} = useParams<{id: string}>();
