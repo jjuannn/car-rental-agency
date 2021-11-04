@@ -79,7 +79,7 @@ export default function EditRentalForm({rental}: IProps): JSX.Element {
             {cars &&
               cars.map((car: Car, i: number) => {
                 return (
-                  <option key={i} value={car.id}>
+                  <option selected={Number(fk_car) === Number(car.id)} key={i} value={car.id}>
                     {car.year} {car.brand} {car.model}
                   </option>
                 );
@@ -92,7 +92,11 @@ export default function EditRentalForm({rental}: IProps): JSX.Element {
             {clients &&
               clients.map((client: Client, i: number) => {
                 return (
-                  <option key={i} value={client.id}>
+                  <option
+                    selected={Number(fk_client) === Number(client.id)}
+                    key={i}
+                    value={client.id}
+                  >
                     {client.name} {client.surname}
                   </option>
                 );
