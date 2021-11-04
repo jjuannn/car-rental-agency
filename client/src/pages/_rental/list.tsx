@@ -10,8 +10,10 @@ import useRentals from '../../hooks/useRentals';
 
 export default function RentalList(): JSX.Element {
   const {data, error, loading, rentalDeleteError, getRentals} = useRentals();
+
   useEffect(() => {
     getRentals();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

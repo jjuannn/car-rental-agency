@@ -12,6 +12,7 @@ export default function ClientDetail(): JSX.Element {
 
   useEffect(() => {
     getClient(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -13,6 +13,7 @@ export default function CarList(): JSX.Element {
 
   useEffect(() => {
     getCars();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

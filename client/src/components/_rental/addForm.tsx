@@ -34,6 +34,7 @@ export default function AddRentalForm(): JSX.Element {
   useEffect(() => {
     getClients();
     getCars();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getCarPricePerDay = (id: number): number => {

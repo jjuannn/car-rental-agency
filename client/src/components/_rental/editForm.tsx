@@ -40,6 +40,7 @@ export default function EditRentalForm({rental}: IProps): JSX.Element {
   useEffect(() => {
     getClients();
     getCars();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const getCarPricePerDay = useCallback(

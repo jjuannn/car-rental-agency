@@ -13,6 +13,7 @@ export default function EditClient(): JSX.Element {
 
   useEffect(() => {
     getClient(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

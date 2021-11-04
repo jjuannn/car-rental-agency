@@ -13,6 +13,7 @@ export default function EditCar(): JSX.Element {
 
   useEffect(() => {
     getCar(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
