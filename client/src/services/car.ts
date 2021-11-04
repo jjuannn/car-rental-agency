@@ -21,7 +21,7 @@ export function getCars(): Promise<Car[] | Error> {
       return rjson;
     })
     .catch(err => {
-      throw new Error(err.response.data.err);
+      throw new Error('Failed while fetching cars');
     });
 }
 

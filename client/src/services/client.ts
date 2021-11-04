@@ -20,7 +20,7 @@ export function getClients(): Promise<Client[] | Error> {
       return rjson;
     })
     .catch(err => {
-      throw new Error(err.response.data.err);
+      throw new Error('Failed while fetching clients');
     });
 }
 

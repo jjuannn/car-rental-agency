@@ -17,7 +17,7 @@ export function getRentals(): Promise<Rental[] | Error> {
       });
     })
     .catch(err => {
-      throw new Error(err.response.data.err);
+      throw new Error('Failed while fetching rentals');
     });
 }
 
