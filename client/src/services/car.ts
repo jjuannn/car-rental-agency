@@ -1,14 +1,7 @@
 import axios from 'axios';
 import Car from '../entities/car';
 import {apiToEntity} from '../mappers/car';
-
-// Backend running at port 8080 by default.
-// Change this if you modify that.
-const BASE_URL = 'http://localhost:8080';
-
-const AXIOS_REQ = axios.create({
-  baseURL: BASE_URL
-});
+import AXIOS_REQ, {BASE_URL} from './_index';
 
 export function getCars(): Promise<Car[] | Error> {
   return AXIOS_REQ.get('/car/all')
