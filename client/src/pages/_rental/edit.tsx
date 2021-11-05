@@ -10,8 +10,10 @@ import EditRentalForm from '../../components/_rental/editForm';
 export default function EditRental(): JSX.Element {
   const {getRental, rentalDetailError, rentalDetailLoading, rentalDetailData} = useRentals();
   const {id} = useParams<{id: string}>();
+
   useEffect(() => {
     getRental(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -105,3 +105,4 @@ dist
 # Compiled TS Folder
 server/lib/
 server/data/
+client/to-do.txt

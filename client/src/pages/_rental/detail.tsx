@@ -12,6 +12,7 @@ export default function RentalDetail(): JSX.Element {
 
   useEffect(() => {
     getRental(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

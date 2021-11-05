@@ -28,8 +28,9 @@ import {useDispatch, useSelector} from 'react-redux';
 
 export default function useRentals() {
   const dispatch = useDispatch();
-  const state = useSelector(state => state.rentals);
-  const {rentalList, rentalAdd, rentalDetail, rentalDelete, rentalEdit} = state;
+  const {rentalList, rentalAdd, rentalDetail, rentalDelete, rentalEdit} = useSelector(
+    state => state.rentals
+  );
 
   const getRentals = async () => {
     dispatch(EDIT_RENTAL_RESET());
