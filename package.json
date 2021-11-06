@@ -9,8 +9,8 @@
     "tsc:watch": "tsc --watch",
     "lib": "cd server && cd lib && nodemon --inspect app.js",
     "app": "cd src && node app.js",
-    "server_build:prod": "cd server && tsc",
-    "server_deploy:prod": "cd server && cd lib && node app.js"
+    "build": "cd server && tsc",
+    "start": "cd server && cd lib && node app.js"
   },
   "repository": {
     "type": "git",
