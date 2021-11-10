@@ -2,7 +2,7 @@ const INITIAL_VALUES = {
   carList: {
     loading: false,
     error: null,
-    data: null
+    data: []
   },
   carAdded: {
     loading: false,

@@ -2,7 +2,7 @@ const INITIAL_VALUES = {
   clientList: {
     loading: false,
     error: null,
-    data: null
+    data: []
   },
   clientDelete: {
     loading: false,
