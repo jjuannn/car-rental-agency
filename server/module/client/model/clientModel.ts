@@ -32,7 +32,7 @@ export default class ClientModel extends Model {
           allowNull: false
         },
         phone: {
-          type: DataTypes.BOOLEAN,
+          type: DataTypes.STRING,
           allowNull: false
         },
         e_mail: {
