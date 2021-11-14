@@ -17,9 +17,28 @@ import multer, {Multer} from 'multer';
 
 function configureDatabase() {
   const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: process.env.MAIN_DB_PATH
+    database: process.env.DATABASE,
+    username: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    host: process.env.DATABASE_HOST,
+    port: 5432,
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    }
   });
+
+  sequelize
+    .authenticate()
+    .then(() => {
+      console.log('Connected successfully');
+    })
+    .catch(() => {
+      console.log('Failed while connecting');
+    });
 
   return sequelize;
 }
