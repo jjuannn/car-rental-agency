@@ -2,6 +2,11 @@
 
 This repository is a backoffice panel for a car rental agency
 
+* [DEMO](https://car-rental-agency.vercel.app/)
+* [API](https://car-rental-agency-j.herokuapp.com/)
+
+-----------------------------------------------------
+
 * Upload car data
 
 * Upload clients data
@@ -32,16 +37,7 @@ This application was made with:
 
 ## To Do: 
 
-- [x] Frontend to consume the API.
-
-- [x] Modify API error messages.
-
-- [ ] Testing when the app is finished.
-
-
-## Features: 
-
-- [x] The app is completely typed (client and server)
+- [ ] Testing.
 
 ## Instalation
 
