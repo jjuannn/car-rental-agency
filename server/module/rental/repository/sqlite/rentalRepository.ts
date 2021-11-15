@@ -91,12 +91,12 @@ export default class ClientRepository
   async findCarRentalsBetweenDates(rental: Rental): Promise<Rental[] | []> {
     const {date_from, date_until, fk_car, id} = rental;
     const toCompare = await this.rentalModel.sequelize.query(
-      `SELECT date_from, date_until, id, fk_car FROM Rents WHERE
-      (fk_car = "${fk_car}") AND
-      (("${date_from}" >= date_from AND "${date_from}" <= date_until) OR
-      ("${date_until}" >= date_from AND "${date_until}" <= date_until) OR
-      ("${date_from}" <= date_from AND "${date_until}" >= date_until)) AND
-      (status = "active") AND (id <> "${id}")
+      `SELECT date_from, date_until, id, fk_car FROM "Rents" WHERE 
+      fk_car = ${fk_car} AND 
+      (('${date_from}' >= date_from AND '${date_from}' <= date_until) OR 
+      ('${date_until}' >= date_from AND '${date_until}' <= date_until) OR 
+      ('${date_from}' <= date_from AND '${date_until}' >= date_until)) 
+      AND (status = 'active') AND (id::varchar <> '${id}'::varchar) 
       `,
       {type: QueryTypes.SELECT, model: this.rentalModel}
     );
