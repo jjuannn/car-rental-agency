@@ -1,9 +1,12 @@
 const path = require('path');
 const dotenv = require('dotenv');
-const config = dotenv.config();
 
-if (config.error) {
-  throw config.error;
+if (process.env.NODE_ENV !== 'production') {
+  const config = dotenv.config();
+
+  if (config.error) {
+    throw config.error;
+  }
 }
 
 import express from 'express';

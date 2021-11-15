@@ -2,7 +2,7 @@ const INITIAL_VALUES = {
   rentalList: {
     loading: false,
     error: null,
-    data: null
+    data: []
   },
   rentalAdd: {
     sending: false,

@@ -1,0 +1,1 @@
+web: cd server && cd lib && node app.js

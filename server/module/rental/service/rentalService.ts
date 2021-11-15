@@ -43,9 +43,9 @@ export default class RentalService implements IRentalService {
     if (rental === undefined) {
       throw new InvalidRentalError();
     }
-    rental.setFinished();
-    this.rentalRepository.saveEditedRental(rental);
-    return this.rentalRepository.finish(rental);
+    const finishedRental = rental.setFinished();
+    this.rentalRepository.saveEditedRental(finishedRental);
+    return this.rentalRepository.finish(finishedRental);
   }
 
   async getAll(): Promise<Rental[]> {
