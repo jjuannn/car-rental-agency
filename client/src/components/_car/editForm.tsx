@@ -59,7 +59,7 @@ export default function EditCarForm({car}: IProps) {
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Year</FormLabel>
-        <Input type='number' name='year' defaultValue={year} min='1800' max='2020' isRequired />
+        <Input type='number' name='year' defaultValue={year} min='1800' max='2021' isRequired />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Price per day</FormLabel>
