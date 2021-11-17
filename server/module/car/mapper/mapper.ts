@@ -43,7 +43,7 @@ export function dbToEntity(carModel: typeof CarModel): Car {
     price_per_day,
     images
   } = carModel.toJSON();
-  const image_url = `http://localhost:8080${images}`;
+  const image_url = `https://car-rental-agency-j.herokuapp.com${images}`;
   return new Car(
     id,
     brand,
