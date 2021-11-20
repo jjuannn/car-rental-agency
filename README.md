@@ -26,14 +26,8 @@ This application was made with:
 
 ## Project images: 
 
-### Home view
-![home-view](/img/home.png)
-
-### Car detail view
-![car-view](/img/car.png)
-
-### List view
-![car-list](/img/list.png)
+### Usage example
+![example](/img/caragency.gif)
 
 ## To Do: 
 
