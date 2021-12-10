@@ -53,7 +53,7 @@ export default class CarRepository extends AbstractCarRepository implements ICar
     const cars = await this.carModel.findAll({
       order: [['id', 'DESC']]
     });
-    if (!cars) {
+    if (cars.length === 0) {
       throw new NoResultsError();
     }
     return cars.map((car: typeof CarModel) => dbToEntity(car));
