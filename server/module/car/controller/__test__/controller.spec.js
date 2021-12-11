@@ -54,7 +54,7 @@ test('an error exist in getAll if there is no results', async () => {
   try {
     await controller.getAll({}, resMock);
   } catch (err) {
-    expect(err).not.toBeNull();
+    expect(err).toBeInstanceOf(NoResultsError);
   }
 });
 
@@ -73,10 +73,17 @@ test('getById calls service correctly with the corresponding parameters', async 
 });
 
 test('an error exist in getById without parameters given', async () => {
+  const resMock = {
+    send: jest.fn(),
+    status: function (status) {
+      return this;
+    }
+  };
+
   try {
-    await controller.getById({}, {});
+    await controller.getById({query: {}}, resMock);
   } catch (err) {
-    expect(err).not.toBeNull();
+    expect(err).toBeInstanceOf(UndefinedIdError);
   }
 });
 
@@ -107,10 +114,16 @@ test('saveEditedCar calls service correctly', async () => {
 });
 
 test('an error exist in saveEditedCar if there is no body or query id', async () => {
+  const resMock = {
+    send: jest.fn(),
+    status: function (status) {
+      return this;
+    }
+  };
   try {
     await controller.saveEditedCar({query: {}}, resMock);
   } catch (err) {
-    expect(err).not.toBeNull();
+    expect(err).toBeInstanceOf(UndefinedIdError);
   }
 });
 
@@ -129,9 +142,16 @@ test('delete calls repository correctly with the corresponding parameters', asyn
 });
 
 test('an error exist in delete without request query id', async () => {
+  const resMock = {
+    send: jest.fn(),
+    status: function (status) {
+      return this;
+    }
+  };
+
   try {
-    await controller.delete({query: {}}, {});
+    await controller.delete({query: {}}, resMock);
   } catch (err) {
-    expect(err).not.toBeNull();
+    expect(err).toBeInstanceOf(UndefinedIdError);
   }
 });
