@@ -5,7 +5,7 @@ import CarModel from '../../model/carModel';
 import CarRepository from '../sqlite/carRepository';
 import Car from '../../entity/car';
 import NoResultsError from '../error/noResultsError';
-import exp from 'constants';
+
 const sequelizeInstance = new Sequelize('sqlite::memory');
 
 let repository;

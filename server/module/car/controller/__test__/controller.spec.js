@@ -84,6 +84,7 @@ test('an error exist in getById without parameters given', async () => {
     await controller.getById({query: {}}, resMock);
   } catch (err) {
     expect(err).toBeInstanceOf(UndefinedIdError);
+    expect(CarServiceMock.getById).toHaveBeenCalledTimes(0);
   }
 });
 
@@ -124,6 +125,7 @@ test('an error exist in saveEditedCar if there is no body or query id', async ()
     await controller.saveEditedCar({query: {}}, resMock);
   } catch (err) {
     expect(err).toBeInstanceOf(UndefinedIdError);
+    expect(CarServiceMock.saveEditedCar).toHaveBeenCalledTimes(0);
   }
 });
 
@@ -153,5 +155,6 @@ test('an error exist in delete without request query id', async () => {
     await controller.delete({query: {}}, resMock);
   } catch (err) {
     expect(err).toBeInstanceOf(UndefinedIdError);
+    expect(CarServiceMock.delete).toHaveBeenCalledTimes(0);
   }
 });

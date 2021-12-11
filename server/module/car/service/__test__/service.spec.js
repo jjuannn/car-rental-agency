@@ -27,6 +27,17 @@ const carToSave = new Car(
   ''
 );
 
+test('saveNewCar fails if the car is undefined', async () => {
+  let car;
+  try {
+    car = await service.saveNewCar();
+  } catch (err) {
+    expect(err).toBeInstanceOf(InvalidCarError);
+    expect(repositoryMock.saveNewCar).toHaveBeenCalledTimes(0);
+  }
+  expect(car).toBeUndefined();
+});
+
 test('saveNewCar calls repository with a valid entity', async () => {
   await service.saveNewCar(carToSave);
 
@@ -34,12 +45,13 @@ test('saveNewCar calls repository with a valid entity', async () => {
   expect(repositoryMock.saveNewCar).toHaveBeenCalledWith(carToSave);
 });
 
-test('saveNewCar fails if the car is undefined', async () => {
+test('saveEditedCar fails if the car is undefined', async () => {
   let car;
   try {
-    car = await service.saveNewCar();
+    car = await service.saveEditedCar();
   } catch (err) {
     expect(err).toBeInstanceOf(InvalidCarError);
+    expect(repositoryMock.saveEditedCar).toHaveBeenCalledTimes(0);
   }
   expect(car).toBeUndefined();
 });
@@ -49,16 +61,6 @@ test('saveEditedCar calls repository with a valid entity ', async () => {
 
   expect(repositoryMock.saveEditedCar).toHaveBeenCalledTimes(1);
   expect(repositoryMock.saveEditedCar).toHaveBeenCalledWith(carToSave);
-});
-
-test('saveEditedCar fails if the car is undefined', async () => {
-  let car;
-  try {
-    car = await service.saveEditedCar();
-  } catch (err) {
-    expect(err).toBeInstanceOf(InvalidCarError);
-  }
-  expect(car).toBeUndefined();
 });
 
 test('getById calls repository with a valid parameter', async () => {
@@ -78,21 +80,22 @@ test('getById fails if the id is undefined', async () => {
   expect(car).toBeUndefined();
 });
 
-test('delete calls repository correctly with a valid parameter', async () => {
-  await service.delete(1);
-
-  expect(repositoryMock.delete).toHaveBeenCalledTimes(1);
-  expect(repositoryMock.delete).toHaveBeenCalledWith(1);
-});
-
 test('delete fails is the id is undefined', async () => {
   let car;
   try {
     car = await service.delete();
   } catch (err) {
     expect(err).toBeInstanceOf(InvalidIdError);
+    expect(repositoryMock.delete).toHaveBeenCalledTimes(0);
   }
   expect(car).toBeUndefined();
+});
+
+test('delete calls repository correctly with a valid parameter', async () => {
+  await service.delete(1);
+
+  expect(repositoryMock.delete).toHaveBeenCalledTimes(1);
+  expect(repositoryMock.delete).toHaveBeenCalledWith(1);
 });
 
 test('getAll calls repository correctly', async () => {
