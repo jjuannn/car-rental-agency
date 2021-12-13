@@ -10,7 +10,8 @@ import {QueryTypes, Op} from 'sequelize';
 
 export default class ClientRepository
   extends AbstractClientRepository
-  implements IRentalRepository {
+  implements IRentalRepository
+{
   constructor(
     public rentalModel: typeof RentalModel,
     public clientModel: typeof ClientModel,
@@ -72,9 +73,7 @@ export default class ClientRepository
         {model: this.clientModel, paranoid: false}
       ]
     });
-    if (!rentals) {
-      throw new NoResultsError();
-    }
+
     return rentals.map((rental: typeof RentalModel) => dbToEntity(rental));
   }
 

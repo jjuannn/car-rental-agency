@@ -16,7 +16,7 @@ export function formToEntity(rental: Rental): Rental {
   } = rental;
 
   return new Rental(
-    Number(id),
+    id,
     fk_car,
     fk_client,
     price_per_day,
