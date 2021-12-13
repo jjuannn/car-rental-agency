@@ -8,7 +8,8 @@ import NoResultsError from '../repository/error/noResultsError';
 
 export default class ClientController
   extends AbstractClientController
-  implements IClientController {
+  implements IClientController
+{
   constructor(public clientService: IClientService, public ROUTE_BASE = '/client') {
     super();
   }
@@ -44,9 +45,7 @@ export default class ClientController
   async getById(req: express.Request, res: express.Response): Promise<void> {
     try {
       if (!req.query.id) {
-        res
-          .status(400)
-          .send({status: 'failed', err: 'You must introduce an ID to get a client details'});
+        throw new UndefinedIdError();
       }
       const id = Number(req.query.id);
       const client = await this.clientService.getById(id);
@@ -78,10 +77,8 @@ export default class ClientController
   async saveEditedClient(req: express.Request, res: express.Response): Promise<void> {
     req.body.id = req.query.id;
     const client = formToEntity(req.body);
-    console.log(client);
     try {
       const editedClient = await this.clientService.saveEditedClient(client);
-      console.log(editedClient);
       res.status(200).send(editedClient);
     } catch (e) {
       res
@@ -91,12 +88,10 @@ export default class ClientController
   }
 
   async delete(req: express.Request, res: express.Response): Promise<void> {
-    if (!req.query.id) {
-      res
-        .status(400)
-        .send({status: 'failed', err: 'You must introduce an ID to get a client details'});
-    }
     try {
+      if (!req.query.id) {
+        throw new UndefinedIdError();
+      }
       const id = Number(req.query.id);
       await this.clientService.delete(id);
       res.status(200).send({success: true});
