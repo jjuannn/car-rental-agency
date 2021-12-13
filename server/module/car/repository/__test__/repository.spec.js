@@ -6,7 +6,7 @@ import CarRepository from '../sqlite/carRepository';
 import Car from '../../entity/car';
 import NoResultsError from '../error/noResultsError';
 
-const sequelizeInstance = new Sequelize('sqlite::memory');
+const sequelizeInstance = new Sequelize('sqlite::memory', {logging: false});
 
 let repository;
 let carModel;
@@ -34,12 +34,9 @@ const carToSave = new Car(
   ''
 );
 
-test('getAll returns an error if the car list is empty', async () => {
-  try {
-    await repository.getAll();
-  } catch (err) {
-    expect(err).toBeInstanceOf(NoResultsError);
-  }
+test('getAll returns an empty array if the car list is empty', async () => {
+  const cars = await repository.getAll();
+  expect(cars).toEqual([]);
 });
 
 test('getAll returns an array of cars', async () => {
