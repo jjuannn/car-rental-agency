@@ -82,6 +82,9 @@ export default class CarController extends AbstractCarController implements ICar
 
   async saveEditedCar(req: express.Request, res: express.Response): Promise<void> {
     try {
+      if (!req.query.id) {
+        throw new UndefinedIdError();
+      }
       req.body.id = req.query.id;
       const car: Car = formToEntity(req.body);
       if (req.file) {
