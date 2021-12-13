@@ -2,7 +2,7 @@
 
 import {Sequelize} from 'sequelize';
 import CarModel from '../../model/carModel';
-import CarRepository from '../sqlite/carRepository';
+import CarRepository from '../postgres/carRepository';
 import Car from '../../entity/car';
 import NoResultsError from '../error/noResultsError';
 

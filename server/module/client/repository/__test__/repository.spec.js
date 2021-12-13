@@ -1,6 +1,6 @@
 import {Sequelize} from 'sequelize';
 import ClientModel from '../../model/clientModel';
-import ClientRepository from '../sqlite/clientRepository';
+import ClientRepository from '../postgres/clientRepository';
 import Client from '../../entity/client';
 import NoResultsError from '../error/noResultsError';
 

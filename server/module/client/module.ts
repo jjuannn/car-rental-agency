@@ -1,4 +1,4 @@
-import ClientRepository from './repository/sqlite/clientRepository';
+import ClientRepository from './repository/postgres/clientRepository';
 import ClientModel from './model/clientModel';
 import ClientController from './controller/clientController';
 import ClientService from './service/clientService';

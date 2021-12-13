@@ -4,7 +4,7 @@ import {Sequelize} from 'sequelize';
 import CarModel from '../../../car/model/carModel';
 import ClientModel from '../../../client/model/clientModel';
 import RentalModel from '../../model/rentalModel';
-import RentalRepository from '../sqlite/rentalRepository';
+import RentalRepository from '../postgres/rentalRepository';
 import Rental from '../../entity/rental';
 import NoResultsError from '../error/noResultsError';
 

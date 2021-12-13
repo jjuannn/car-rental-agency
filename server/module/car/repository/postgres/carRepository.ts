@@ -3,7 +3,7 @@ import {dbToEntity} from '../../mapper/mapper';
 import CarModel from '../../model/carModel';
 import AbstractCarRepository from '../abstractRepository/abstractRepository';
 import NoResultsError from '../error/noResultsError';
-import ICarRepository from '../interface/sqlite/ICarRepository';
+import ICarRepository from '../interface/postgres/ICarRepository';
 
 export default class CarRepository extends AbstractCarRepository implements ICarRepository {
   constructor(public carModel: typeof CarModel) {

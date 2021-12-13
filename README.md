@@ -12,7 +12,7 @@ This repository is a backoffice panel for a car rental agency
 This application was made with:
 
 * 🍀 Node JS and Express for the rest-api.
-* 💾 SQLite3 for the database where the data are stored.
+* 💾 PostgresSQL for the database where the data are stored.
 * ➰ Sequelize as an ORM.
 * 🟦 TypeScript for the static type definitions.
 * ⚛️ React JS for the UI.
