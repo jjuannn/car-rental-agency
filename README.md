@@ -29,10 +29,6 @@ This application was made with:
 ### Usage example
 ![example](/img/caragency.gif)
 
-## To Do: 
-
-- [ ] Testing.
-
 ## Instalation
 
 - Run ```npm install``` to install the project dependencies.
