@@ -23,7 +23,7 @@ This application was made with:
 * ⚛️ React JS for the UI.
 * ⚡️ Chakra UI for the styles.
 * 🟣 Redux for the state handling.
-
+* 🃏 Jest for API Modules unit testing
 ## Project images: 
 
 ### Usage example
