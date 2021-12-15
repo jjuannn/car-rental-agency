@@ -32,7 +32,7 @@ export default function RentalDetailCard({rental}: IProps): JSX.Element {
           </ListItem>
           <ListItem textTransform='capitalize'>
             <ListIcon as={AiFillCaretRight} color='teal.main' />
-            Car: {Car.year} {Car.brand} {Car.model}
+            Car: {Car.year} {Car.brand} {Car.model} ({Car.id})
           </ListItem>
           <ListItem textTransform='capitalize'>
             <ListIcon as={AiFillCaretRight} color='teal.main' />
