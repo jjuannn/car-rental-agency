@@ -1,1 +1,1 @@
-web: cd server && cd lib && node app.js
+web: cd server && tsc && cd lib && node app.js
