@@ -14,7 +14,8 @@ import NoResultsError from '../repository/error/noResultsError';
 
 export default class RentalController
   extends AbstractRentalController
-  implements IRentalController {
+  implements IRentalController
+{
   constructor(
     public rentalService: IRentalService,
     public carService: ICarService,
@@ -102,9 +103,12 @@ export default class RentalController
   }
 
   async saveEditedRental(req: express.Request, res: express.Response): Promise<void> {
-    const rental: Rental = formToEntity(req.body);
-    rental.id = Number(req.query.id);
     try {
+      const rental: Rental = formToEntity(req.body);
+      if (!req.query.id) {
+        throw new UndefinedIdError();
+      }
+      rental.id = Number(req.query.id);
       const editedRental = await this.rentalService.saveEditedRental(rental);
       res.status(200).send(editedRental);
     } catch (e) {
@@ -126,10 +130,10 @@ export default class RentalController
   }
 
   async finish(req: express.Request, res: express.Response): Promise<void> {
-    if (!req.query.id) {
-      throw new UndefinedIdError();
-    }
     try {
+      if (!req.query.id) {
+        throw new UndefinedIdError();
+      }
       const id = Number(req.query.id);
       const rentalToDelete = await this.rentalService.getById(id);
       const finished = await this.rentalService.finish(rentalToDelete);

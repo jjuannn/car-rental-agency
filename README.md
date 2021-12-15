@@ -17,21 +17,17 @@ This repository is a backoffice panel for a car rental agency
 This application was made with:
 
 * 🍀 Node JS and Express for the rest-api.
-* 🐘 PostgreSQL for the database where the data are stored.
+* 💾 PostgresSQL for the database where the data are stored.
 * ➰ Sequelize as an ORM.
 * 🟦 TypeScript for the static type definitions.
 * ⚛️ React JS for the UI.
 * ⚡️ Chakra UI for the styles.
 * 🟣 Redux for the state handling.
-
+* 🃏 Jest for API Modules unit testing
 ## Project images: 
 
 ### Usage example
 ![example](/img/caragency.gif)
-
-## To Do: 
-
-- [ ] Testing.
 
 ## Instalation
 

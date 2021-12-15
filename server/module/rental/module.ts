@@ -1,6 +1,6 @@
 import RentalController from '../rental/controller/rentalController';
 import RentalService from '../rental/service/rentalService';
-import RentalRepository from '../rental/repository/sqlite/rentalRepository';
+import RentalRepository from './repository/postgres/rentalRepository';
 import RentalModel from '../rental/model/rentalModel';
 import DICointainer from 'rsdi';
 import express from 'express';

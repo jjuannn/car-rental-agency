@@ -2,7 +2,7 @@ import ICarService from './interface/ICarService';
 import Car from '../entity/car';
 import InvalidIdError from './error/invalidId';
 import InvalidCarError from './error/invalidCar';
-import ICarRepository from '../repository/interface/sqlite/ICarRepository';
+import ICarRepository from '../repository/interface/postgres/ICarRepository';
 
 export default class CarService implements ICarService {
   constructor(public carRepository: ICarRepository) {}

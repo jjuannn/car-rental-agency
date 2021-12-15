@@ -53,7 +53,7 @@ function AddCarForm(): JSX.Element {
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Year</FormLabel>
-        <Input type='number' name='year' min='1800' max='2021' isRequired />
+        <Input type='number' name='year' min='1800' max='2022' isRequired />
       </FormControl>
       <FormControl as='fieldset' marginBottom='10' isRequired>
         <FormLabel>Price per day</FormLabel>

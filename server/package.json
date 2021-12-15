@@ -4,10 +4,11 @@
   "description": "Proyecto: Agencia de alquiler de autos",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --collect-coverage",
+    "test:clear_cache": "jest --clearCache",
     "compile:dev": "cd server && concurrently \"tsc --watch\" \"npm run lib\" ",
     "tsc:watch": "tsc --watch",
-    "lib": "cd server && cd lib && nodemon --inspect app.js",
+    "lib": "cd lib && nodemon --inspect app.js",
     "app": "cd src && node app.js",
     "build": "cd server && tsc",
     "start": "cd server && cd lib && node app.js"
@@ -24,7 +25,6 @@
   "homepage": "https://github.com/jjuannn/CAR-RENTAL-AGENCY#readme",
   "dependencies": {
     "@types/express": "^4.17.12",
-    "@types/jest": "^27.0.1",
     "@types/multer": "^1.4.5",
     "axios": "^0.21.1",
     "bulma": "^0.9.1",
@@ -42,12 +42,17 @@
     "sqlite3": "^5.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
+    "@types/jest": "^27.0.3",
     "@types/node": "^15.14.9",
     "@types/sequelize": "^4.28.9",
     "cypress": "^9.0.0",
     "eslint": "^7.14.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
+    "jest": "^27.4.4",
     "jsdoc": "^3.6.6",
     "nodemon": "^2.0.6",
     "prettier": "2.2.1",
