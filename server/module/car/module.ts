@@ -1,4 +1,4 @@
-import CarRepository from './repository/sqlite/carRepository';
+import CarRepository from './repository/postgres/carRepository';
 import CarModel from './model/carModel';
 import CarController from './controller/carController';
 import CarService from './service/carService';

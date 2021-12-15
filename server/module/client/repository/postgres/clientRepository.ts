@@ -7,7 +7,8 @@ import ClientModel from '../../model/clientModel';
 
 export default class ClientRepository
   extends AbstractClientRepository
-  implements IClientRepository {
+  implements IClientRepository
+{
   constructor(public clientModel: typeof ClientModel) {
     super();
   }
@@ -51,14 +52,13 @@ export default class ClientRepository
     const clients = await this.clientModel.findAll({
       order: [['id', 'DESC']]
     });
-    if (!clients) {
-      throw new NoResultsError();
-    }
+
     return clients.map((client: typeof ClientModel) => dbToEntity(client));
   }
 
   async delete(id: number): Promise<boolean> {
     const clientToDelete = await this.clientModel.findByPk(id);
+
     if (!clientToDelete) {
       throw new NoResultsError();
     }

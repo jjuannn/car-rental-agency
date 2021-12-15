@@ -52,10 +52,10 @@ export default class CarController extends AbstractCarController implements ICar
   }
 
   async getById(req: express.Request, res: express.Response): Promise<void> {
-    if (!req.query.id) {
-      throw new UndefinedIdError();
-    }
     try {
+      if (!req.query || !req.query.id) {
+        throw new UndefinedIdError();
+      }
       const id = Number(req.query.id);
       const car = await this.carService.getById(id);
       res.status(200).send(car);
@@ -68,11 +68,11 @@ export default class CarController extends AbstractCarController implements ICar
   }
 
   async saveNewCar(req: express.Request, res: express.Response): Promise<void> {
-    const car: Car = formToEntity(req.body);
-    if (req.file) {
-      car.images = `/uploads/${req.file.filename}`;
-    }
     try {
+      const car: Car = formToEntity(req.body);
+      if (req.file) {
+        car.images = `/uploads/${req.file.filename}`;
+      }
       const newCar = await this.carService.saveNewCar(car);
       res.status(200).send(newCar);
     } catch (e) {
@@ -81,12 +81,16 @@ export default class CarController extends AbstractCarController implements ICar
   }
 
   async saveEditedCar(req: express.Request, res: express.Response): Promise<void> {
-    req.body.id = req.query.id;
-    const car: Car = formToEntity(req.body);
-    if (req.file) {
-      car.images = `/uploads/${req.file.filename}`;
-    }
     try {
+      if (!req.query.id) {
+        throw new UndefinedIdError();
+      }
+      req.body.id = req.query.id;
+      const car: Car = formToEntity(req.body);
+      if (req.file) {
+        car.images = `/uploads/${req.file.filename}`;
+      }
+
       const editedCar = await this.carService.saveEditedCar(car);
       res.status(200).send(editedCar);
     } catch (e) {
@@ -95,10 +99,11 @@ export default class CarController extends AbstractCarController implements ICar
   }
 
   async delete(req: express.Request, res: express.Response): Promise<void> {
-    if (!req.query.id) {
-      throw new UndefinedIdError();
-    }
     try {
+      if (!req.query.id) {
+        throw new UndefinedIdError();
+      }
+
       const id = Number(req.query.id);
       await this.carService.delete(id);
       res.status(200).send({success: true});

@@ -15,7 +15,7 @@ export function formToEntity(car: Car): Car {
     images
   } = car;
   return new Car(
-    Number(id),
+    id,
     brand,
     model,
     year,
