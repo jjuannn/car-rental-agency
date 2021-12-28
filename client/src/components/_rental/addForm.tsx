@@ -39,7 +39,7 @@ export default function AddRentalForm(): JSX.Element {
 
   const getCarPricePerDay = (id: number): number => {
     const car = cars.find((car: Car) => Number(car.id) === id);
-    const price = car && car.price_per_day;
+    const price = car?.price_per_day;
     return price;
   };
 
@@ -67,27 +67,21 @@ export default function AddRentalForm(): JSX.Element {
         <FormControl as='fieldset' isRequired marginBottom='10' marginRight={{md: '5'}}>
           <FormLabel>Car</FormLabel>
           <Select placeholder='Select car' name='fk_car'>
-            {cars &&
-              cars.map((car: Car, i: number) => {
-                return (
-                  <option key={i} value={car.id}>
-                    {car.year} {car.brand} {car.model}
-                  </option>
-                );
-              })}
+            {cars?.map((car: Car, i: number) => (
+              <option key={i} value={car.id}>
+                {car.year} {car.brand} {car.model}
+              </option>
+            ))}
           </Select>
         </FormControl>
         <FormControl as='fieldset' isRequired marginBottom='10' marginLeft={{md: '5'}}>
           <FormLabel>Client</FormLabel>
           <Select placeholder='Select client' name='fk_client'>
-            {clients &&
-              clients.map((client: Client, i: number) => {
-                return (
-                  <option key={i} value={client.id}>
-                    {client.name} {client.surname}
-                  </option>
-                );
-              })}
+            {clients?.map((client: Client, i: number) => (
+              <option key={i} value={client.id}>
+                {client.name} {client.surname}
+              </option>
+            ))}
           </Select>
         </FormControl>
       </Box>
