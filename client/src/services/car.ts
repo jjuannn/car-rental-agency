@@ -19,7 +19,6 @@ export function getCars(): Promise<Car[] | Error> {
 }
 
 export function addCar(data: FormData): Promise<Car | Error> {
-  console.log(data);
   return axios({
     method: 'POST',
     url: `${BASE_URL}/car/new`,

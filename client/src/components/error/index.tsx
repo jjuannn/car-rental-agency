@@ -7,7 +7,7 @@ interface IProps {
 
 export default function ErrorMessage({message}: IProps): JSX.Element {
   return (
-    <Text fontSize='16px' padding='3' as='em' color='red'>
+    <Text data-testid='error-message' fontSize='16px' padding='3' as='em' color='red'>
       {message}
     </Text>
   );

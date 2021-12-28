@@ -26,13 +26,13 @@ export default function StatCard({
       padding='3'
       borderRadius='12px'
     >
-      <StatLabel>
+      <StatLabel data-testid='last-month-number'>
         {type} - {lastMonthNumber} last month
       </StatLabel>
-      <StatNumber fontWeight='700'>
+      <StatNumber fontWeight='700' data-testid='total-number'>
         {total} {type}
       </StatNumber>
-      <StatHelpText>
+      <StatHelpText data-testid='last-month-percent'>
         <StatArrow type='increase' /> {lastMonthPercent}% since last month
       </StatHelpText>
     </Stat>

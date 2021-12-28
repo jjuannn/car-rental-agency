@@ -26,7 +26,9 @@ export default function NavigationBar(): JSX.Element {
           bg='teal.main'
           size='md'
         >
-          <Link to='/'>Rental Agency</Link>
+          <Link data-testid='home-button-link' to='/'>
+            Rental Agency
+          </Link>
         </Heading>
         <Menu>
           <MenuButton
@@ -38,14 +40,14 @@ export default function NavigationBar(): JSX.Element {
           >
             Manage
           </MenuButton>
-          <MenuList>
-            <MenuItem as={Link} to='/car/list'>
+          <MenuList data-testid='menu-list'>
+            <MenuItem data-testid='menu-item-cars' as={Link} to='/car/list'>
               Cars <Icon marginLeft='2' as={AiOutlineCar} />
             </MenuItem>
-            <MenuItem as={Link} to='/client/list'>
+            <MenuItem data-testid='menu-item-clients' as={Link} to='/client/list'>
               Clients <Icon marginLeft='2' as={AiOutlineUser} />
             </MenuItem>
-            <MenuItem as={Link} to='/rental/list'>
+            <MenuItem data-testid='menu-item-rentals' as={Link} to='/rental/list'>
               Rentals <Icon marginLeft='2' as={AiOutlineBook} />
             </MenuItem>
           </MenuList>
