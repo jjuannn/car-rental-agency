@@ -44,7 +44,7 @@ export default class CarRepository extends AbstractCarRepository implements ICar
   async getById(id: number): Promise<Car> {
     const car = await this.carModel.findOne({where: {id}});
     if (!car) {
-      throw new NoResultsError();
+      throw new NoResultsError(`Cannot find car with ID ${id}`);
     }
     return dbToEntity(car);
   }
@@ -60,7 +60,7 @@ export default class CarRepository extends AbstractCarRepository implements ICar
   async delete(id: number): Promise<boolean> {
     const carToDelete = await this.carModel.findByPk(id);
     if (!carToDelete) {
-      throw new NoResultsError();
+      throw new NoResultsError(`Cannot find car with ID ${id}`);
     }
 
     carToDelete.destroy();

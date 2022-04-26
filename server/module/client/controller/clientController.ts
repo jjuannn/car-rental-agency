@@ -8,8 +8,7 @@ import NoResultsError from '../repository/error/noResultsError';
 
 export default class ClientController
   extends AbstractClientController
-  implements IClientController
-{
+  implements IClientController {
   constructor(public clientService: IClientService, public ROUTE_BASE = '/client') {
     super();
   }
@@ -33,12 +32,7 @@ export default class ClientController
       const clients = await this.clientService.getAll();
       res.status(200).send(clients);
     } catch (e) {
-      if (e instanceof NoResultsError) {
-        res.status(400).send({status: 'failed', err: 'Cannot find client list'});
-      }
-      res
-        .status(400)
-        .send({status: 'failed', err: 'Something failed while getting the clients list'});
+      res.status(400).send({status: 'failed', err: 'Cannot find client list'});
     }
   }
 
@@ -50,14 +44,8 @@ export default class ClientController
       const id = Number(req.query.id);
       const client = await this.clientService.getById(id);
       res.status(200).send(client);
-    } catch (e) {
-      if (e instanceof NoResultsError) {
-        res.status(400).send({status: 'failed', err: `Cannot find client with ID ${req.query.id}`});
-      }
-      res.status(400).send({
-        status: 'failed',
-        err: 'Something failed while getting the client, but looks like is our fault. Try again :/'
-      });
+    } catch (e: any) {
+      res.status(400).send({status: 'failed', err: e.message});
     }
   }
 
@@ -95,13 +83,8 @@ export default class ClientController
       const id = Number(req.query.id);
       await this.clientService.delete(id);
       res.status(200).send({success: true});
-    } catch (e) {
-      if (e instanceof NoResultsError) {
-        res.status(400).send({status: 'failed', err: `Cannot find client with ID ${req.query.id}`});
-      }
-      res
-        .status(400)
-        .send({status: 'failed', err: 'Something went wrong while deleting a client!'});
+    } catch (e: any) {
+      res.status(400).send({status: 'failed', err: e.message});
     }
   }
 }
