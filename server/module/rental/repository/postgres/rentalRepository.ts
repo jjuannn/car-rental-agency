@@ -10,8 +10,7 @@ import {QueryTypes, Op} from 'sequelize';
 
 export default class ClientRepository
   extends AbstractClientRepository
-  implements IRentalRepository
-{
+  implements IRentalRepository {
   constructor(
     public rentalModel: typeof RentalModel,
     public clientModel: typeof ClientModel,
@@ -60,7 +59,7 @@ export default class ClientRepository
       ]
     });
     if (!rental) {
-      throw new NoResultsError();
+      throw new NoResultsError(`Cannot find rental with ID ${id}`);
     }
     return dbToEntity(rental);
   }
@@ -81,7 +80,7 @@ export default class ClientRepository
     const setInactive = await this.rentalModel.findByPk(rental.id);
 
     if (!setInactive) {
-      throw new NoResultsError();
+      throw new NoResultsError(`Cannot find rental with ID ${rental.id}`);
     }
     setInactive.destroy();
 

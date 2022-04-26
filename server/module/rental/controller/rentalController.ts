@@ -14,8 +14,7 @@ import NoResultsError from '../repository/error/noResultsError';
 
 export default class RentalController
   extends AbstractRentalController
-  implements IRentalController
-{
+  implements IRentalController {
   constructor(
     public rentalService: IRentalService,
     public carService: ICarService,
@@ -44,12 +43,7 @@ export default class RentalController
       const rentals = await this.rentalService.getAll();
       res.status(200).send(rentals);
     } catch (e) {
-      if (e instanceof NoResultsError) {
-        res.status(400).send({status: 'failed', err: 'Cannot find the rental list'});
-      }
-      res
-        .status(400)
-        .send({status: 'failed', err: 'Something failed while getting the rental list'});
+      res.status(400).send({status: 'failed', err: 'Cannot find the rental list'});
     }
   }
 
@@ -61,21 +55,8 @@ export default class RentalController
       const id = Number(req.query.id);
       const rental = await this.rentalService.getById(id);
       res.status(200).send(rental);
-    } catch (e) {
-      if (e instanceof UndefinedIdError) {
-        res
-          .status(400)
-          .send({status: 'failed', err: 'You must introduce an ID to get a rental details'});
-      }
-      if (e instanceof NoResultsError) {
-        res
-          .status(400)
-          .send({status: 'failed', err: `Cannot find a rental with the ID ${req.query.id}`});
-      }
-      res.status(400).send({
-        status: 'failed',
-        err: 'Something failed while getting the rental, but looks like is our fault. Try again :/'
-      });
+    } catch (e: any) {
+      res.status(400).send({status: 'failed', err: e.message});
     }
   }
 
@@ -84,21 +65,8 @@ export default class RentalController
     try {
       const newRental = await this.rentalService.saveNewRental(rental);
       res.status(200).send(newRental);
-    } catch (e) {
-      if (e instanceof InvalidDatesError) {
-        res
-          .status(400)
-          .send({status: 'failed', err: 'The start date cannot be greater than the finish date'});
-      }
-      if (e instanceof CarAlreadyRentedError) {
-        res
-          .status(400)
-          .send({status: 'failed', err: 'The car is already rented in the selected dates'});
-      }
-      res.status(400).send({
-        status: 'failed',
-        err: 'Something failed while saving the rental, but looks like is our fault. Try again :/'
-      });
+    } catch (e: any) {
+      res.status(400).send({status: 'failed', err: e.message});
     }
   }
 
@@ -111,21 +79,8 @@ export default class RentalController
       rental.id = Number(req.query.id);
       const editedRental = await this.rentalService.saveEditedRental(rental);
       res.status(200).send(editedRental);
-    } catch (e) {
-      if (e instanceof InvalidDatesError) {
-        res
-          .status(400)
-          .send({status: 'failed', err: 'The start date cannot be greater than the finish date'});
-      }
-      if (e instanceof CarAlreadyRentedError) {
-        res
-          .status(400)
-          .send({status: 'failed', err: 'The car is already rented in the selected dates'});
-      }
-      res.status(400).send({
-        status: 'failed',
-        err: 'Something failed while saving the rental, but looks like is our fault. Try again :/'
-      });
+    } catch (e: any) {
+      res.status(400).send({status: 'failed', err: e.message});
     }
   }
 
@@ -138,15 +93,8 @@ export default class RentalController
       const rentalToDelete = await this.rentalService.getById(id);
       const finished = await this.rentalService.finish(rentalToDelete);
       res.status(200).send({success: true});
-    } catch (e) {
-      if (e instanceof NoResultsError) {
-        res
-          .status(400)
-          .send({status: 'failed', err: 'Looks like there is not an rental with that ID'});
-      }
-      res
-        .status(400)
-        .send({status: 'failed', err: 'Something failed while finishing a rental. Try again :/'});
+    } catch (e: any) {
+      res.status(400).send({status: 'failed', err: e.message});
     }
   }
 }

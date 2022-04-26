@@ -7,8 +7,7 @@ import ClientModel from '../../model/clientModel';
 
 export default class ClientRepository
   extends AbstractClientRepository
-  implements IClientRepository
-{
+  implements IClientRepository {
   constructor(public clientModel: typeof ClientModel) {
     super();
   }
@@ -43,7 +42,7 @@ export default class ClientRepository
   async getById(id: number): Promise<Client> {
     const client = await this.clientModel.findOne({where: {id}});
     if (!client) {
-      throw new NoResultsError();
+      throw new NoResultsError(`Cannot find client with ID ${id}`);
     }
     return dbToEntity(client);
   }
@@ -60,7 +59,7 @@ export default class ClientRepository
     const clientToDelete = await this.clientModel.findByPk(id);
 
     if (!clientToDelete) {
-      throw new NoResultsError();
+      throw new NoResultsError(`Cannot find client with id ${id}`);
     }
 
     clientToDelete.destroy();
